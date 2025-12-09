@@ -1,0 +1,64 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# --- Virtual environments ---
+venv/
+env/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# --- VS Code ---
+.vscode/
+.code-workspace
+
+# --- PyInstaller ---
+*.manifest
+*.spec
+
+# --- Unit test / coverage reports ---
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+test-results/
+
+# --- Jupyter Notebook checkpoints ---
+.ipynb_checkpoints
+
+# --- Logs and databases ---
+*.log
+*.sqlite3
+*.db
+
+# --- OS-specific files ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Environment variables / secrets ---
+.env
+.env.*
+*.env
+*.pem
+*.key
+
+# --- Project specific ---
+# Add custom ignores below
+models/
