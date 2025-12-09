@@ -111,7 +111,9 @@ class ModelSingleton:
         output = self.model.generate(
             **inputs,
             max_new_tokens=max_new_tokens,
-            temperature=temperature
+            temperature=temperature,
+            do_sample=True,
+            pad_token_id=self.tokenizer.eos_token_id
         )
         
         # Decode only the newly generated tokens (*excluding* input prompt)
