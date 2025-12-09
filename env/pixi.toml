@@ -1,0 +1,32 @@
+[workspace]
+authors = ["Manthan Gadhia <54841046+manthangadhia@users.noreply.github.com>"]
+channels = ["conda-forge"]
+name = "env"
+platforms = ["win-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+python = "3.11.*"
+ipykernel = ">=7.1.0,<8"
+ipython = ">=9.8.0,<10"
+matplotlib = ">=3.10.8,<4"
+seaborn = ">=0.13.2,<0.14"
+pandas = ">=2.3.3,<3"
+scikit-learn = ">=1.7.2,<2"
+tqdm = ">=4.67.1,<5"
+nomkl = ">=1.0,<2"
+numpy = ">=2.3.5,<3"
+
+[pypi-dependencies]
+transformers = ">=4.57.3, <5"
+datasets = ">=4.4.1, <5"
+accelerate = ">=1.12.0, <2"
+sentencepiece = ">=0.2.1, <0.3"
+einops = ">=0.8.1, <0.9"
+torch = { version = ">=2.5.1", index = "https://download.pytorch.org/whl/cu126" }
+torchvision = { version = ">=0.20.1", index = "https://download.pytorch.org/whl/cu126" }
+bitsandbytes-windows = ">=0.37.5, <0.38"
+evaluate = ">=0.4.6, <0.5"
+diversity = ">=0.3.0, <0.4"
