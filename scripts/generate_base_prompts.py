@@ -16,7 +16,7 @@ sys.path.insert(0, str(root_dir))
 data_dir = root_dir / "data"
 
 PROMPT_FILE = data_dir / "output_ift.jsonl" ## build prompts for base from ift outputs
-OUTPUT_FILE = data_dir / "gender_prompts" / "prompts_ggiven_base.json"
+OUTPUT_FILE = data_dir / "gender_prompts" / "prompts_ggiven_base_200.json"
 
 # -------------------------
 
@@ -44,7 +44,7 @@ def main():
             prompt = entry["prompt"]
             narrative = entry["response"]
             
-            new_prompt = create_prompt_with_narrative(prompt, narrative)
+            new_prompt = create_prompt_with_narrative(prompt, narrative, chars=200)
             
             new_entry = {
                 "profile_id": profile_id,
