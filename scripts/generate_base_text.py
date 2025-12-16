@@ -19,8 +19,8 @@ PROMPT_FILE = data_dir / "gender_prompts" / "prompts_ggiven_base.json"
 OUTPUT_FILE = data_dir / "output_base.jsonl"
 
 # Number of prompts to process and responses per prompt
-NUM_PROMPTS = 5
-NUM_RESPONSES_PER_PROMPT = 3
+NUM_PROMPTS = 2
+NUM_RESPONSES_PER_PROMPT = 2
 
 # BASE_MODEL = "mistralai/Mistral-7B-v0.1"
 # IFT_MODEL = "mistralai/Mistral-7B-Instruct-v0.3"
