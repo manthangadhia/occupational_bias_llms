@@ -19,8 +19,8 @@ PROMPT_FILE = data_dir / "gender_prompts" / "prompts_gender_given.json"
 OUTPUT_FILE = data_dir / "output_ift.jsonl"
 
 # Number of prompts to process and responses per prompt
-NUM_PROMPTS = 5
-NUM_RESPONSES_PER_PROMPT = 3
+NUM_PROMPTS = 10
+NUM_RESPONSES_PER_PROMPT = 10
 
 # BASE_MODEL = "mistralai/Mistral-7B-v0.1"
 # IFT_MODEL = "mistralai/Mistral-7B-Instruct-v0.3"
@@ -91,7 +91,7 @@ def main():
                     }
                     out.write(json.dumps(entry) + "\n")
 
-        # Clean up after processing all models
+        # clean up after processing all models
         model_manager.unload_model()
 
     print(f"\nDone! Saved results to {OUTPUT_FILE}")

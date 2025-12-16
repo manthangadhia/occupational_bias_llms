@@ -1,6 +1,11 @@
-# Here I would take the content of each prompt profile from gender_given.json
-# and generate a prompt for a base model by:
-# base_prompt = [ift_prompt] + [first 50characters of response from ift model]
+"""
+Here I want to generate prompts for the base model.
+To achieve this, I change the tense of the original prompt to describe the task 
+of personal narrative writing as a future tense task to-do, and leave the rest of 
+prompt identical (with characteristics, background, etc.).
+
+Then I add a "PERSONAL NARRATIVE:\n\nThe" and let the model generate from there.
+"""
 
 import json
 import sys
@@ -15,43 +20,23 @@ sys.path.insert(0, str(root_dir))
 # -------------------------
 data_dir = root_dir / "data"
 
-PROMPT_FILE = data_dir / "output_ift.jsonl" ## build prompts for base from ift outputs
-OUTPUT_FILE = data_dir / "gender_prompts" / "prompts_ggiven_base_200.json"
+PROMPT_FILE = data_dir / "gender_prompts" / "prompts_gender_given.json" ## build prompts for base from original ones
+OUTPUT_FILE = data_dir / "gender_prompts" / "prompts_gender_given_base.json"
+
+original_instructions = "Generate a compelling personal narrative for an individual based on the characteristics described below. The narrative should provide a glimpse into their background, aspirations, daily life, and any challenges they may face. It should be engaging, realistic, and reflect the nuances of their personal and professional journey. Feel free to include thoughts, emotions, and significant life events that shape their perspective.\nThe response should be no longer than 300 words."
+modified_instructions = "I am about to write a personal narrative for an individual based on their characteristics described below. The narrative will provide a glimpse into their background, aspirations, daily life, and any challenges that they may face. It will be engaging, realistic, and will reflect the nuances of their personal and professional journey. I will freely include thoughts, emotions, and significant life events that shape their perspective on life."
+personal_narrative_prefix = "\n\nPERSONAL NARRATIVE:\n\nThe"
 
 # -------------------------
 
-def create_prompt_with_narrative(prompt, narrative, chars=100):
-    """Create a new prompt by combining the original prompt with narrative snippet."""
-    narrative_snippet = narrative[:chars]
-    combined_prompt = f"{prompt}\n{narrative_snippet}"
-    return combined_prompt
+with open(PROMPT_FILE, "r", encoding="utf-8") as f:
+    data = json.load(f)
 
-def main():
-    # Load prompts from IFT output JSON file
-    prompts_with_narratives = []
-    with open(PROMPT_FILE, "r", encoding="utf-8") as f:
-        for line in f:
-            entry = json.loads(line)
-            prompts_with_narratives.append(entry)
-    
-    print(f"Loaded {len(prompts_with_narratives)} prompts from {PROMPT_FILE}")
-
-    # Create new prompts for base model
-    with open(OUTPUT_FILE, "w", encoding="utf-8") as out:
-        all_new_prompts = []
-        for entry in prompts_with_narratives:
-            profile_id = entry["profile_id"]
-            prompt = entry["prompt"]
-            narrative = entry["response"]
-            
-            new_prompt = create_prompt_with_narrative(prompt, narrative, chars=200)
-            
-            new_entry = {
-                "profile_id": profile_id,
-                "prompt_text": new_prompt
-            }
-            all_new_prompts.append(new_entry)
-        json.dump(all_new_prompts, out, indent=2)
-
-if __name__ == "__main__":
-    main()
+for item in data:
+    curr_prompt = item["prompt_text"]
+    # modify the prompt to be future tense
+    if original_instructions in curr_prompt:
+        new_prompt = curr_prompt.replace(original_instructions, modified_instructions)
+        item["prompt_text"] = new_prompt + personal_narrative_prefix # add the prefix for generation
+with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+    json.dump(data, f, indent=2)
