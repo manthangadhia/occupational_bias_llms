@@ -116,8 +116,10 @@ class ModelSingleton:
             pad_token_id=self.tokenizer.eos_token_id
         )
         
-        # Decode only the newly generated tokens (*excluding* input prompt)
-        generated_tokens = output[0][input_length:]
+        generated_tokens = output[0]
+        if self.current_model_name != "ift":
+            # Decode only the newly generated tokens (*excluding* input prompt)
+            generated_tokens = generated_tokens[input_length:]
         return self.tokenizer.decode(generated_tokens, skip_special_tokens=True)
     
     def get_device(self) -> str:
