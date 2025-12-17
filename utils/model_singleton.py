@@ -25,6 +25,7 @@ class ModelSingleton:
         
         self._initialized = True
         self.current_model_name: Optional[str] = None
+        self.current_model_key: Optional[str] = None
         self.tokenizer: Optional[AutoTokenizer] = None
         self.model: Optional[AutoModelForCausalLM] = None
         self.device: str = "cuda" if torch.cuda.is_available() else "cpu"
@@ -35,13 +36,14 @@ class ModelSingleton:
         self.cache_dir = cache_dir
         self.cache_dir.mkdir(exist_ok=True)
     
-    def load_model(self, model_name: str) -> Tuple[AutoTokenizer, AutoModelForCausalLM]:
+    def load_model(self, model_name: str, model_key: Optional[str] = None) -> Tuple[AutoTokenizer, AutoModelForCausalLM]:
         """
         Load a model and tokenizer. If a different model is already loaded,
         unload it first to free memory.
         
         Args:
             model_name: HuggingFace model identifier
+            model_key: Optional key to identify model type (e.g., 'base', 'ift')
             
         Returns:
             Tuple of (tokenizer, model)
@@ -71,6 +73,7 @@ class ModelSingleton:
         )
         
         self.current_model_name = model_name
+        self.current_model_key = model_key
         print(f"Model {model_name} loaded successfully on {self.device}")
         
         return self.tokenizer, self.model
@@ -83,6 +86,7 @@ class ModelSingleton:
             self.model = None
             self.tokenizer = None
             self.current_model_name = None
+            self.current_model_key = None
             
             # Clear CUDA cache if using GPU
             if self.device == "cuda":
@@ -90,7 +94,7 @@ class ModelSingleton:
             
             print("Model unloaded and memory cleared")
     
-    def generate(self, prompt: str, max_new_tokens: int = 200, temperature: float = 0.7) -> str:
+    def generate(self, prompt: str, max_new_tokens: int = 200, temperature: float = 0.7, clip_input: bool = False) -> str:
         """
         Generate text using the currently loaded model.
         
@@ -117,7 +121,10 @@ class ModelSingleton:
         )
         
         generated_tokens = output[0]
-        if self.current_model_name != "ift":
+        model_is_ift = self.current_model_key == "ift"
+        print(f"model is ift? {model_is_ift}")
+        if model_is_ift or clip_input:
+            print(f"clipping input, model is ift: {model_is_ift}")
             # Decode only the newly generated tokens (*excluding* input prompt)
             generated_tokens = generated_tokens[input_length:]
         return self.tokenizer.decode(generated_tokens, skip_special_tokens=True)
