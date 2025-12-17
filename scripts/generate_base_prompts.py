@@ -24,8 +24,8 @@ PROMPT_FILE = data_dir / "gender_prompts" / "prompts_gender_given.json" ## build
 OUTPUT_FILE = data_dir / "gender_prompts" / "prompts_gender_given_base.json"
 
 original_instructions = "Generate a compelling personal narrative for an individual based on the characteristics described below. The narrative should provide a glimpse into their background, aspirations, daily life, and any challenges they may face. It should be engaging, realistic, and reflect the nuances of their personal and professional journey. Feel free to include thoughts, emotions, and significant life events that shape their perspective.\nThe response should be no longer than 300 words."
-modified_instructions = "I am about to write a personal narrative for an individual based on their characteristics described below. The narrative will provide a glimpse into their background, aspirations, daily life, and any challenges that they may face. It will be engaging, realistic, and will reflect the nuances of their personal and professional journey. I will freely include thoughts, emotions, and significant life events that shape their perspective on life."
-personal_narrative_prefix = "\n\nPERSONAL NARRATIVE:\n\nThe"
+modified_instructions = "Tomorrow, I am about to write a personal narrative for an individual based on their characteristics described below. The narrative will provide a glimpse into their background, aspirations, daily life, and any challenges that they may face, and in order to do this I will have to pick a name for them based on their gender. This narrative will be engaging, realistic, and will reflect the nuances of the individual's personal and professional journey, and it will be written in a third-person perspective. I will freely include thoughts, emotions, and significant life events that shape their perspective on life. "
+personal_narrative_prefix = "\n\n*The next day...*\n\nPERSONAL NARRATIVE:\n\nThe"
 
 # -------------------------
 

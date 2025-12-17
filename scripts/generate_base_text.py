@@ -15,12 +15,12 @@ data_dir = root_dir / "data"
 models_dir = root_dir / "models"
 models_dir.mkdir(exist_ok=True)
 
-PROMPT_FILE = data_dir / "gender_prompts" / "prompts_ggiven_base.json"
+PROMPT_FILE = data_dir / "gender_prompts" / "prompts_gender_given_base.json"
 OUTPUT_FILE = data_dir / "output_base.jsonl"
 
 # Number of prompts to process and responses per prompt
-NUM_PROMPTS = 2
-NUM_RESPONSES_PER_PROMPT = 2
+NUM_PROMPTS = 10
+NUM_RESPONSES_PER_PROMPT = 10
 
 # BASE_MODEL = "mistralai/Mistral-7B-v0.1"
 # IFT_MODEL = "mistralai/Mistral-7B-Instruct-v0.3"
@@ -63,7 +63,7 @@ def main():
             print(f"{'='*50}")
             
             # Load model using singleton (automatically unloads previous model)
-            model_manager.load_model(model_name)
+            model_manager.load_model(model_name, model_key=model_key)
 
             for prompt_data in prompts_to_process:
                 profile_id = prompt_data.get("profile_id", "unknown")
