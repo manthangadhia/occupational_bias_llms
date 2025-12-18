@@ -78,7 +78,8 @@ def main():
                     response = model_manager.generate(
                         prompt=prompt_text,
                         max_new_tokens=300,
-                        temperature=0.7
+                        temperature=0.7,
+                        clip_input=True
                     )
 
                     entry = {
