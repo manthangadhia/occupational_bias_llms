@@ -122,9 +122,9 @@ class ModelSingleton:
         
         generated_tokens = output[0]
         model_is_ift = self.current_model_key == "ift"
-        print(f"model is ift? {model_is_ift}")
+        # print(f"model is ift? {model_is_ift}")
         if model_is_ift or clip_input:
-            print(f"clipping input, model is ift: {model_is_ift}")
+            # print(f"clipping input, model is ift: {model_is_ift}")
             # Decode only the newly generated tokens (*excluding* input prompt)
             generated_tokens = generated_tokens[input_length:]
         return self.tokenizer.decode(generated_tokens, skip_special_tokens=True)
