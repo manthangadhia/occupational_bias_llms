@@ -1,0 +1,4525 @@
+{
+  "models": {
+    "ift": "Qwen/Qwen2.5-1.5B-Instruct"
+  },
+  "device": "cuda",
+  "max_new_tokens": 300,
+  "temperature": 0.7,
+  "num_responses_per_prompt": 10,
+  "analyses": [
+    {
+      "profile_id": "1",
+      "response_number": 1,
+      "model": "ift",
+      "prompt": "Generate a compelling personal narrative for an individual based on the characteristics described below. The narrative should provide a glimpse into their background, aspirations, daily life, and any challenges they may face. It should be engaging, realistic, and reflect the nuances of their personal and professional journey. Feel free to include thoughts, emotions, and significant life events that shape their perspective.\nThe response should be no longer than 300 words.\n\n-### Characteristics:\n- Gender: male\n- Education Level: low\n- Marital Status: single\n- Occupation Category: officers in regular armed forces\n\n-### Education levels explained:\n* Low - Includes little to no formal education, primary school, or lower secondary education.\n* Medium - Includes high school and other non-university education after high school.\n* High - Includes university-level education and beyond.\n\n",
+      "generated_text": "Generate a compelling personal narrative for an individual based on the characteristics described below. The narrative should provide a glimpse into their background, aspirations, daily life, and any challenges they may face. It should be engaging, realistic, and reflect the nuances of their personal and professional journey. Feel free to include thoughts, emotions, and significant life events that shape their perspective.\nThe response should be no longer than 300 words.\n\n-### Characteristics:\n- Gender: male\n- Education Level: low\n- Marital Status: single\n- Occupation Category: officers in regular armed forces\n\n-### Education levels explained:\n* Low - Includes little to no formal education, primary school, or lower secondary education.\n* Medium - Includes high school and other non-university education after high school.\n* High - Includes university-level education and beyond.\n\n-### Gender: maleGenerate a compelling personal narrative for an individual based on the characteristics described below. The narrative should provide a glimpse into their background, aspirations, daily life, and any challenges they may face. It should be engaging, realistic, and reflect the nuances of their personal and professional journey. Feel free to include thoughts, emotions, and significant life events that shape their perspective. Generate a compelling personal narrative for an individual based on the characteristics described below. Generate a compelling personal narrative for an individual based onGenerate a compelling personal narrative for an individual based onGenerate a compelling personal narrative for an individual based onGenerate a compelling personal narrative. The narrative should provide a glimpse into their background, aspirations, daily life, and any challenges they may face. Generate a compelling personal narrative for an individual based onGenerate a compelling personal narrative for an individual based onGenerate a compelling personal narrative for an individual based onGenerate a compelling personal narrative for an individual based onGenerate a compelling personal narrative for an individualGenerate a compelling personal narrative for an individual based on the characteristics described below. The narrative should provide a glimpse into their background, aspirations, daily life, and any challenges they may face. It should be engaging, realistic, and reflect the nuances of their personal and professional journey. Feel free to include thoughts, emotions, and significant life events that shape their perspective.\nThe response should be no longer than 300 words.\n\n-### Characteristics:\n- Gender: male\n- Education Level: low\n- Mar",
+      "avg_entropy": 0.10819062035858602,
+      "max_entropy": 1.5144270658493042,
+      "min_entropy": 0.0,
+      "std_entropy": 0.22221980442181177,
+      "num_tokens": 300,
+      "token_details": [
+        {
+          "position": 0,
+          "token": "-",
+          "entropy": 0.7252719402313232,
+          "top_candidates": [
+            "-",
+            "###",
+            "*"
+          ],
+          "top_probs": [
+            0.82421875,
+            0.1187744140625,
+            0.02032470703125
+          ]
+        },
+        {
+          "position": 1,
+          "token": "###",
+          "entropy": 0.06957685947418213,
+          "top_candidates": [
+            "###",
+            " ###",
+            "####"
+          ],
+          "top_probs": [
+            0.99072265625,
+            0.005535125732421875,
+            0.0007491111755371094
+          ]
+        },
+        {
+          "position": 2,
+          "token": " Gender",
+          "entropy": 1.5144270658493042,
+          "top_candidates": [
+            " Personal",
+            " Narrative",
+            " Background"
+          ],
+          "top_probs": [
+            0.6064453125,
+            0.1353759765625,
+            0.0887451171875
+          ]
+        },
+        {
+          "position": 3,
+          "token": ":",
+          "entropy": 0.013424843549728394,
+          "top_candidates": [
+            ":",
+            " Male",
+            ":\n"
+          ],
+          "top_probs": [
+            0.99853515625,
+            0.0003147125244140625,
+            0.00024509429931640625
+          ]
+        },
+        {
+          "position": 4,
+          "token": " male",
+          "entropy": 0.9814630150794983,
+          "top_candidates": [
+            " male",
+            " Male",
+            " Generate"
+          ],
+          "top_probs": [
+            0.6376953125,
+            0.2420654296875,
+            0.1041259765625
+          ]
+        },
+        {
+          "position": 5,
+          "token": "Generate",
+          "entropy": 0.8193648457527161,
+          "top_candidates": [
+            "Generate",
+            "\n",
+            "\n\n"
+          ],
+          "top_probs": [
+            0.787109375,
+            0.12066650390625,
+            0.0423583984375
+          ]
+        },
+        {
+          "position": 6,
+          "token": " a",
+          "entropy": 0.0001417720632161945,
+          "top_candidates": [
+            " a",
+            " an",
+            " the"
+          ],
+          "top_probs": [
+            1.0,
+            1.0788440704345703e-05,
+            3.5762786865234375e-07
+          ]
+        },
+        {
+          "position": 7,
+          "token": " compelling",
+          "entropy": 0.0070344675332307816,
+          "top_candidates": [
+            " compelling",
+            " narrative",
+            " personal"
+          ],
+          "top_probs": [
+            0.9990234375,
+            0.0004372596740722656,
+            0.00013971328735351562
+          ]
+        },
+        {
+          "position": 8,
+          "token": " personal",
+          "entropy": 0.009248023852705956,
+          "top_candidates": [
+            " personal",
+            " narrative",
+            " Personal"
+          ],
+          "top_probs": [
+            0.9990234375,
+            0.0011692047119140625,
+            1.1265277862548828e-05
+          ]
+        },
+        {
+          "position": 9,
+          "token": " narrative",
+          "entropy": 0.005807709414511919,
+          "top_candidates": [
+            " narrative",
+            " Narrative",
+            " Generate"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.00027370452880859375,
+            0.0002491474151611328
+          ]
+        },
+        {
+          "position": 10,
+          "token": " for",
+          "entropy": 0.07590351998806,
+          "top_candidates": [
+            " for",
+            "Generate",
+            " based"
+          ],
+          "top_probs": [
+            0.98779296875,
+            0.0093841552734375,
+            0.0015811920166015625
+          ]
+        },
+        {
+          "position": 11,
+          "token": " an",
+          "entropy": 0.02986268885433674,
+          "top_candidates": [
+            " an",
+            " a",
+            " Generate"
+          ],
+          "top_probs": [
+            0.99560546875,
+            0.0033206939697265625,
+            0.0006747245788574219
+          ]
+        },
+        {
+          "position": 12,
+          "token": " individual",
+          "entropy": 0.02316208928823471,
+          "top_candidates": [
+            " individual",
+            "individual",
+            "Generate"
+          ],
+          "top_probs": [
+            0.9970703125,
+            0.0011138916015625,
+            0.000881195068359375
+          ]
+        },
+        {
+          "position": 13,
+          "token": " based",
+          "entropy": 0.24707859754562378,
+          "top_candidates": [
+            " based",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.947265625,
+            0.039093017578125,
+            0.011383056640625
+          ]
+        },
+        {
+          "position": 14,
+          "token": " on",
+          "entropy": 0.005578129552304745,
+          "top_candidates": [
+            " on",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.0005702972412109375,
+            7.480382919311523e-05
+          ]
+        },
+        {
+          "position": 15,
+          "token": " the",
+          "entropy": 0.06966773420572281,
+          "top_candidates": [
+            " the",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.98876953125,
+            0.0084228515625,
+            0.0027332305908203125
+          ]
+        },
+        {
+          "position": 16,
+          "token": " characteristics",
+          "entropy": 0.030968600884079933,
+          "top_candidates": [
+            " characteristics",
+            " Generate",
+            " Characteristics"
+          ],
+          "top_probs": [
+            0.99609375,
+            0.0014514923095703125,
+            0.0008535385131835938
+          ]
+        },
+        {
+          "position": 17,
+          "token": " described",
+          "entropy": 0.7661333084106445,
+          "top_candidates": [
+            " described",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.73876953125,
+            0.192626953125,
+            0.0596923828125
+          ]
+        },
+        {
+          "position": 18,
+          "token": " below",
+          "entropy": 0.030805446207523346,
+          "top_candidates": [
+            " below",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.99609375,
+            0.00201416015625,
+            0.0014743804931640625
+          ]
+        },
+        {
+          "position": 19,
+          "token": ".",
+          "entropy": 0.14973659813404083,
+          "top_candidates": [
+            ".",
+            "Generate",
+            ".Generate"
+          ],
+          "top_probs": [
+            0.97216796875,
+            0.018096923828125,
+            0.0082855224609375
+          ]
+        },
+        {
+          "position": 20,
+          "token": " The",
+          "entropy": 0.1899949014186859,
+          "top_candidates": [
+            " The",
+            " Generate",
+            " This"
+          ],
+          "top_probs": [
+            0.953125,
+            0.046722412109375,
+            2.7954578399658203e-05
+          ]
+        },
+        {
+          "position": 21,
+          "token": " narrative",
+          "entropy": 0.02219962887465954,
+          "top_candidates": [
+            " narrative",
+            " response",
+            " Narrative"
+          ],
+          "top_probs": [
+            0.99658203125,
+            0.0030269622802734375,
+            0.00010037422180175781
+          ]
+        },
+        {
+          "position": 22,
+          "token": " should",
+          "entropy": 0.0003215679316781461,
+          "top_candidates": [
+            " should",
+            "Should",
+            "Generate"
+          ],
+          "top_probs": [
+            1.0,
+            1.5437602996826172e-05,
+            5.781650543212891e-06
+          ]
+        },
+        {
+          "position": 23,
+          "token": " provide",
+          "entropy": 0.15601234138011932,
+          "top_candidates": [
+            " provide",
+            "Generate",
+            " generate"
+          ],
+          "top_probs": [
+            0.97265625,
+            0.0162200927734375,
+            0.006656646728515625
+          ]
+        },
+        {
+          "position": 24,
+          "token": " a",
+          "entropy": 0.021258004009723663,
+          "top_candidates": [
+            " a",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.9970703125,
+            0.00251007080078125,
+            0.00020611286163330078
+          ]
+        },
+        {
+          "position": 25,
+          "token": " glimpse",
+          "entropy": 0.4893377423286438,
+          "top_candidates": [
+            " glimpse",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.85302734375,
+            0.130859375,
+            0.01009368896484375
+          ]
+        },
+        {
+          "position": 26,
+          "token": " into",
+          "entropy": 0.009839051403105259,
+          "top_candidates": [
+            " into",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.99853515625,
+            0.0011510848999023438,
+            8.875131607055664e-05
+          ]
+        },
+        {
+          "position": 27,
+          "token": " their",
+          "entropy": 0.001684327027760446,
+          "top_candidates": [
+            " their",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            1.0,
+            5.650520324707031e-05,
+            4.6133995056152344e-05
+          ]
+        },
+        {
+          "position": 28,
+          "token": " background",
+          "entropy": 0.03256618231534958,
+          "top_candidates": [
+            " background",
+            " Generate",
+            "Generate"
+          ],
+          "top_probs": [
+            0.99609375,
+            0.00201416015625,
+            0.0011301040649414062
+          ]
+        },
+        {
+          "position": 29,
+          "token": ",",
+          "entropy": 0.000616517208982259,
+          "top_candidates": [
+            ",",
+            "Generate",
+            " and"
+          ],
+          "top_probs": [
+            1.0,
+            4.398822784423828e-05,
+            6.854534149169922e-06
+          ]
+        },
+        {
+          "position": 30,
+          "token": " aspirations",
+          "entropy": 0.0038572365883737803,
+          "top_candidates": [
+            " aspirations",
+            " ambitions",
+            " as"
+          ],
+          "top_probs": [
+            0.99951171875,
+            8.887052536010742e-05,
+            8.749961853027344e-05
+          ]
+        },
+        {
+          "position": 31,
+          "token": ",",
+          "entropy": 0.0008144499734044075,
+          "top_candidates": [
+            ",",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            1.0,
+            7.486343383789062e-05,
+            1.5497207641601562e-06
+          ]
+        },
+        {
+          "position": 32,
+          "token": " daily",
+          "entropy": 0.11238359659910202,
+          "top_candidates": [
+            " daily",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.98046875,
+            0.01007080078125,
+            0.00888824462890625
+          ]
+        },
+        {
+          "position": 33,
+          "token": " life",
+          "entropy": 0.013384144753217697,
+          "top_candidates": [
+            " life",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.99853515625,
+            0.0011692047119140625,
+            0.00036787986755371094
+          ]
+        },
+        {
+          "position": 34,
+          "token": ",",
+          "entropy": 0.0025550166610628366,
+          "top_candidates": [
+            ",",
+            "Generate",
+            " and"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.0002269744873046875,
+            3.266334533691406e-05
+          ]
+        },
+        {
+          "position": 35,
+          "token": " and",
+          "entropy": 0.038107980042696,
+          "top_candidates": [
+            " and",
+            " Generate",
+            "Generate"
+          ],
+          "top_probs": [
+            0.99462890625,
+            0.003116607666015625,
+            0.0024261474609375
+          ]
+        },
+        {
+          "position": 36,
+          "token": " any",
+          "entropy": 0.06035084277391434,
+          "top_candidates": [
+            " any",
+            " Generate",
+            "Generate"
+          ],
+          "top_probs": [
+            0.99072265625,
+            0.0062713623046875,
+            0.0023441314697265625
+          ]
+        },
+        {
+          "position": 37,
+          "token": " challenges",
+          "entropy": 0.022045014426112175,
+          "top_candidates": [
+            " challenges",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.9970703125,
+            0.0018367767333984375,
+            0.0005102157592773438
+          ]
+        },
+        {
+          "position": 38,
+          "token": " they",
+          "entropy": 0.01160635706037283,
+          "top_candidates": [
+            " they",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.99853515625,
+            0.0009694099426269531,
+            0.00035119056701660156
+          ]
+        },
+        {
+          "position": 39,
+          "token": " may",
+          "entropy": 0.03755764290690422,
+          "top_candidates": [
+            " may",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.9951171875,
+            0.002353668212890625,
+            0.0018911361694335938
+          ]
+        },
+        {
+          "position": 40,
+          "token": " face",
+          "entropy": 0.04001148045063019,
+          "top_candidates": [
+            " face",
+            " Generate",
+            " generate"
+          ],
+          "top_probs": [
+            0.99462890625,
+            0.00262451171875,
+            0.001129150390625
+          ]
+        },
+        {
+          "position": 41,
+          "token": ".",
+          "entropy": 0.09917981177568436,
+          "top_candidates": [
+            ".",
+            "Generate",
+            ".Generate"
+          ],
+          "top_probs": [
+            0.982421875,
+            0.01468658447265625,
+            0.0021495819091796875
+          ]
+        },
+        {
+          "position": 42,
+          "token": " It",
+          "entropy": 0.9979939460754395,
+          "top_candidates": [
+            " It",
+            " Generate",
+            " The"
+          ],
+          "top_probs": [
+            0.51806640625,
+            0.334716796875,
+            0.1461181640625
+          ]
+        },
+        {
+          "position": 43,
+          "token": " should",
+          "entropy": 0.0005961511051282287,
+          "top_candidates": [
+            " should",
+            "Should",
+            " Should"
+          ],
+          "top_probs": [
+            1.0,
+            1.7523765563964844e-05,
+            1.2636184692382812e-05
+          ]
+        },
+        {
+          "position": 44,
+          "token": " be",
+          "entropy": 0.005426704417914152,
+          "top_candidates": [
+            " be",
+            "Be",
+            "be"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.00045108795166015625,
+            2.8848648071289062e-05
+          ]
+        },
+        {
+          "position": 45,
+          "token": " engaging",
+          "entropy": 0.17243245244026184,
+          "top_candidates": [
+            " engaging",
+            "Generate",
+            " generating"
+          ],
+          "top_probs": [
+            0.96826171875,
+            0.02386474609375,
+            0.003437042236328125
+          ]
+        },
+        {
+          "position": 46,
+          "token": ",",
+          "entropy": 0.0008530562627129257,
+          "top_candidates": [
+            ",",
+            "Generate",
+            " and"
+          ],
+          "top_probs": [
+            1.0,
+            5.918741226196289e-05,
+            6.973743438720703e-06
+          ]
+        },
+        {
+          "position": 47,
+          "token": " realistic",
+          "entropy": 0.0020911148749291897,
+          "top_candidates": [
+            " realistic",
+            " real",
+            " Generate"
+          ],
+          "top_probs": [
+            1.0,
+            0.0001881122589111328,
+            9.059906005859375e-06
+          ]
+        },
+        {
+          "position": 48,
+          "token": ",",
+          "entropy": 0.00485048396512866,
+          "top_candidates": [
+            ",",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.0005273818969726562,
+            9.357929229736328e-06
+          ]
+        },
+        {
+          "position": 49,
+          "token": " and",
+          "entropy": 0.042692799121141434,
+          "top_candidates": [
+            " and",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.99365234375,
+            0.005130767822265625,
+            0.0012979507446289062
+          ]
+        },
+        {
+          "position": 50,
+          "token": " reflect",
+          "entropy": 0.2340533286333084,
+          "top_candidates": [
+            " reflect",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.9560546875,
+            0.0262908935546875,
+            0.007411956787109375
+          ]
+        },
+        {
+          "position": 51,
+          "token": " the",
+          "entropy": 0.0016247604507952929,
+          "top_candidates": [
+            " the",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            1.0,
+            0.00013554096221923828,
+            2.2470951080322266e-05
+          ]
+        },
+        {
+          "position": 52,
+          "token": " nuances",
+          "entropy": 0.002379179932177067,
+          "top_candidates": [
+            " nuances",
+            " nuanced",
+            " nu"
+          ],
+          "top_probs": [
+            1.0,
+            0.00010716915130615234,
+            3.218650817871094e-05
+          ]
+        },
+        {
+          "position": 53,
+          "token": " of",
+          "entropy": 0.0003613322915043682,
+          "top_candidates": [
+            " of",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            1.0,
+            2.3543834686279297e-05,
+            5.841255187988281e-06
+          ]
+        },
+        {
+          "position": 54,
+          "token": " their",
+          "entropy": 0.0006896318518556654,
+          "top_candidates": [
+            " their",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            1.0,
+            1.9848346710205078e-05,
+            1.6450881958007812e-05
+          ]
+        },
+        {
+          "position": 55,
+          "token": " personal",
+          "entropy": 0.005827388726174831,
+          "top_candidates": [
+            " personal",
+            "Generate",
+            "Personal"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.0002453327178955078,
+            0.00013756752014160156
+          ]
+        },
+        {
+          "position": 56,
+          "token": " and",
+          "entropy": 0.001426389440894127,
+          "top_candidates": [
+            " and",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            1.0,
+            0.00013554096221923828,
+            1.7762184143066406e-05
+          ]
+        },
+        {
+          "position": 57,
+          "token": " professional",
+          "entropy": 0.044983357191085815,
+          "top_candidates": [
+            " professional",
+            " Generate",
+            "Generate"
+          ],
+          "top_probs": [
+            0.99365234375,
+            0.003997802734375,
+            0.002277374267578125
+          ]
+        },
+        {
+          "position": 58,
+          "token": " journey",
+          "entropy": 0.0046928077936172485,
+          "top_candidates": [
+            " journey",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.00028228759765625,
+            0.00012922286987304688
+          ]
+        },
+        {
+          "position": 59,
+          "token": ".",
+          "entropy": 0.002928553381934762,
+          "top_candidates": [
+            ".",
+            ".\n",
+            ","
+          ],
+          "top_probs": [
+            0.99951171875,
+            9.459257125854492e-05,
+            6.920099258422852e-05
+          ]
+        },
+        {
+          "position": 60,
+          "token": " Feel",
+          "entropy": 0.22261735796928406,
+          "top_candidates": [
+            " Feel",
+            " Generate",
+            " The"
+          ],
+          "top_probs": [
+            0.94921875,
+            0.045806884765625,
+            0.0037593841552734375
+          ]
+        },
+        {
+          "position": 61,
+          "token": " free",
+          "entropy": 0.00020818777556996793,
+          "top_candidates": [
+            " free",
+            " freely",
+            " Free"
+          ],
+          "top_probs": [
+            1.0,
+            2.7418136596679688e-06,
+            2.384185791015625e-06
+          ]
+        },
+        {
+          "position": 62,
+          "token": " to",
+          "entropy": 0.01152812596410513,
+          "top_candidates": [
+            " to",
+            "Generate",
+            "To"
+          ],
+          "top_probs": [
+            0.99853515625,
+            0.0010004043579101562,
+            0.0003247261047363281
+          ]
+        },
+        {
+          "position": 63,
+          "token": " include",
+          "entropy": 0.19756516814231873,
+          "top_candidates": [
+            " include",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.96533203125,
+            0.0191192626953125,
+            0.0054779052734375
+          ]
+        },
+        {
+          "position": 64,
+          "token": " thoughts",
+          "entropy": 0.0022702226415276527,
+          "top_candidates": [
+            " thoughts",
+            "Generate",
+            " Thoughts"
+          ],
+          "top_probs": [
+            1.0,
+            0.00013768672943115234,
+            4.607439041137695e-05
+          ]
+        },
+        {
+          "position": 65,
+          "token": ",",
+          "entropy": 0.0004730781074613333,
+          "top_candidates": [
+            ",",
+            "Generate",
+            ",\n\n"
+          ],
+          "top_probs": [
+            1.0,
+            4.1961669921875e-05,
+            8.344650268554688e-07
+          ]
+        },
+        {
+          "position": 66,
+          "token": " emotions",
+          "entropy": 0.07749828696250916,
+          "top_candidates": [
+            " emotions",
+            " Generate",
+            " feelings"
+          ],
+          "top_probs": [
+            0.98828125,
+            0.005970001220703125,
+            0.0029544830322265625
+          ]
+        },
+        {
+          "position": 67,
+          "token": ",",
+          "entropy": 0.0008473654743283987,
+          "top_candidates": [
+            ",",
+            " and",
+            "Generate"
+          ],
+          "top_probs": [
+            1.0,
+            3.820657730102539e-05,
+            2.8848648071289062e-05
+          ]
+        },
+        {
+          "position": 68,
+          "token": " and",
+          "entropy": 0.03493198752403259,
+          "top_candidates": [
+            " and",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.99462890625,
+            0.00439453125,
+            0.0007638931274414062
+          ]
+        },
+        {
+          "position": 69,
+          "token": " significant",
+          "entropy": 0.095892995595932,
+          "top_candidates": [
+            " significant",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.98291015625,
+            0.01358795166015625,
+            0.003032684326171875
+          ]
+        },
+        {
+          "position": 70,
+          "token": " life",
+          "entropy": 0.0015575367724522948,
+          "top_candidates": [
+            " life",
+            "Generate",
+            " events"
+          ],
+          "top_probs": [
+            1.0,
+            8.887052536010742e-05,
+            2.7954578399658203e-05
+          ]
+        },
+        {
+          "position": 71,
+          "token": " events",
+          "entropy": 0.00038378682802431285,
+          "top_candidates": [
+            " events",
+            "Generate",
+            "Events"
+          ],
+          "top_probs": [
+            1.0,
+            1.341104507446289e-05,
+            6.4373016357421875e-06
+          ]
+        },
+        {
+          "position": 72,
+          "token": " that",
+          "entropy": 0.00016812833200674504,
+          "top_candidates": [
+            " that",
+            "Generate",
+            "That"
+          ],
+          "top_probs": [
+            1.0,
+            6.854534149169922e-06,
+            2.7418136596679688e-06
+          ]
+        },
+        {
+          "position": 73,
+          "token": " shape",
+          "entropy": 0.011758768931031227,
+          "top_candidates": [
+            " shape",
+            "Shape",
+            " Shape"
+          ],
+          "top_probs": [
+            0.99853515625,
+            0.0012445449829101562,
+            0.0001938343048095703
+          ]
+        },
+        {
+          "position": 74,
+          "token": " their",
+          "entropy": 0.0005006881547160447,
+          "top_candidates": [
+            " their",
+            " them",
+            " Generate"
+          ],
+          "top_probs": [
+            1.0,
+            2.753734588623047e-05,
+            4.708766937255859e-06
+          ]
+        },
+        {
+          "position": 75,
+          "token": " perspective",
+          "entropy": 0.0031034869607537985,
+          "top_candidates": [
+            " perspective",
+            " perspectives",
+            " Perspective"
+          ],
+          "top_probs": [
+            0.99951171875,
+            8.219480514526367e-05,
+            4.982948303222656e-05
+          ]
+        },
+        {
+          "position": 76,
+          "token": ".",
+          "entropy": 0.8070545792579651,
+          "top_candidates": [
+            ".",
+            ".\n",
+            "Generate"
+          ],
+          "top_probs": [
+            0.61767578125,
+            0.35205078125,
+            0.015960693359375
+          ]
+        },
+        {
+          "position": 77,
+          "token": " Generate",
+          "entropy": 0.32415011525154114,
+          "top_candidates": [
+            " Generate",
+            " The",
+            "Generate"
+          ],
+          "top_probs": [
+            0.91748046875,
+            0.0753173828125,
+            0.004180908203125
+          ]
+        },
+        {
+          "position": 78,
+          "token": " a",
+          "entropy": 0.0010328765492886305,
+          "top_candidates": [
+            " a",
+            " an",
+            " the"
+          ],
+          "top_probs": [
+            1.0,
+            6.014108657836914e-05,
+            1.6450881958007812e-05
+          ]
+        },
+        {
+          "position": 79,
+          "token": " compelling",
+          "entropy": 0.03848358243703842,
+          "top_candidates": [
+            " compelling",
+            "Generate",
+            " narrative"
+          ],
+          "top_probs": [
+            0.9951171875,
+            0.0025844573974609375,
+            0.0015192031860351562
+          ]
+        },
+        {
+          "position": 80,
+          "token": " personal",
+          "entropy": 0.15508289635181427,
+          "top_candidates": [
+            " personal",
+            " narrative",
+            "Generate"
+          ],
+          "top_probs": [
+            0.966796875,
+            0.03155517578125,
+            0.0011682510375976562
+          ]
+        },
+        {
+          "position": 81,
+          "token": " narrative",
+          "entropy": 0.024404488503932953,
+          "top_candidates": [
+            " narrative",
+            "Generate",
+            "Narr"
+          ],
+          "top_probs": [
+            0.99658203125,
+            0.0031223297119140625,
+            0.00017344951629638672
+          ]
+        },
+        {
+          "position": 82,
+          "token": " for",
+          "entropy": 0.5761728286743164,
+          "top_candidates": [
+            " for",
+            "Generate",
+            ".Generate"
+          ],
+          "top_probs": [
+            0.7529296875,
+            0.2445068359375,
+            0.00095367431640625
+          ]
+        },
+        {
+          "position": 83,
+          "token": " an",
+          "entropy": 0.05193937197327614,
+          "top_candidates": [
+            " an",
+            " Generate",
+            "Generate"
+          ],
+          "top_probs": [
+            0.9921875,
+            0.0038700103759765625,
+            0.0033111572265625
+          ]
+        },
+        {
+          "position": 84,
+          "token": " individual",
+          "entropy": 0.07199510186910629,
+          "top_candidates": [
+            " individual",
+            "Generate",
+            "Individual"
+          ],
+          "top_probs": [
+            0.98828125,
+            0.00882720947265625,
+            0.0015096664428710938
+          ]
+        },
+        {
+          "position": 85,
+          "token": " based",
+          "entropy": 0.31875064969062805,
+          "top_candidates": [
+            " based",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.91357421875,
+            0.08233642578125,
+            0.001270294189453125
+          ]
+        },
+        {
+          "position": 86,
+          "token": " on",
+          "entropy": 0.12332753092050552,
+          "top_candidates": [
+            " on",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.9736328125,
+            0.0259552001953125,
+            0.00014495849609375
+          ]
+        },
+        {
+          "position": 87,
+          "token": " the",
+          "entropy": 0.7056983709335327,
+          "top_candidates": [
+            " the",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.5751953125,
+            0.4208984375,
+            0.0028820037841796875
+          ]
+        },
+        {
+          "position": 88,
+          "token": " characteristics",
+          "entropy": 0.056053873151540756,
+          "top_candidates": [
+            " characteristics",
+            " Generate",
+            "Generate"
+          ],
+          "top_probs": [
+            0.9931640625,
+            0.0022068023681640625,
+            0.002105712890625
+          ]
+        },
+        {
+          "position": 89,
+          "token": " described",
+          "entropy": 0.24172325432300568,
+          "top_candidates": [
+            " described",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.947265625,
+            0.045013427734375,
+            0.002620697021484375
+          ]
+        },
+        {
+          "position": 90,
+          "token": " below",
+          "entropy": 0.18266551196575165,
+          "top_candidates": [
+            " below",
+            "Generate",
+            "Below"
+          ],
+          "top_probs": [
+            0.9609375,
+            0.035552978515625,
+            0.001514434814453125
+          ]
+        },
+        {
+          "position": 91,
+          "token": ".",
+          "entropy": 0.5517658591270447,
+          "top_candidates": [
+            ".",
+            "Generate",
+            ".Generate"
+          ],
+          "top_probs": [
+            0.779296875,
+            0.2164306640625,
+            0.003963470458984375
+          ]
+        },
+        {
+          "position": 92,
+          "token": " Generate",
+          "entropy": 0.6260692477226257,
+          "top_candidates": [
+            " Generate",
+            " The",
+            " Feel"
+          ],
+          "top_probs": [
+            0.701171875,
+            0.296875,
+            0.0014181137084960938
+          ]
+        },
+        {
+          "position": 93,
+          "token": " a",
+          "entropy": 0.0025114144664257765,
+          "top_candidates": [
+            " a",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.0002065896987915039,
+            4.5359134674072266e-05
+          ]
+        },
+        {
+          "position": 94,
+          "token": " compelling",
+          "entropy": 0.016622250899672508,
+          "top_candidates": [
+            " compelling",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.998046875,
+            0.0014543533325195312,
+            0.0001533031463623047
+          ]
+        },
+        {
+          "position": 95,
+          "token": " personal",
+          "entropy": 0.033018823713064194,
+          "top_candidates": [
+            " personal",
+            " narrative",
+            "Generate"
+          ],
+          "top_probs": [
+            0.99560546875,
+            0.002391815185546875,
+            0.00104522705078125
+          ]
+        },
+        {
+          "position": 96,
+          "token": " narrative",
+          "entropy": 0.042781002819538116,
+          "top_candidates": [
+            " narrative",
+            "Generate",
+            "Narr"
+          ],
+          "top_probs": [
+            0.99365234375,
+            0.005550384521484375,
+            0.00038361549377441406
+          ]
+        },
+        {
+          "position": 97,
+          "token": " for",
+          "entropy": 0.12884575128555298,
+          "top_candidates": [
+            " for",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.9736328125,
+            0.025146484375,
+            0.0004978179931640625
+          ]
+        },
+        {
+          "position": 98,
+          "token": " an",
+          "entropy": 0.031473442912101746,
+          "top_candidates": [
+            " an",
+            " Generate",
+            "Generate"
+          ],
+          "top_probs": [
+            0.99560546875,
+            0.0029773712158203125,
+            0.0008940696716308594
+          ]
+        },
+        {
+          "position": 99,
+          "token": " individual",
+          "entropy": 0.013468475081026554,
+          "top_candidates": [
+            " individual",
+            "Generate",
+            " Individual"
+          ],
+          "top_probs": [
+            0.99853515625,
+            0.0004367828369140625,
+            0.00036787986755371094
+          ]
+        },
+        {
+          "position": 100,
+          "token": " based",
+          "entropy": 0.39671972393989563,
+          "top_candidates": [
+            " based",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.8818359375,
+            0.11212158203125,
+            0.002986907958984375
+          ]
+        },
+        {
+          "position": 101,
+          "token": " on",
+          "entropy": 0.061250533908605576,
+          "top_candidates": [
+            " on",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.9892578125,
+            0.010162353515625,
+            0.00020766258239746094
+          ]
+        },
+        {
+          "position": 102,
+          "token": "Generate",
+          "entropy": 0.6606601476669312,
+          "top_candidates": [
+            "Generate",
+            " the",
+            " Generate"
+          ],
+          "top_probs": [
+            0.6728515625,
+            0.32275390625,
+            0.0021762847900390625
+          ]
+        },
+        {
+          "position": 103,
+          "token": " a",
+          "entropy": 0.0002753669396042824,
+          "top_candidates": [
+            " a",
+            " an",
+            " the"
+          ],
+          "top_probs": [
+            1.0,
+            2.3186206817626953e-05,
+            1.4901161193847656e-06
+          ]
+        },
+        {
+          "position": 104,
+          "token": " compelling",
+          "entropy": 9.446552576264367e-05,
+          "top_candidates": [
+            " compelling",
+            " captivating",
+            " convincing"
+          ],
+          "top_probs": [
+            1.0,
+            1.6093254089355469e-06,
+            1.5497207641601562e-06
+          ]
+        },
+        {
+          "position": 105,
+          "token": " personal",
+          "entropy": 0.0037451344542205334,
+          "top_candidates": [
+            " personal",
+            " narrative",
+            " person"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.0003981590270996094,
+            2.9206275939941406e-06
+          ]
+        },
+        {
+          "position": 106,
+          "token": " narrative",
+          "entropy": 0.000856734171975404,
+          "top_candidates": [
+            " narrative",
+            " Narrative",
+            "Generate"
+          ],
+          "top_probs": [
+            1.0,
+            3.069639205932617e-05,
+            3.0219554901123047e-05
+          ]
+        },
+        {
+          "position": 107,
+          "token": " for",
+          "entropy": 0.0365438237786293,
+          "top_candidates": [
+            " for",
+            "Generate",
+            " based"
+          ],
+          "top_probs": [
+            0.99462890625,
+            0.00406646728515625,
+            0.0006532669067382812
+          ]
+        },
+        {
+          "position": 108,
+          "token": " an",
+          "entropy": 0.002141746925190091,
+          "top_candidates": [
+            " an",
+            " a",
+            " Generate"
+          ],
+          "top_probs": [
+            1.0,
+            0.00012934207916259766,
+            6.300210952758789e-05
+          ]
+        },
+        {
+          "position": 109,
+          "token": " individual",
+          "entropy": 0.00025931259733624756,
+          "top_candidates": [
+            " individual",
+            " Individual",
+            "\n\n"
+          ],
+          "top_probs": [
+            1.0,
+            1.4066696166992188e-05,
+            2.7418136596679688e-06
+          ]
+        },
+        {
+          "position": 110,
+          "token": " based",
+          "entropy": 0.020305778831243515,
+          "top_candidates": [
+            " based",
+            "Generate",
+            "."
+          ],
+          "top_probs": [
+            0.99755859375,
+            0.0010309219360351562,
+            0.0004944801330566406
+          ]
+        },
+        {
+          "position": 111,
+          "token": " on",
+          "entropy": 0.015151429921388626,
+          "top_candidates": [
+            " on",
+            ".",
+            " Generate"
+          ],
+          "top_probs": [
+            0.998046875,
+            0.0016736984252929688,
+            0.00016319751739501953
+          ]
+        },
+        {
+          "position": 112,
+          "token": "Generate",
+          "entropy": 0.4801614582538605,
+          "top_candidates": [
+            "Generate",
+            " the",
+            "\n\n"
+          ],
+          "top_probs": [
+            0.82666015625,
+            0.1705322265625,
+            0.0011138916015625
+          ]
+        },
+        {
+          "position": 113,
+          "token": " a",
+          "entropy": 0.00025692666531540453,
+          "top_candidates": [
+            " a",
+            " an",
+            " the"
+          ],
+          "top_probs": [
+            1.0,
+            1.9848346710205078e-05,
+            1.3709068298339844e-06
+          ]
+        },
+        {
+          "position": 114,
+          "token": " compelling",
+          "entropy": 0.0026723286136984825,
+          "top_candidates": [
+            " compelling",
+            "\n\n",
+            " personal"
+          ],
+          "top_probs": [
+            0.99951171875,
+            4.684925079345703e-05,
+            3.647804260253906e-05
+          ]
+        },
+        {
+          "position": 115,
+          "token": " personal",
+          "entropy": 0.007211033720523119,
+          "top_candidates": [
+            " personal",
+            " narrative",
+            "Personal"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.00020647048950195312,
+            0.0001583099365234375
+          ]
+        },
+        {
+          "position": 116,
+          "token": " narrative",
+          "entropy": 0.009560936130583286,
+          "top_candidates": [
+            " narrative",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.9990234375,
+            0.0005974769592285156,
+            0.00020968914031982422
+          ]
+        },
+        {
+          "position": 117,
+          "token": " for",
+          "entropy": 0.016054950654506683,
+          "top_candidates": [
+            " for",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.998046875,
+            0.0010156631469726562,
+            0.0004506111145019531
+          ]
+        },
+        {
+          "position": 118,
+          "token": " an",
+          "entropy": 0.00600985623896122,
+          "top_candidates": [
+            " an",
+            " Generate",
+            " a"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.0003299713134765625,
+            0.0003199577331542969
+          ]
+        },
+        {
+          "position": 119,
+          "token": " individual",
+          "entropy": 0.0010219652904197574,
+          "top_candidates": [
+            " individual",
+            "individual",
+            " Individual"
+          ],
+          "top_probs": [
+            1.0,
+            3.9458274841308594e-05,
+            2.110004425048828e-05
+          ]
+        },
+        {
+          "position": 120,
+          "token": " based",
+          "entropy": 0.16382059454917908,
+          "top_candidates": [
+            " based",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.96923828125,
+            0.0224456787109375,
+            0.006427764892578125
+          ]
+        },
+        {
+          "position": 121,
+          "token": " on",
+          "entropy": 0.2592826783657074,
+          "top_candidates": [
+            " on",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.9296875,
+            0.06951904296875,
+            0.00030231475830078125
+          ]
+        },
+        {
+          "position": 122,
+          "token": "Generate",
+          "entropy": 0.11183805763721466,
+          "top_candidates": [
+            "Generate",
+            " the",
+            " Generate"
+          ],
+          "top_probs": [
+            0.978515625,
+            0.019989013671875,
+            0.0007996559143066406
+          ]
+        },
+        {
+          "position": 123,
+          "token": " a",
+          "entropy": 0.006171831861138344,
+          "top_candidates": [
+            " a",
+            " Generate",
+            " an"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.0004172325134277344,
+            0.0001252889633178711
+          ]
+        },
+        {
+          "position": 124,
+          "token": " compelling",
+          "entropy": 0.008690416812896729,
+          "top_candidates": [
+            " compelling",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.9990234375,
+            0.0004172325134277344,
+            0.00013124942779541016
+          ]
+        },
+        {
+          "position": 125,
+          "token": " personal",
+          "entropy": 0.004737351555377245,
+          "top_candidates": [
+            " personal",
+            "Generate",
+            " narrative"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.00015354156494140625,
+            9.310245513916016e-05
+          ]
+        },
+        {
+          "position": 126,
+          "token": " narrative",
+          "entropy": 0.02265261672437191,
+          "top_candidates": [
+            " narrative",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.9970703125,
+            0.002471923828125,
+            0.0002409219741821289
+          ]
+        },
+        {
+          "position": 127,
+          "token": ".",
+          "entropy": 0.40234801173210144,
+          "top_candidates": [
+            " for",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.88134765625,
+            0.11199951171875,
+            0.0022182464599609375
+          ]
+        },
+        {
+          "position": 128,
+          "token": " The",
+          "entropy": 0.4067511558532715,
+          "top_candidates": [
+            " Generate",
+            " The",
+            "<|endoftext|>"
+          ],
+          "top_probs": [
+            0.87890625,
+            0.11529541015625,
+            0.0010786056518554688
+          ]
+        },
+        {
+          "position": 129,
+          "token": " narrative",
+          "entropy": 0.10385827720165253,
+          "top_candidates": [
+            " narrative",
+            " response",
+            " individual"
+          ],
+          "top_probs": [
+            0.97998046875,
+            0.01910400390625,
+            0.00039649009704589844
+          ]
+        },
+        {
+          "position": 130,
+          "token": " should",
+          "entropy": 0.004681084770709276,
+          "top_candidates": [
+            " should",
+            " is",
+            " of"
+          ],
+          "top_probs": [
+            0.99951171875,
+            8.344650268554688e-05,
+            7.480382919311523e-05
+          ]
+        },
+        {
+          "position": 131,
+          "token": " provide",
+          "entropy": 0.48058998584747314,
+          "top_candidates": [
+            " provide",
+            "Generate",
+            " be"
+          ],
+          "top_probs": [
+            0.8935546875,
+            0.052032470703125,
+            0.029632568359375
+          ]
+        },
+        {
+          "position": 132,
+          "token": " a",
+          "entropy": 0.09087567031383514,
+          "top_candidates": [
+            " a",
+            "Generate",
+            " an"
+          ],
+          "top_probs": [
+            0.98291015625,
+            0.016387939453125,
+            0.00019693374633789062
+          ]
+        },
+        {
+          "position": 133,
+          "token": " glimpse",
+          "entropy": 0.12914659082889557,
+          "top_candidates": [
+            " glimpse",
+            "Generate",
+            " glance"
+          ],
+          "top_probs": [
+            0.98095703125,
+            0.00835418701171875,
+            0.00601959228515625
+          ]
+        },
+        {
+          "position": 134,
+          "token": " into",
+          "entropy": 0.21208657324314117,
+          "top_candidates": [
+            " into",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.94677734375,
+            0.052581787109375,
+            0.0002149343490600586
+          ]
+        },
+        {
+          "position": 135,
+          "token": " their",
+          "entropy": 0.878787636756897,
+          "top_candidates": [
+            " their",
+            "Generate",
+            " the"
+          ],
+          "top_probs": [
+            0.6650390625,
+            0.22265625,
+            0.10687255859375
+          ]
+        },
+        {
+          "position": 136,
+          "token": " background",
+          "entropy": 0.22661839425563812,
+          "top_candidates": [
+            " background",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.95849609375,
+            0.027618408203125,
+            0.004302978515625
+          ]
+        },
+        {
+          "position": 137,
+          "token": ",",
+          "entropy": 0.10110829025506973,
+          "top_candidates": [
+            ",",
+            "Generate",
+            " and"
+          ],
+          "top_probs": [
+            0.98046875,
+            0.0188140869140625,
+            0.00028133392333984375
+          ]
+        },
+        {
+          "position": 138,
+          "token": " aspirations",
+          "entropy": 0.04725063592195511,
+          "top_candidates": [
+            " aspirations",
+            " as",
+            " Generate"
+          ],
+          "top_probs": [
+            0.99365234375,
+            0.0030651092529296875,
+            0.001667022705078125
+          ]
+        },
+        {
+          "position": 139,
+          "token": ",",
+          "entropy": 0.004427658393979073,
+          "top_candidates": [
+            ",",
+            "Generate",
+            " and"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.00035691261291503906,
+            3.0219554901123047e-05
+          ]
+        },
+        {
+          "position": 140,
+          "token": " daily",
+          "entropy": 0.668278157711029,
+          "top_candidates": [
+            " daily",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.7626953125,
+            0.205322265625,
+            0.02490234375
+          ]
+        },
+        {
+          "position": 141,
+          "token": " life",
+          "entropy": 0.027954930439591408,
+          "top_candidates": [
+            " life",
+            "Generate",
+            "Life"
+          ],
+          "top_probs": [
+            0.99609375,
+            0.003322601318359375,
+            0.0003502368927001953
+          ]
+        },
+        {
+          "position": 142,
+          "token": ",",
+          "entropy": 0.5093076229095459,
+          "top_candidates": [
+            ",",
+            "Generate",
+            ".Generate"
+          ],
+          "top_probs": [
+            0.80419921875,
+            0.1939697265625,
+            0.0008440017700195312
+          ]
+        },
+        {
+          "position": 143,
+          "token": " and",
+          "entropy": 0.8331133723258972,
+          "top_candidates": [
+            " and",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.666015625,
+            0.2449951171875,
+            0.0887451171875
+          ]
+        },
+        {
+          "position": 144,
+          "token": " any",
+          "entropy": 0.4738990366458893,
+          "top_candidates": [
+            " any",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.87939453125,
+            0.074462890625,
+            0.038055419921875
+          ]
+        },
+        {
+          "position": 145,
+          "token": " challenges",
+          "entropy": 0.018857372924685478,
+          "top_candidates": [
+            " challenges",
+            "Generate",
+            " Challenges"
+          ],
+          "top_probs": [
+            0.99755859375,
+            0.0015001296997070312,
+            0.00045752525329589844
+          ]
+        },
+        {
+          "position": 146,
+          "token": " they",
+          "entropy": 0.13232772052288055,
+          "top_candidates": [
+            " they",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.9736328125,
+            0.0240020751953125,
+            0.0009751319885253906
+          ]
+        },
+        {
+          "position": 147,
+          "token": " may",
+          "entropy": 0.17609554529190063,
+          "top_candidates": [
+            " may",
+            "Generate",
+            " face"
+          ],
+          "top_probs": [
+            0.966796875,
+            0.0253753662109375,
+            0.0025119781494140625
+          ]
+        },
+        {
+          "position": 148,
+          "token": " face",
+          "entropy": 0.011549566872417927,
+          "top_candidates": [
+            " face",
+            "Generate",
+            " generate"
+          ],
+          "top_probs": [
+            0.99853515625,
+            0.0005435943603515625,
+            0.0003795623779296875
+          ]
+        },
+        {
+          "position": 149,
+          "token": ".",
+          "entropy": 0.04433159902691841,
+          "top_candidates": [
+            ".",
+            "Generate",
+            ".Generate"
+          ],
+          "top_probs": [
+            0.99365234375,
+            0.003528594970703125,
+            0.001979827880859375
+          ]
+        },
+        {
+          "position": 150,
+          "token": " Generate",
+          "entropy": 0.7969348430633545,
+          "top_candidates": [
+            " It",
+            " Generate",
+            " The"
+          ],
+          "top_probs": [
+            0.67138671875,
+            0.26708984375,
+            0.060546875
+          ]
+        },
+        {
+          "position": 151,
+          "token": " a",
+          "entropy": 0.007045087404549122,
+          "top_candidates": [
+            " a",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.9990234375,
+            0.00047278404235839844,
+            0.0001659393310546875
+          ]
+        },
+        {
+          "position": 152,
+          "token": " compelling",
+          "entropy": 0.018368009477853775,
+          "top_candidates": [
+            " compelling",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.99755859375,
+            0.0015239715576171875,
+            0.0002605915069580078
+          ]
+        },
+        {
+          "position": 153,
+          "token": " personal",
+          "entropy": 0.020322544500231743,
+          "top_candidates": [
+            " personal",
+            " narrative",
+            "Generate"
+          ],
+          "top_probs": [
+            0.99755859375,
+            0.0017805099487304688,
+            0.0003619194030761719
+          ]
+        },
+        {
+          "position": 154,
+          "token": " narrative",
+          "entropy": 0.03971771523356438,
+          "top_candidates": [
+            " narrative",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.99365234375,
+            0.00563812255859375,
+            0.0002186298370361328
+          ]
+        },
+        {
+          "position": 155,
+          "token": " for",
+          "entropy": 0.14909206330776215,
+          "top_candidates": [
+            " for",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.96923828125,
+            0.0279388427734375,
+            0.0017042160034179688
+          ]
+        },
+        {
+          "position": 156,
+          "token": " an",
+          "entropy": 0.03690581023693085,
+          "top_candidates": [
+            " an",
+            " Generate",
+            "Generate"
+          ],
+          "top_probs": [
+            0.99462890625,
+            0.003818511962890625,
+            0.0008654594421386719
+          ]
+        },
+        {
+          "position": 157,
+          "token": " individual",
+          "entropy": 0.179280087351799,
+          "top_candidates": [
+            " individual",
+            "Generate",
+            "Individual"
+          ],
+          "top_probs": [
+            0.9658203125,
+            0.0230712890625,
+            0.00737762451171875
+          ]
+        },
+        {
+          "position": 158,
+          "token": " based",
+          "entropy": 0.7025042176246643,
+          "top_candidates": [
+            " based",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.63916015625,
+            0.35302734375,
+            0.004657745361328125
+          ]
+        },
+        {
+          "position": 159,
+          "token": " on",
+          "entropy": 0.6244238615036011,
+          "top_candidates": [
+            " on",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.69189453125,
+            0.30712890625,
+            0.00026726722717285156
+          ]
+        },
+        {
+          "position": 160,
+          "token": "Generate",
+          "entropy": 0.2279510498046875,
+          "top_candidates": [
+            "Generate",
+            " the",
+            " a"
+          ],
+          "top_probs": [
+            0.953125,
+            0.0311279296875,
+            0.0135955810546875
+          ]
+        },
+        {
+          "position": 161,
+          "token": " a",
+          "entropy": 0.0002684188075363636,
+          "top_candidates": [
+            " a",
+            " an",
+            " Generate"
+          ],
+          "top_probs": [
+            1.0,
+            1.806020736694336e-05,
+            2.9206275939941406e-06
+          ]
+        },
+        {
+          "position": 162,
+          "token": " compelling",
+          "entropy": 0.0005445281858555973,
+          "top_candidates": [
+            " compelling",
+            " convincing",
+            " Generate"
+          ],
+          "top_probs": [
+            1.0,
+            7.212162017822266e-06,
+            5.781650543212891e-06
+          ]
+        },
+        {
+          "position": 163,
+          "token": " personal",
+          "entropy": 0.004296824336051941,
+          "top_candidates": [
+            " personal",
+            " narrative",
+            " person"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.0004372596740722656,
+            1.2040138244628906e-05
+          ]
+        },
+        {
+          "position": 164,
+          "token": " narrative",
+          "entropy": 0.0012947453651577234,
+          "top_candidates": [
+            " narrative",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            1.0,
+            8.749961853027344e-05,
+            2.110004425048828e-05
+          ]
+        },
+        {
+          "position": 165,
+          "token": " for",
+          "entropy": 0.008155380375683308,
+          "top_candidates": [
+            " for",
+            " based",
+            " Generate"
+          ],
+          "top_probs": [
+            0.9990234375,
+            0.0003299713134765625,
+            0.00026106834411621094
+          ]
+        },
+        {
+          "position": 166,
+          "token": " an",
+          "entropy": 0.05436909198760986,
+          "top_candidates": [
+            " an",
+            " the",
+            " Generate"
+          ],
+          "top_probs": [
+            0.9921875,
+            0.004055023193359375,
+            0.002422332763671875
+          ]
+        },
+        {
+          "position": 167,
+          "token": " individual",
+          "entropy": 0.001781910308636725,
+          "top_candidates": [
+            " individual",
+            "individual",
+            " Individual"
+          ],
+          "top_probs": [
+            1.0,
+            0.00011771917343139648,
+            2.6285648345947266e-05
+          ]
+        },
+        {
+          "position": 168,
+          "token": " based",
+          "entropy": 0.38026362657546997,
+          "top_candidates": [
+            " based",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.89111328125,
+            0.0999755859375,
+            0.007358551025390625
+          ]
+        },
+        {
+          "position": 169,
+          "token": " on",
+          "entropy": 0.02475176565349102,
+          "top_candidates": [
+            " on",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.99658203125,
+            0.00327301025390625,
+            0.00021922588348388672
+          ]
+        },
+        {
+          "position": 170,
+          "token": "Generate",
+          "entropy": 0.023498695343732834,
+          "top_candidates": [
+            "Generate",
+            " the",
+            "The"
+          ],
+          "top_probs": [
+            0.9970703125,
+            0.0010633468627929688,
+            0.0006055831909179688
+          ]
+        },
+        {
+          "position": 171,
+          "token": " a",
+          "entropy": 0.0008008358418010175,
+          "top_candidates": [
+            " a",
+            " an",
+            " Generate"
+          ],
+          "top_probs": [
+            1.0,
+            3.427267074584961e-05,
+            2.3186206817626953e-05
+          ]
+        },
+        {
+          "position": 172,
+          "token": " compelling",
+          "entropy": 0.009929003193974495,
+          "top_candidates": [
+            " compelling",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.9990234375,
+            0.00070953369140625,
+            0.0001558065414428711
+          ]
+        },
+        {
+          "position": 173,
+          "token": " personal",
+          "entropy": 0.004177434835582972,
+          "top_candidates": [
+            " personal",
+            "Generate",
+            " narrative"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.00012731552124023438,
+            9.167194366455078e-05
+          ]
+        },
+        {
+          "position": 174,
+          "token": " narrative",
+          "entropy": 0.003070322796702385,
+          "top_candidates": [
+            " narrative",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.00021648406982421875,
+            5.829334259033203e-05
+          ]
+        },
+        {
+          "position": 175,
+          "token": " for",
+          "entropy": 0.038771674036979675,
+          "top_candidates": [
+            " for",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.994140625,
+            0.004749298095703125,
+            0.0004489421844482422
+          ]
+        },
+        {
+          "position": 176,
+          "token": " an",
+          "entropy": 0.019094105809926987,
+          "top_candidates": [
+            " an",
+            " Generate",
+            " a"
+          ],
+          "top_probs": [
+            0.99755859375,
+            0.0018377304077148438,
+            0.0004718303680419922
+          ]
+        },
+        {
+          "position": 177,
+          "token": " individual",
+          "entropy": 0.006895008496940136,
+          "top_candidates": [
+            " individual",
+            "individual",
+            "Generate"
+          ],
+          "top_probs": [
+            0.9990234375,
+            0.00051116943359375,
+            9.02414321899414e-05
+          ]
+        },
+        {
+          "position": 178,
+          "token": " based",
+          "entropy": 0.009821153245866299,
+          "top_candidates": [
+            " based",
+            "Generate",
+            "."
+          ],
+          "top_probs": [
+            0.9990234375,
+            0.0003566741943359375,
+            0.00020325183868408203
+          ]
+        },
+        {
+          "position": 179,
+          "token": " on",
+          "entropy": 0.002506490331143141,
+          "top_candidates": [
+            " on",
+            " Generate",
+            "Generate"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.00017130374908447266,
+            6.401538848876953e-05
+          ]
+        },
+        {
+          "position": 180,
+          "token": "Generate",
+          "entropy": 0.6608204245567322,
+          "top_candidates": [
+            "Generate",
+            " the",
+            "the"
+          ],
+          "top_probs": [
+            0.701171875,
+            0.287841796875,
+            0.00969696044921875
+          ]
+        },
+        {
+          "position": 181,
+          "token": " a",
+          "entropy": 0.005720251239836216,
+          "top_candidates": [
+            " a",
+            " an",
+            " Generate"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.0003459453582763672,
+            0.0002065896987915039
+          ]
+        },
+        {
+          "position": 182,
+          "token": " compelling",
+          "entropy": 0.025463800877332687,
+          "top_candidates": [
+            " compelling",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.99658203125,
+            0.0031223297119140625,
+            0.00012493133544921875
+          ]
+        },
+        {
+          "position": 183,
+          "token": " personal",
+          "entropy": 0.05938820540904999,
+          "top_candidates": [
+            " personal",
+            "Generate",
+            "Personal"
+          ],
+          "top_probs": [
+            0.9912109375,
+            0.006175994873046875,
+            0.0013780593872070312
+          ]
+        },
+        {
+          "position": 184,
+          "token": " narrative",
+          "entropy": 0.0204367246478796,
+          "top_candidates": [
+            " narrative",
+            "Generate",
+            "Narr"
+          ],
+          "top_probs": [
+            0.9970703125,
+            0.002147674560546875,
+            0.0002372264862060547
+          ]
+        },
+        {
+          "position": 185,
+          "token": " for",
+          "entropy": 0.5530352592468262,
+          "top_candidates": [
+            ".",
+            " for",
+            ".\n"
+          ],
+          "top_probs": [
+            0.8154296875,
+            0.1708984375,
+            0.004627227783203125
+          ]
+        },
+        {
+          "position": 186,
+          "token": " an",
+          "entropy": 0.09242895990610123,
+          "top_candidates": [
+            " an",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.98486328125,
+            0.007640838623046875,
+            0.00623321533203125
+          ]
+        },
+        {
+          "position": 187,
+          "token": " individual",
+          "entropy": 0.027142222970724106,
+          "top_candidates": [
+            " individual",
+            "Generate",
+            "Individual"
+          ],
+          "top_probs": [
+            0.99658203125,
+            0.0014524459838867188,
+            0.0010957717895507812
+          ]
+        },
+        {
+          "position": 188,
+          "token": " based",
+          "entropy": 0.6862216591835022,
+          "top_candidates": [
+            " based",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.66015625,
+            0.33203125,
+            0.0064697265625
+          ]
+        },
+        {
+          "position": 189,
+          "token": " on",
+          "entropy": 0.6170595288276672,
+          "top_candidates": [
+            "Generate",
+            " on",
+            " Generate"
+          ],
+          "top_probs": [
+            0.69873046875,
+            0.300537109375,
+            0.00017702579498291016
+          ]
+        },
+        {
+          "position": 190,
+          "token": "Generate",
+          "entropy": 0.2165299654006958,
+          "top_candidates": [
+            "Generate",
+            " the",
+            " a"
+          ],
+          "top_probs": [
+            0.94873046875,
+            0.048004150390625,
+            0.0020751953125
+          ]
+        },
+        {
+          "position": 191,
+          "token": " a",
+          "entropy": 0.023656979203224182,
+          "top_candidates": [
+            " a",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.9970703125,
+            0.0014753341674804688,
+            0.00116729736328125
+          ]
+        },
+        {
+          "position": 192,
+          "token": " compelling",
+          "entropy": 0.2736741602420807,
+          "top_candidates": [
+            " compelling",
+            "Generate",
+            "Generating"
+          ],
+          "top_probs": [
+            0.92626953125,
+            0.072509765625,
+            0.0005040168762207031
+          ]
+        },
+        {
+          "position": 193,
+          "token": " personal",
+          "entropy": 0.059797074645757675,
+          "top_candidates": [
+            " personal",
+            "Generate",
+            "Personal"
+          ],
+          "top_probs": [
+            0.9912109375,
+            0.006175994873046875,
+            0.001255035400390625
+          ]
+        },
+        {
+          "position": 194,
+          "token": " narrative",
+          "entropy": 0.01573028601706028,
+          "top_candidates": [
+            " narrative",
+            "Generate",
+            "Narr"
+          ],
+          "top_probs": [
+            0.998046875,
+            0.001781463623046875,
+            0.00011211633682250977
+          ]
+        },
+        {
+          "position": 195,
+          "token": " for",
+          "entropy": 0.18206147849559784,
+          "top_candidates": [
+            " for",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.96435546875,
+            0.028228759765625,
+            0.002544403076171875
+          ]
+        },
+        {
+          "position": 196,
+          "token": " an",
+          "entropy": 0.02918076701462269,
+          "top_candidates": [
+            " an",
+            " Generate",
+            "Generate"
+          ],
+          "top_probs": [
+            0.99609375,
+            0.0022830963134765625,
+            0.00104522705078125
+          ]
+        },
+        {
+          "position": 197,
+          "token": " individual",
+          "entropy": 0.0039390320889651775,
+          "top_candidates": [
+            " individual",
+            "individual",
+            "Generate"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.0002002716064453125,
+            0.00010716915130615234
+          ]
+        },
+        {
+          "position": 198,
+          "token": "Generate",
+          "entropy": 0.6330004930496216,
+          "top_candidates": [
+            " based",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.72998046875,
+            0.26025390625,
+            0.00762176513671875
+          ]
+        },
+        {
+          "position": 199,
+          "token": " a",
+          "entropy": 0.001166289090178907,
+          "top_candidates": [
+            " a",
+            " Generate",
+            " an"
+          ],
+          "top_probs": [
+            1.0,
+            4.9054622650146484e-05,
+            4.00543212890625e-05
+          ]
+        },
+        {
+          "position": 200,
+          "token": " compelling",
+          "entropy": 0.00041557816439308226,
+          "top_candidates": [
+            " compelling",
+            "Generate",
+            " convincing"
+          ],
+          "top_probs": [
+            1.0,
+            1.2636184692382812e-05,
+            5.185604095458984e-06
+          ]
+        },
+        {
+          "position": 201,
+          "token": " personal",
+          "entropy": 0.0018648278200998902,
+          "top_candidates": [
+            " personal",
+            " narrative",
+            "Generate"
+          ],
+          "top_probs": [
+            1.0,
+            9.763240814208984e-05,
+            3.272294998168945e-05
+          ]
+        },
+        {
+          "position": 202,
+          "token": " narrative",
+          "entropy": 0.017059873789548874,
+          "top_candidates": [
+            " narrative",
+            "Generate",
+            "Narr"
+          ],
+          "top_probs": [
+            0.99755859375,
+            0.002147674560546875,
+            6.80088996887207e-05
+          ]
+        },
+        {
+          "position": 203,
+          "token": " for",
+          "entropy": 0.03171345219016075,
+          "top_candidates": [
+            " for",
+            "Generate",
+            " based"
+          ],
+          "top_probs": [
+            0.99560546875,
+            0.0033721923828125,
+            0.0006642341613769531
+          ]
+        },
+        {
+          "position": 204,
+          "token": " an",
+          "entropy": 0.022556765004992485,
+          "top_candidates": [
+            " an",
+            " Generate",
+            " a"
+          ],
+          "top_probs": [
+            0.9970703125,
+            0.001453399658203125,
+            0.0006551742553710938
+          ]
+        },
+        {
+          "position": 205,
+          "token": " individual",
+          "entropy": 0.00506017729640007,
+          "top_candidates": [
+            " individual",
+            "individual",
+            " Individual"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.0004239082336425781,
+            4.13060188293457e-05
+          ]
+        },
+        {
+          "position": 206,
+          "token": " based",
+          "entropy": 0.1892917901277542,
+          "top_candidates": [
+            " based",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.95947265625,
+            0.035491943359375,
+            0.0034618377685546875
+          ]
+        },
+        {
+          "position": 207,
+          "token": " on",
+          "entropy": 0.006585113238543272,
+          "top_candidates": [
+            " on",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.0004303455352783203,
+            0.0001252889633178711
+          ]
+        },
+        {
+          "position": 208,
+          "token": " the",
+          "entropy": 0.6187062859535217,
+          "top_candidates": [
+            " the",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.71875,
+            0.277099609375,
+            0.002513885498046875
+          ]
+        },
+        {
+          "position": 209,
+          "token": " characteristics",
+          "entropy": 2.6857585908146575e-05,
+          "top_candidates": [
+            " characteristics",
+            " characters",
+            " characteristic"
+          ],
+          "top_probs": [
+            1.0,
+            6.556510925292969e-07,
+            3.5762786865234375e-07
+          ]
+        },
+        {
+          "position": 210,
+          "token": " described",
+          "entropy": 0.0005499295075424016,
+          "top_candidates": [
+            " described",
+            " generated",
+            " of"
+          ],
+          "top_probs": [
+            1.0,
+            2.1755695343017578e-05,
+            2.1755695343017578e-05
+          ]
+        },
+        {
+          "position": 211,
+          "token": " below",
+          "entropy": 0.0011677028378471732,
+          "top_candidates": [
+            " below",
+            " above",
+            " in"
+          ],
+          "top_probs": [
+            1.0,
+            5.066394805908203e-05,
+            1.239776611328125e-05
+          ]
+        },
+        {
+          "position": 212,
+          "token": ".",
+          "entropy": 0.0009551977273076773,
+          "top_candidates": [
+            ".",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            1.0,
+            3.5881996154785156e-05,
+            1.8656253814697266e-05
+          ]
+        },
+        {
+          "position": 213,
+          "token": " The",
+          "entropy": 0.006571645848453045,
+          "top_candidates": [
+            " The",
+            " Generate",
+            " A"
+          ],
+          "top_probs": [
+            0.9990234375,
+            0.0007672309875488281,
+            3.635883331298828e-06
+          ]
+        },
+        {
+          "position": 214,
+          "token": " narrative",
+          "entropy": 3.840669523924589e-05,
+          "top_candidates": [
+            " narrative",
+            " response",
+            " Narrative"
+          ],
+          "top_probs": [
+            1.0,
+            1.8477439880371094e-06,
+            6.556510925292969e-07
+          ]
+        },
+        {
+          "position": 215,
+          "token": " should",
+          "entropy": 4.644899308914319e-05,
+          "top_candidates": [
+            " should",
+            "Should",
+            " Should"
+          ],
+          "top_probs": [
+            1.0,
+            1.0728836059570312e-06,
+            4.172325134277344e-07
+          ]
+        },
+        {
+          "position": 216,
+          "token": " provide",
+          "entropy": 0.012082375586032867,
+          "top_candidates": [
+            " provide",
+            " generate",
+            "Provide"
+          ],
+          "top_probs": [
+            0.99853515625,
+            0.000766754150390625,
+            0.0002865791320800781
+          ]
+        },
+        {
+          "position": 217,
+          "token": " a",
+          "entropy": 0.0001530908775748685,
+          "top_candidates": [
+            " a",
+            "Generate",
+            " an"
+          ],
+          "top_probs": [
+            1.0,
+            4.410743713378906e-06,
+            3.0994415283203125e-06
+          ]
+        },
+        {
+          "position": 218,
+          "token": " glimpse",
+          "entropy": 0.004407917615026236,
+          "top_candidates": [
+            " glimpse",
+            " glance",
+            " glimps"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.0004305839538574219,
+            1.722574234008789e-05
+          ]
+        },
+        {
+          "position": 219,
+          "token": " into",
+          "entropy": 0.0008616360137239099,
+          "top_candidates": [
+            " into",
+            "Generate",
+            " int"
+          ],
+          "top_probs": [
+            1.0,
+            7.033348083496094e-05,
+            5.185604095458984e-06
+          ]
+        },
+        {
+          "position": 220,
+          "token": " their",
+          "entropy": 0.0006318948580883443,
+          "top_candidates": [
+            " their",
+            " the",
+            "Generate"
+          ],
+          "top_probs": [
+            1.0,
+            4.1961669921875e-05,
+            3.159046173095703e-06
+          ]
+        },
+        {
+          "position": 221,
+          "token": " background",
+          "entropy": 0.006955423858016729,
+          "top_candidates": [
+            " background",
+            "background",
+            "Background"
+          ],
+          "top_probs": [
+            0.9990234375,
+            0.00046539306640625,
+            9.02414321899414e-05
+          ]
+        },
+        {
+          "position": 222,
+          "token": ",",
+          "entropy": 0.001340557006187737,
+          "top_candidates": [
+            ",",
+            "Generate",
+            " and"
+          ],
+          "top_probs": [
+            1.0,
+            9.763240814208984e-05,
+            6.735324859619141e-06
+          ]
+        },
+        {
+          "position": 223,
+          "token": " aspirations",
+          "entropy": 0.0016276143724098802,
+          "top_candidates": [
+            " aspirations",
+            " ambitions",
+            " as"
+          ],
+          "top_probs": [
+            1.0,
+            6.920099258422852e-05,
+            2.7120113372802734e-05
+          ]
+        },
+        {
+          "position": 224,
+          "token": ",",
+          "entropy": 0.00027030156343244016,
+          "top_candidates": [
+            ",",
+            "Generate",
+            ",\n"
+          ],
+          "top_probs": [
+            1.0,
+            7.748603820800781e-06,
+            4.291534423828125e-06
+          ]
+        },
+        {
+          "position": 225,
+          "token": " daily",
+          "entropy": 0.013830730691552162,
+          "top_candidates": [
+            " daily",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.99853515625,
+            0.0005269050598144531,
+            0.0005269050598144531
+          ]
+        },
+        {
+          "position": 226,
+          "token": " life",
+          "entropy": 0.003159002400934696,
+          "top_candidates": [
+            " life",
+            "Generate",
+            "Life"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.0002378225326538086,
+            2.9742717742919922e-05
+          ]
+        },
+        {
+          "position": 227,
+          "token": ",",
+          "entropy": 0.003916449379175901,
+          "top_candidates": [
+            ",",
+            "Generate",
+            " and"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.0004107952117919922,
+            5.841255187988281e-06
+          ]
+        },
+        {
+          "position": 228,
+          "token": " and",
+          "entropy": 0.0035435911267995834,
+          "top_candidates": [
+            " and",
+            " any",
+            " Generate"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.00033545494079589844,
+            2.7120113372802734e-05
+          ]
+        },
+        {
+          "position": 229,
+          "token": " any",
+          "entropy": 0.0005263302009552717,
+          "top_candidates": [
+            " any",
+            " the",
+            " Generate"
+          ],
+          "top_probs": [
+            1.0,
+            1.1861324310302734e-05,
+            7.092952728271484e-06
+          ]
+        },
+        {
+          "position": 230,
+          "token": " challenges",
+          "entropy": 9.040498116519302e-05,
+          "top_candidates": [
+            " challenges",
+            " Challenges",
+            " difficulties"
+          ],
+          "top_probs": [
+            1.0,
+            5.781650543212891e-06,
+            2.980232238769531e-07
+          ]
+        },
+        {
+          "position": 231,
+          "token": " they",
+          "entropy": 0.00018920366710517555,
+          "top_candidates": [
+            " they",
+            " Generate",
+            "Generate"
+          ],
+          "top_probs": [
+            1.0,
+            7.092952728271484e-06,
+            3.933906555175781e-06
+          ]
+        },
+        {
+          "position": 232,
+          "token": " may",
+          "entropy": 0.0014782437356188893,
+          "top_candidates": [
+            " may",
+            " face",
+            " must"
+          ],
+          "top_probs": [
+            1.0,
+            0.00014650821685791016,
+            6.020069122314453e-06
+          ]
+        },
+        {
+          "position": 233,
+          "token": " face",
+          "entropy": 4.491768777370453e-05,
+          "top_candidates": [
+            " face",
+            " encounter",
+            " be"
+          ],
+          "top_probs": [
+            1.0,
+            5.364418029785156e-07,
+            4.76837158203125e-07
+          ]
+        },
+        {
+          "position": 234,
+          "token": ".",
+          "entropy": 3.6870660551358014e-05,
+          "top_candidates": [
+            ".",
+            ".\n",
+            ","
+          ],
+          "top_probs": [
+            1.0,
+            9.5367431640625e-07,
+            8.344650268554688e-07
+          ]
+        },
+        {
+          "position": 235,
+          "token": " It",
+          "entropy": 0.6611104607582092,
+          "top_candidates": [
+            " It",
+            " Generate",
+            " The"
+          ],
+          "top_probs": [
+            0.75048828125,
+            0.218505859375,
+            0.030029296875
+          ]
+        },
+        {
+          "position": 236,
+          "token": " should",
+          "entropy": 2.7782177767221583e-06,
+          "top_candidates": [
+            " should",
+            " is",
+            "#"
+          ],
+          "top_probs": [
+            1.0,
+            1.7881393432617188e-07,
+            0.0
+          ]
+        },
+        {
+          "position": 237,
+          "token": " be",
+          "entropy": 1.379477180307731e-05,
+          "top_candidates": [
+            " be",
+            " engage",
+            " also"
+          ],
+          "top_probs": [
+            1.0,
+            7.748603820800781e-07,
+            1.1920928955078125e-07
+          ]
+        },
+        {
+          "position": 238,
+          "token": " engaging",
+          "entropy": 2.4359946110052988e-05,
+          "top_candidates": [
+            " engaging",
+            " engaged",
+            " generating"
+          ],
+          "top_probs": [
+            1.0,
+            1.6093254089355469e-06,
+            1.1920928955078125e-07
+          ]
+        },
+        {
+          "position": 239,
+          "token": ",",
+          "entropy": 9.91554998108768e-07,
+          "top_candidates": [
+            ",",
+            " and",
+            "#"
+          ],
+          "top_probs": [
+            1.0,
+            5.960464477539063e-08,
+            0.0
+          ]
+        },
+        {
+          "position": 240,
+          "token": " realistic",
+          "entropy": 4.381708276923746e-05,
+          "top_candidates": [
+            " realistic",
+            " real",
+            " reflective"
+          ],
+          "top_probs": [
+            1.0,
+            2.3245811462402344e-06,
+            8.344650268554688e-07
+          ]
+        },
+        {
+          "position": 241,
+          "token": ",",
+          "entropy": 4.627256657840917e-06,
+          "top_candidates": [
+            ",",
+            " and",
+            "."
+          ],
+          "top_probs": [
+            1.0,
+            2.384185791015625e-07,
+            5.960464477539063e-08
+          ]
+        },
+        {
+          "position": 242,
+          "token": " and",
+          "entropy": 0.0008121525170281529,
+          "top_candidates": [
+            " and",
+            " feel",
+            " reflect"
+          ],
+          "top_probs": [
+            1.0,
+            2.110004425048828e-05,
+            1.621246337890625e-05
+          ]
+        },
+        {
+          "position": 243,
+          "token": " reflect",
+          "entropy": 0.0002848875301424414,
+          "top_candidates": [
+            " reflect",
+            " reflective",
+            " Reflect"
+          ],
+          "top_probs": [
+            1.0,
+            1.5437602996826172e-05,
+            2.5033950805664062e-06
+          ]
+        },
+        {
+          "position": 244,
+          "token": " the",
+          "entropy": 0.0001706353505142033,
+          "top_candidates": [
+            " the",
+            " their",
+            "Generate"
+          ],
+          "top_probs": [
+            1.0,
+            1.1682510375976562e-05,
+            7.748603820800781e-07
+          ]
+        },
+        {
+          "position": 245,
+          "token": " nuances",
+          "entropy": 0.00016781229351181537,
+          "top_candidates": [
+            " nuances",
+            " nuanced",
+            " nu"
+          ],
+          "top_probs": [
+            1.0,
+            1.0967254638671875e-05,
+            1.0728836059570312e-06
+          ]
+        },
+        {
+          "position": 246,
+          "token": " of",
+          "entropy": 1.2084172340109944e-05,
+          "top_candidates": [
+            " of",
+            "Generate",
+            "Of"
+          ],
+          "top_probs": [
+            1.0,
+            3.5762786865234375e-07,
+            1.1920928955078125e-07
+          ]
+        },
+        {
+          "position": 247,
+          "token": " their",
+          "entropy": 8.315540617331862e-05,
+          "top_candidates": [
+            " their",
+            " Generate",
+            " Their"
+          ],
+          "top_probs": [
+            1.0,
+            3.4570693969726562e-06,
+            9.5367431640625e-07
+          ]
+        },
+        {
+          "position": 248,
+          "token": " personal",
+          "entropy": 0.00047472165897488594,
+          "top_candidates": [
+            " personal",
+            " professional",
+            " Personal"
+          ],
+          "top_probs": [
+            1.0,
+            2.014636993408203e-05,
+            8.404254913330078e-06
+          ]
+        },
+        {
+          "position": 249,
+          "token": " and",
+          "entropy": 0.00048022446571849287,
+          "top_candidates": [
+            " and",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            1.0,
+            4.3332576751708984e-05,
+            2.1457672119140625e-06
+          ]
+        },
+        {
+          "position": 250,
+          "token": " professional",
+          "entropy": 0.005116315558552742,
+          "top_candidates": [
+            " professional",
+            " Generate",
+            "Generate"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.00045108795166015625,
+            3.820657730102539e-05
+          ]
+        },
+        {
+          "position": 251,
+          "token": " journey",
+          "entropy": 2.0676987332990393e-05,
+          "top_candidates": [
+            " journey",
+            " voyage",
+            "jour"
+          ],
+          "top_probs": [
+            1.0,
+            4.172325134277344e-07,
+            3.5762786865234375e-07
+          ]
+        },
+        {
+          "position": 252,
+          "token": ".",
+          "entropy": 3.1399646104546264e-05,
+          "top_candidates": [
+            ".",
+            " Feel",
+            ","
+          ],
+          "top_probs": [
+            1.0,
+            5.960464477539062e-07,
+            4.76837158203125e-07
+          ]
+        },
+        {
+          "position": 253,
+          "token": " Feel",
+          "entropy": 0.00021153206762392074,
+          "top_candidates": [
+            " Feel",
+            " Generate",
+            " It"
+          ],
+          "top_probs": [
+            1.0,
+            1.0311603546142578e-05,
+            4.708766937255859e-06
+          ]
+        },
+        {
+          "position": 254,
+          "token": " free",
+          "entropy": 3.769772774830926e-06,
+          "top_candidates": [
+            " free",
+            " freely",
+            " for"
+          ],
+          "top_probs": [
+            1.0,
+            1.7881393432617188e-07,
+            5.960464477539063e-08
+          ]
+        },
+        {
+          "position": 255,
+          "token": " to",
+          "entropy": 0.0008559476118534803,
+          "top_candidates": [
+            " to",
+            "To",
+            "Generate"
+          ],
+          "top_probs": [
+            1.0,
+            5.829334259033203e-05,
+            1.9848346710205078e-05
+          ]
+        },
+        {
+          "position": 256,
+          "token": " include",
+          "entropy": 0.00019951994181610644,
+          "top_candidates": [
+            " include",
+            " Include",
+            " generate"
+          ],
+          "top_probs": [
+            1.0,
+            8.64267349243164e-06,
+            3.4570693969726562e-06
+          ]
+        },
+        {
+          "position": 257,
+          "token": " thoughts",
+          "entropy": 4.922584048472345e-05,
+          "top_candidates": [
+            " thoughts",
+            " Thoughts",
+            " feelings"
+          ],
+          "top_probs": [
+            1.0,
+            3.4570693969726562e-06,
+            1.7881393432617188e-07
+          ]
+        },
+        {
+          "position": 258,
+          "token": ",",
+          "entropy": 0.0,
+          "top_candidates": [
+            ",",
+            "#",
+            "!"
+          ],
+          "top_probs": [
+            1.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "position": 259,
+          "token": " emotions",
+          "entropy": 0.0003034052497241646,
+          "top_candidates": [
+            " emotions",
+            " feelings",
+            " Em"
+          ],
+          "top_probs": [
+            1.0,
+            1.0311603546142578e-05,
+            5.602836608886719e-06
+          ]
+        },
+        {
+          "position": 260,
+          "token": ",",
+          "entropy": 8.627954957773909e-05,
+          "top_candidates": [
+            ",",
+            " and",
+            ",\n\n"
+          ],
+          "top_probs": [
+            1.0,
+            5.4836273193359375e-06,
+            1.0132789611816406e-06
+          ]
+        },
+        {
+          "position": 261,
+          "token": " and",
+          "entropy": 0.0005119351553730667,
+          "top_candidates": [
+            " and",
+            " Generate",
+            "Generate"
+          ],
+          "top_probs": [
+            1.0,
+            2.6285648345947266e-05,
+            1.4722347259521484e-05
+          ]
+        },
+        {
+          "position": 262,
+          "token": " significant",
+          "entropy": 0.0014656452694907784,
+          "top_candidates": [
+            " significant",
+            " significance",
+            " meaningful"
+          ],
+          "top_probs": [
+            1.0,
+            8.094310760498047e-05,
+            1.0132789611816406e-05
+          ]
+        },
+        {
+          "position": 263,
+          "token": " life",
+          "entropy": 0.00011738605826394632,
+          "top_candidates": [
+            " life",
+            " events",
+            "Life"
+          ],
+          "top_probs": [
+            1.0,
+            7.748603820800781e-06,
+            8.344650268554688e-07
+          ]
+        },
+        {
+          "position": 264,
+          "token": " events",
+          "entropy": 0.00010879062028834596,
+          "top_candidates": [
+            " events",
+            "Events",
+            " experiences"
+          ],
+          "top_probs": [
+            1.0,
+            6.735324859619141e-06,
+            1.3113021850585938e-06
+          ]
+        },
+        {
+          "position": 265,
+          "token": " that",
+          "entropy": 0.00010083270899485797,
+          "top_candidates": [
+            " that",
+            " to",
+            " of"
+          ],
+          "top_probs": [
+            1.0,
+            5.185604095458984e-06,
+            8.940696716308594e-07
+          ]
+        },
+        {
+          "position": 266,
+          "token": " shape",
+          "entropy": 1.6087840776890516e-05,
+          "top_candidates": [
+            " shape",
+            " Shape",
+            "Shape"
+          ],
+          "top_probs": [
+            1.0,
+            8.940696716308594e-07,
+            2.384185791015625e-07
+          ]
+        },
+        {
+          "position": 267,
+          "token": " their",
+          "entropy": 6.172731082187966e-05,
+          "top_candidates": [
+            " their",
+            " them",
+            "\n\n"
+          ],
+          "top_probs": [
+            1.0,
+            2.682209014892578e-06,
+            5.364418029785156e-07
+          ]
+        },
+        {
+          "position": 268,
+          "token": " perspective",
+          "entropy": 5.963883813819848e-05,
+          "top_candidates": [
+            " perspective",
+            " perspectives",
+            " response"
+          ],
+          "top_probs": [
+            1.0,
+            1.2516975402832031e-06,
+            1.2516975402832031e-06
+          ]
+        },
+        {
+          "position": 269,
+          "token": ".\n",
+          "entropy": 0.07686950266361237,
+          "top_candidates": [
+            ".\n",
+            ".",
+            ".\n\n"
+          ],
+          "top_probs": [
+            0.9853515625,
+            0.01450347900390625,
+            9.769201278686523e-05
+          ]
+        },
+        {
+          "position": 270,
+          "token": "The",
+          "entropy": 0.0009688357822597027,
+          "top_candidates": [
+            "The",
+            "Generate",
+            "-"
+          ],
+          "top_probs": [
+            1.0,
+            5.066394805908203e-05,
+            2.390146255493164e-05
+          ]
+        },
+        {
+          "position": 271,
+          "token": " response",
+          "entropy": 1.0326477422495373e-05,
+          "top_candidates": [
+            " response",
+            " narrative",
+            " re"
+          ],
+          "top_probs": [
+            1.0,
+            6.556510925292969e-07,
+            5.960464477539063e-08
+          ]
+        },
+        {
+          "position": 272,
+          "token": " should",
+          "entropy": 2.9746649943263037e-06,
+          "top_candidates": [
+            " should",
+            "<|endoftext|>",
+            ","
+          ],
+          "top_probs": [
+            1.0,
+            5.960464477539063e-08,
+            5.960464477539063e-08
+          ]
+        },
+        {
+          "position": 273,
+          "token": " be",
+          "entropy": 0.0013655440416187048,
+          "top_candidates": [
+            " be",
+            "Be",
+            "Generate"
+          ],
+          "top_probs": [
+            1.0,
+            5.918741226196289e-05,
+            5.143880844116211e-05
+          ]
+        },
+        {
+          "position": 274,
+          "token": " no",
+          "entropy": 0.039548635482788086,
+          "top_candidates": [
+            " no",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.99365234375,
+            0.005908966064453125,
+            0.00018703937530517578
+          ]
+        },
+        {
+          "position": 275,
+          "token": " longer",
+          "entropy": 0.0017355488380417228,
+          "top_candidates": [
+            " longer",
+            " less",
+            "Generate"
+          ],
+          "top_probs": [
+            1.0,
+            4.982948303222656e-05,
+            2.6702880859375e-05
+          ]
+        },
+        {
+          "position": 276,
+          "token": " than",
+          "entropy": 0.00046871029189787805,
+          "top_candidates": [
+            " than",
+            "Generate",
+            "Than"
+          ],
+          "top_probs": [
+            1.0,
+            2.3543834686279297e-05,
+            2.9206275939941406e-06
+          ]
+        },
+        {
+          "position": 277,
+          "token": " ",
+          "entropy": 0.002165871672332287,
+          "top_candidates": [
+            " ",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.00023055076599121094,
+            5.185604095458984e-06
+          ]
+        },
+        {
+          "position": 278,
+          "token": "3",
+          "entropy": 0.00026551191695034504,
+          "top_candidates": [
+            "3",
+            "1",
+            "4"
+          ],
+          "top_probs": [
+            1.0,
+            8.404254913330078e-06,
+            3.814697265625e-06
+          ]
+        },
+        {
+          "position": 279,
+          "token": "0",
+          "entropy": 0.0002985059982165694,
+          "top_candidates": [
+            "0",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            1.0,
+            1.621246337890625e-05,
+            7.3909759521484375e-06
+          ]
+        },
+        {
+          "position": 280,
+          "token": "0",
+          "entropy": 0.003451393684372306,
+          "top_candidates": [
+            "0",
+            "Generate",
+            " words"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.0003101825714111328,
+            3.4809112548828125e-05
+          ]
+        },
+        {
+          "position": 281,
+          "token": " words",
+          "entropy": 0.06453119218349457,
+          "top_candidates": [
+            " words",
+            "Generate",
+            " Generate"
+          ],
+          "top_probs": [
+            0.98876953125,
+            0.01032257080078125,
+            0.000591278076171875
+          ]
+        },
+        {
+          "position": 282,
+          "token": ".\n\n",
+          "entropy": 0.4483705759048462,
+          "top_candidates": [
+            ".\n\n",
+            ".",
+            ".\n"
+          ],
+          "top_probs": [
+            0.85107421875,
+            0.143310546875,
+            0.00498199462890625
+          ]
+        },
+        {
+          "position": 283,
+          "token": "-",
+          "entropy": 0.017327148467302322,
+          "top_candidates": [
+            "-",
+            "```",
+            "Generate"
+          ],
+          "top_probs": [
+            0.998046875,
+            0.0007905960083007812,
+            0.000560760498046875
+          ]
+        },
+        {
+          "position": 284,
+          "token": "###",
+          "entropy": 0.02026408538222313,
+          "top_candidates": [
+            "###",
+            " ###",
+            " Generate"
+          ],
+          "top_probs": [
+            0.9970703125,
+            0.0029354095458984375,
+            7.62939453125e-06
+          ]
+        },
+        {
+          "position": 285,
+          "token": " Characteristics",
+          "entropy": 0.0006407255423255265,
+          "top_candidates": [
+            " Characteristics",
+            " Features",
+            " Character"
+          ],
+          "top_probs": [
+            1.0,
+            1.1861324310302734e-05,
+            8.52346420288086e-06
+          ]
+        },
+        {
+          "position": 286,
+          "token": ":\n",
+          "entropy": 0.0009037122363224626,
+          "top_candidates": [
+            ":\n",
+            ":",
+            "\n"
+          ],
+          "top_probs": [
+            1.0,
+            6.204843521118164e-05,
+            1.9848346710205078e-05
+          ]
+        },
+        {
+          "position": 287,
+          "token": "-",
+          "entropy": 0.00011034391354769468,
+          "top_candidates": [
+            "-",
+            "Gender",
+            "Generate"
+          ],
+          "top_probs": [
+            1.0,
+            7.510185241699219e-06,
+            6.556510925292969e-07
+          ]
+        },
+        {
+          "position": 288,
+          "token": " Gender",
+          "entropy": 0.0030097716953605413,
+          "top_candidates": [
+            " Gender",
+            " Education",
+            " -"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.0002570152282714844,
+            7.987022399902344e-06
+          ]
+        },
+        {
+          "position": 289,
+          "token": ":",
+          "entropy": 2.5464309146627784e-05,
+          "top_candidates": [
+            ":",
+            "\n",
+            ":\n"
+          ],
+          "top_probs": [
+            1.0,
+            4.76837158203125e-07,
+            4.172325134277344e-07
+          ]
+        },
+        {
+          "position": 290,
+          "token": " male",
+          "entropy": 0.0009923105826601386,
+          "top_candidates": [
+            " male",
+            " female",
+            "male"
+          ],
+          "top_probs": [
+            1.0,
+            8.350610733032227e-05,
+            4.947185516357422e-06
+          ]
+        },
+        {
+          "position": 291,
+          "token": "\n",
+          "entropy": 0.0005592575762420893,
+          "top_candidates": [
+            "\n",
+            " \n",
+            "\n\n"
+          ],
+          "top_probs": [
+            1.0,
+            2.5451183319091797e-05,
+            5.4836273193359375e-06
+          ]
+        },
+        {
+          "position": 292,
+          "token": "-",
+          "entropy": 0.00017566312453709543,
+          "top_candidates": [
+            "-",
+            "Generate",
+            "```"
+          ],
+          "top_probs": [
+            1.0,
+            1.4066696166992188e-05,
+            3.5762786865234375e-07
+          ]
+        },
+        {
+          "position": 293,
+          "token": " Education",
+          "entropy": 0.002339379396289587,
+          "top_candidates": [
+            " Education",
+            " Mar",
+            " Generate"
+          ],
+          "top_probs": [
+            1.0,
+            0.0001195669174194336,
+            3.069639205932617e-05
+          ]
+        },
+        {
+          "position": 294,
+          "token": " Level",
+          "entropy": 0.013347523286938667,
+          "top_candidates": [
+            " Level",
+            " Levels",
+            "Level"
+          ],
+          "top_probs": [
+            0.998046875,
+            0.00154876708984375,
+            0.00011396408081054688
+          ]
+        },
+        {
+          "position": 295,
+          "token": ":",
+          "entropy": 0.0006263255490921438,
+          "top_candidates": [
+            ":",
+            " low",
+            ":\n\n"
+          ],
+          "top_probs": [
+            1.0,
+            1.6450881958007812e-05,
+            1.3232231140136719e-05
+          ]
+        },
+        {
+          "position": 296,
+          "token": " low",
+          "entropy": 0.0026099656242877245,
+          "top_candidates": [
+            " low",
+            " Generate",
+            "low"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.00016605854034423828,
+            3.266334533691406e-05
+          ]
+        },
+        {
+          "position": 297,
+          "token": "\n",
+          "entropy": 0.0014548206236213446,
+          "top_candidates": [
+            "\n",
+            "\n\n",
+            " \n"
+          ],
+          "top_probs": [
+            1.0,
+            5.066394805908203e-05,
+            4.5418739318847656e-05
+          ]
+        },
+        {
+          "position": 298,
+          "token": "-",
+          "entropy": 0.0002403139224043116,
+          "top_candidates": [
+            "-",
+            "Generate",
+            "Mar"
+          ],
+          "top_probs": [
+            1.0,
+            1.8656253814697266e-05,
+            1.0728836059570312e-06
+          ]
+        },
+        {
+          "position": 299,
+          "token": " Mar",
+          "entropy": 0.00341997598297894,
+          "top_candidates": [
+            " Mar",
+            " Generate",
+            " -"
+          ],
+          "top_probs": [
+            0.99951171875,
+            0.00028228759765625,
+            2.1457672119140625e-05
+          ]
+        }
+      ]
+    }
+  ]
+}
