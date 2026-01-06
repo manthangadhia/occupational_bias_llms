@@ -41,7 +41,7 @@ BASE_MODEL = "Qwen/Qwen2.5-1.5B"
 IFT_MODEL = "Qwen/Qwen2.5-1.5B-Instruct"
 
 MODELS = {
-    # "base": BASE_MODEL,
+    "base": BASE_MODEL,
     "ift": IFT_MODEL
 }
 
@@ -66,36 +66,38 @@ def generate_with_entropy_tracking(prompt, model, tokenizer, device, max_new_tok
         - top_probs: for each position, the probabilities and tokens of top 5 candidates
     """
     # Encode the prompt
-    input_ids = tokenizer.encode(prompt, return_tensors="pt").input_ids.to(device)
+    inputs = tokenizer.encode(prompt, return_tensors="pt")
+    input_ids = inputs.to(device)
     
     # Store entropy values and tokens as we generate
     token_entropies = []
-    generated_tokens = []
+    generated_token_ids = []
     top_probs_per_position = []
 
     # Manually implement KV-cache to bring memory usage to "normal levels"
     past_key_values = None
     
     # Generate token by token to inspect each distribution
+    model.eval()
     with torch.no_grad():
+
+        # First forward pass
+        outputs = model(input_ids, use_cache=True)
+        past_key_values = outputs.past_key_values
+        next_token_logits = outputs.logits[:, -1, :]
+
+        # Then generate tokens one by one (auto-regressive generation)
         for _ in range(max_new_tokens):
-            # Get the model's output for the current sequence
-            outputs = model(input_ids, past_key_values=past_key_values)
-            past_key_values = outputs.past_key_values
-            
-            # Get logits for the next token position
-            next_token_logits = outputs.logits[:, -1, :]
-            
-            # Apply temperature
-            if temperature != 1.0:
-                next_token_logits = next_token_logits / temperature
+            # Apply temperature to logits (smooth or sharpen distribution)
+            logits = next_token_logits / temperature
             
             # Convert logits to probabilities using softmax
-            probs = torch.softmax(next_token_logits, dim=-1)
+            probs = torch.softmax(logits, dim=-1)
             
             # Calculate entropy of this distribution
-            prob_dist = probs.cpu().numpy()[0]
+            prob_dist = probs.cpu().numpy()[0] # This numpy approach is slow, I'm copying the whole vocab each time
             token_entropy = entropy(prob_dist)
+            # token_entropy = (-(probs * probs.log()).sum(dim=-1)).item() # Trying to just do computation on GPU
             token_entropies.append(float(token_entropy))
             
             # Store the top 5 most probable tokens for inspection
@@ -107,23 +109,33 @@ def generate_with_entropy_tracking(prompt, model, tokenizer, device, max_new_tok
             
             # Sample the next token using multinomial sampling
             next_token = torch.multinomial(probs, num_samples=1)
-            
-            generated_tokens.append(tokenizer.decode(next_token[0]))
-            
-            # Add the new token to sequence for next iteration
-            input_ids = torch.cat([input_ids, next_token], dim=-1)
+            generated_token_ids.append(next_token.item()) # Track token IDs manually
+            # generated_tokens.append(tokenizer.decode(next_token[0]))
             
             # Stop if we generate an end-of-sequence token
             if next_token.item() == tokenizer.eos_token_id:
                 break
+
+            # Finally, feed only next_token
+            outputs = model(
+                input_ids=next_token,
+                past_key_values=past_key_values,
+                use_cache=True
+            )
+
+            past_key_values = outputs.past_key_values
+            next_token_logits = outputs.logits[:, -1, :]
     
     # Decode the full generated sequence
-    generated_text = tokenizer.decode(input_ids[0], skip_special_tokens=True)
+    generated_text = (prompt + tokenizer.decode(generated_token_ids, skip_special_tokens=True))
+
+    # Sanity check before returning
+    assert len(token_entropies) == len(generated_token_ids), f"Mismatch in lengths of entropies ({len(token_entropies)}) and tokens ({len(generated_token_ids)})"
     
     return {
         'text': generated_text,
         'entropies': token_entropies,
-        'tokens': generated_tokens,
+        'tokens': tokenizer.convert_ids_to_tokens(generated_token_ids),
         'top_probs': top_probs_per_position
     }
 
