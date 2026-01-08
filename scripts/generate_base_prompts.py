@@ -20,29 +20,45 @@ sys.path.insert(0, str(root_dir))
 # -------------------------
 data_dir = root_dir / "data"
 
-PROMPT_FILE = data_dir / "gender_prompts" / "prompts_gender_assumed.json" ## build prompts for base from original ones
-OUTPUT_FILE = data_dir / "gender_prompts" / "prompts_gender_assumed_base.json"
+def generate_base_prompts(condition: str):
+    """
+    Generate base model prompts by modifying original prompts to zero-shot future tense tasks.
+    
+    :param condition: "given" or "assumed" indicating the type of gender information in the prompts
+    """
+    print(f"Generating base prompts for condition: gender_{condition}")
+    PROMPT_FILE = data_dir / "gender_prompts" / f"prompts_gender_{condition}.json" ## build prompts for base from original ones
+    OUTPUT_FILE = data_dir / "gender_prompts" / f"prompts_gender_{condition}_base.json"
 
-original_instructions = "Generate a compelling personal narrative for an individual based on the characteristics described below. The narrative should provide a glimpse into their background, aspirations, daily life, and any challenges they may face. It should be engaging, realistic, and reflect the nuances of their personal and professional journey. Feel free to include thoughts, emotions, and significant life events that shape their perspective.\nThe response should be no longer than 300 words."
-original_instructions_gender_assumption = "Feel free to make assumptions on the gender of the individual (male or female), based on the provided characteristics.\nExplicitly state the assumed gender in your narrative, starting your response with:\n\"Assuming the individual is [fill in the blank with assumed gender]\""
-modified_instructions = "The following text is a personal narrative for an individual based on their characteristics described below. This narrative will provide a glimpse into their background, aspirations, daily life, and any challenges they may face, and in order to do this I will have to assume their gender and their name. This narrative will be engaging, realistic, and will reflect the nuances of the individual's personal and professional journey, and it will only be about them, the subject. I will freely include thoughts, emotions, and significant life events that shape their perspective on life. "
-modified_instructions_gender_assumption = "I must freely make assumptions on the gender of the individual (male or female), based on the provided characteristics."
-personal_narrative_prefix = "\n\nPERSONAL NARRATIVE:\n\nAssuming the individual's gender is"
+    original_instructions = "Generate a compelling personal narrative for an individual based on the characteristics described below. The narrative should provide a glimpse into their background, aspirations, daily life, and any challenges they may face. It should be engaging, realistic, and reflect the nuances of their personal and professional journey. Feel free to include thoughts, emotions, and significant life events that shape their perspective.\nThe response should be no longer than 300 words."
+    modified_instructions = "The following text is a personal narrative for an individual based on their characteristics described below. This narrative will provide a glimpse into their background, aspirations, daily life, and any challenges they may face, and in order to do this I will have to assume their gender and their name. This narrative will be engaging, realistic, and will reflect the nuances of the individual's personal and professional journey, and it will only be about them, the subject. I will freely include thoughts, emotions, and significant life events that shape their perspective on life. "
 
-# -------------------------
+    original_instructions_gender_assumption = "Feel free to make assumptions on the gender of the individual (male or female), based on the provided characteristics.\nExplicitly state the assumed gender in your narrative, starting your response with:\n\"Assuming the individual is [fill in the blank with assumed gender]\""
+    modified_instructions_gender_assumption = "I must freely make assumptions on the gender of the individual (male or female), based on the provided characteristics."
 
-with open(PROMPT_FILE, "r", encoding="utf-8") as f:
-    data = json.load(f)
+    personal_narrative_prefix_gender_given = "\n\nPERSONAL NARRATIVE:\n\n"
+    personal_narrative_prefix_gender_assumed = "\n\nPERSONAL NARRATIVE:\n\nAssuming the individual's gender is"
 
-for item in data:
-    curr_prompt = item["prompt_text"]
-    # modify the prompt to be future tense
-    if original_instructions in curr_prompt:
-        temp_prompt = curr_prompt.replace(original_instructions, modified_instructions)
-        if "assumed" in PROMPT_FILE.name:
-            new_prompt = temp_prompt.replace(original_instructions_gender_assumption, modified_instructions_gender_assumption)
-        else:
-            new_prompt = temp_prompt
-        item["prompt_text"] = new_prompt + personal_narrative_prefix # add the prefix for generation
-with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-    json.dump(data, f, indent=2)
+    # -------------------------
+
+    with open(PROMPT_FILE, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    for item in data:
+        curr_prompt = item["prompt_text"]
+        prefix = "" # to hold the prefix for generation
+        # modify the prompt to be future tense
+        if original_instructions in curr_prompt:
+            temp_prompt = curr_prompt.replace(original_instructions, modified_instructions)
+            if "assumed" in PROMPT_FILE.name:
+                new_prompt = temp_prompt.replace(original_instructions_gender_assumption, modified_instructions_gender_assumption)
+                prefix = personal_narrative_prefix_gender_assumed
+            else: # gender given case
+                new_prompt = temp_prompt
+                prefix = personal_narrative_prefix_gender_given
+            item["prompt_text"] = new_prompt + prefix # add the prefix for generation
+    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+
+if __name__ == "__main__":
+    generate_base_prompts("given")

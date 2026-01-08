@@ -94,7 +94,7 @@ class ModelSingleton:
             
             print("Model unloaded and memory cleared")
     
-    def generate(self, prompt: str, max_new_tokens: int = 200, temperature: float = 0.7, clip_input: bool = False) -> str:
+    def generate(self, prompt: str, max_new_tokens: int = 300, temperature: float = 0.7, clip_input: bool = False) -> str:
         """
         Generate text using the currently loaded model.
         
