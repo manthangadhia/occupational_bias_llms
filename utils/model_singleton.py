@@ -6,6 +6,7 @@ import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from pathlib import Path
 from typing import Optional, Tuple
+import numpy as np
 
 
 class ModelSingleton:
@@ -128,6 +129,127 @@ class ModelSingleton:
             # Decode only the newly generated tokens (*excluding* input prompt)
             generated_tokens = generated_tokens[input_length:]
         return self.tokenizer.decode(generated_tokens, skip_special_tokens=True)
+    
+    def generate_with_entropy(
+        self,
+        prompt: str,
+        max_new_tokens: int = 300,
+        temperature: float = 0.7,
+        clip_input: bool = False,
+        track_top_k: Optional[int] = None,
+        return_per_token_entropy: bool = False
+    ) -> dict:
+        """
+        Generate text while tracking entropy metrics.
+        
+        Args:
+            prompt: Input text prompt
+            max_new_tokens: Maximum number of tokens to generate
+            temperature: Sampling temperature
+            clip_input: Whether to exclude input prompt from returned text
+            track_top_k: If set, store top-k token candidates per position (None = don't track)
+            return_per_token_entropy: Whether to return the full list of per-token entropies
+            
+        Returns:
+            dict with keys:
+                - 'text': generated text (with or without prompt based on clip_input)
+                - 'mean_entropy': average entropy across all generated tokens
+                - 'max_entropy': maximum entropy value
+                - 'min_entropy': minimum entropy value
+                - 'std_entropy': standard deviation of entropy
+                - 'num_tokens': number of tokens generated
+                - 'per_token_entropy': list of entropy values (only if return_per_token_entropy=True)
+                - 'tokens': list of generated token strings
+                - 'top_k_data': per-position top-k info (only if track_top_k is set)
+        """
+        if self.model is None or self.tokenizer is None:
+            raise RuntimeError("No model loaded. Call load_model() first.")
+        
+        # Encode the prompt
+        inputs = self.tokenizer.encode(prompt, return_tensors="pt")
+        input_ids = inputs.to(self.device)
+        
+        # Storage for metrics
+        token_entropies = []
+        generated_token_ids = []
+        top_k_data = [] if track_top_k else None
+        
+        # Manual generation with KV-cache
+        past_key_values = None
+        
+        self.model.eval()
+        with torch.no_grad():
+            # First forward pass
+            outputs = self.model(input_ids, use_cache=True)
+            past_key_values = outputs.past_key_values
+            next_token_logits = outputs.logits[:, -1, :]
+            
+            # Generate tokens one by one
+            for _ in range(max_new_tokens):
+                # Apply temperature
+                logits = next_token_logits / temperature
+                
+                # Convert to probabilities
+                probs = torch.softmax(logits, dim=-1)
+                
+                # Calculate entropy on GPU (more efficient than numpy)
+                token_entropy = -(probs * probs.log()).sum(dim=-1).item()
+                token_entropies.append(float(token_entropy))
+                
+                # Track top-k if requested
+                if track_top_k:
+                    top_k_probs, top_k_indices = torch.topk(probs, track_top_k)
+                    top_k_data.append({
+                        'probs': top_k_probs.cpu().numpy()[0].tolist(),
+                        'tokens': [self.tokenizer.decode([idx]) for idx in top_k_indices[0]]
+                    })
+                
+                # Sample next token
+                next_token = torch.multinomial(probs, num_samples=1)
+                generated_token_ids.append(next_token.item())
+                
+                # Check for EOS
+                if next_token.item() == self.tokenizer.eos_token_id:
+                    break
+                
+                # Continue generation with KV-cache
+                outputs = self.model(
+                    input_ids=next_token,
+                    past_key_values=past_key_values,
+                    use_cache=True
+                )
+                past_key_values = outputs.past_key_values
+                next_token_logits = outputs.logits[:, -1, :]
+        
+        # Decode generated tokens
+        generated_text = self.tokenizer.decode(generated_token_ids, skip_special_tokens=True)
+        
+        # Determine what text to return based on clip_input and model type
+        model_is_ift = self.current_model_key == "ift"
+        if model_is_ift or clip_input:
+            final_text = generated_text
+        else:
+            final_text = prompt + generated_text
+        
+        # Build result dictionary
+        result = {
+            'text': final_text,
+            'mean_entropy': float(np.mean(token_entropies)),
+            'max_entropy': float(np.max(token_entropies)),
+            'min_entropy': float(np.min(token_entropies)),
+            'std_entropy': float(np.std(token_entropies)),
+            'num_tokens': len(generated_token_ids),
+            'tokens': self.tokenizer.convert_ids_to_tokens(generated_token_ids)
+        }
+        
+        # Add optional fields
+        if return_per_token_entropy:
+            result['per_token_entropy'] = token_entropies
+        
+        if track_top_k:
+            result['top_k_data'] = top_k_data
+        
+        return result
     
     def get_device(self) -> str:
         """Return the current device being used."""
