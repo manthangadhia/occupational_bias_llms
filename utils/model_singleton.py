@@ -193,7 +193,12 @@ class ModelSingleton:
                 probs = torch.softmax(logits, dim=-1)
                 
                 # Calculate entropy on GPU (more efficient than numpy)
-                token_entropy = -(probs * probs.log()).sum(dim=-1).item()
+                # token_entropy = -(probs * probs.log()).sum(dim=-1).item() # this was always returnign nans because of 0-probs
+                token_entropy = -torch.where(
+                    probs > 0,
+                    probs * probs.log(),
+                    torch.zeros_like(probs)
+                ).sum(dim=-1).item()
                 token_entropies.append(float(token_entropy))
                 
                 # Track top-k if requested
@@ -224,9 +229,8 @@ class ModelSingleton:
         # Decode generated tokens
         generated_text = self.tokenizer.decode(generated_token_ids, skip_special_tokens=True)
         
-        # Determine what text to return based on clip_input and model type
-        model_is_ift = self.current_model_key == "ift"
-        if model_is_ift or clip_input:
+        # Clip input prompt if requested
+        if clip_input:
             final_text = generated_text
         else:
             final_text = prompt + generated_text
@@ -239,7 +243,7 @@ class ModelSingleton:
             'min_entropy': float(np.min(token_entropies)),
             'std_entropy': float(np.std(token_entropies)),
             'num_tokens': len(generated_token_ids),
-            'tokens': self.tokenizer.convert_ids_to_tokens(generated_token_ids)
+            'tokens': [self.tokenizer.decode([token_id]) for token_id in generated_token_ids] #self.tokenizer.convert_ids_to_tokens(generated_token_ids)
         }
         
         # Add optional fields
