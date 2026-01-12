@@ -41,7 +41,7 @@ print(f"Using device: {model_manager.get_device()}")
 
 
 # -------------------------
-# main loop
+# Main loop
 # -------------------------
 
 def main(entropy_tracking: bool = False):
