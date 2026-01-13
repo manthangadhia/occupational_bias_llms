@@ -1,9 +1,8 @@
 import json
+import os
 import sys
 from pathlib import Path
 import time
-import torch
-import numpy as np
 from scipy.stats import entropy
 
 # Add utils to path
@@ -18,8 +17,13 @@ from utils import ModelSingleton, load_prompts_for_model
 data_dir = root_dir / "data"
 output_dir = data_dir / "olmo7b_results"
 output_dir.mkdir(exist_ok=True)
-models_dir = root_dir / "models"
-models_dir.mkdir(exist_ok=True)
+
+# This looks for the "export" from your bash script
+# If it doesn't find it, it uses root_dir / "models" as a backup
+models_dir_path = os.getenv("OLMO_MODEL_ROOT", str(root_dir / "models"))
+models_dir = Path(models_dir_path)
+
+print(f"Directing ModelSingleton to: {models_dir}")
 
 # Model configuration
 BASE_MODEL = "allenai/Olmo-3-1025-7B"
@@ -59,7 +63,7 @@ def main(track_entropy: bool = True,
     with open(output_dir / "olmo7b_results.jsonl", "w", encoding="utf-8") as out_file:
         for model_key in MODELS.keys():
             model_name = MODELS[model_key]
-            print(f"\nLoading model: {model_name}")
+            print(f"\nPreparing to load model: {model_name}")
             _, model = model_manager.load_model(model_name, model_key=model_key)
             model.eval()
 

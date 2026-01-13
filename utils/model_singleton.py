@@ -7,6 +7,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 from pathlib import Path
 from typing import Optional, Tuple
 import numpy as np
+import gc
 
 
 class ModelSingleton:
@@ -60,7 +61,7 @@ class ModelSingleton:
             self.unload_model()
         
         # Load new model
-        print(f"Loading model: {model_name}")
+        print(f"Loading model through manager: {model_name}")
         self.tokenizer = AutoTokenizer.from_pretrained(
             model_name,
             cache_dir=self.cache_dir
@@ -68,9 +69,11 @@ class ModelSingleton:
         
         self.model = AutoModelForCausalLM.from_pretrained(
             model_name,
-            torch_dtype=torch.float16 if self.device == "cuda" else torch.float32,
-            device_map="auto" if self.device == "cuda" else None,
-            cache_dir=self.cache_dir
+            torch_dtype=torch.bfloat16 if self.device == "cuda" else torch.float32,
+            device_map="auto",
+            cache_dir=self.cache_dir,
+            low_cpu_mem_usage=True,
+            trust_remote_code=True
         )
         
         self.current_model_name = model_name
@@ -88,10 +91,14 @@ class ModelSingleton:
             self.tokenizer = None
             self.current_model_name = None
             self.current_model_key = None
+
+            # Force immediate garbage collection
+            gc.collect()
             
             # Clear CUDA cache if using GPU
             if self.device == "cuda":
                 torch.cuda.empty_cache()
+                torch.cuda.synchronize()
             
             print("Model unloaded and memory cleared")
     
