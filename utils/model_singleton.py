@@ -72,8 +72,6 @@ class ModelSingleton:
             torch_dtype=torch.bfloat16 if self.device == "cuda" else torch.float32,
             device_map="auto",
             cache_dir=self.cache_dir,
-            low_cpu_mem_usage=True,
-            trust_remote_code=True
         )
         
         self.current_model_name = model_name
@@ -98,6 +96,7 @@ class ModelSingleton:
             # Clear CUDA cache if using GPU
             if self.device == "cuda":
                 torch.cuda.empty_cache()
+                torch.cuda.ipc_collect()
                 torch.cuda.synchronize()
             
             print("Model unloaded and memory cleared")
@@ -262,6 +261,16 @@ class ModelSingleton:
         
         if track_top_k:
             result['top_k_data'] = top_k_data
+
+        # Hard cleanup for GPU memory
+        del past_key_values
+        del logits
+        del next_token_logits
+        del outputs
+        del input_ids 
+        del probs
+        torch.cuda.empty_cache()
+        gc.collect()
         
         return result
     
