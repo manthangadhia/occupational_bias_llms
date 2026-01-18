@@ -66,7 +66,10 @@ def main(track_entropy: bool = True,
         for model_key in MODELS.keys():
             model_name = MODELS[model_key]
             print(f"\nPreparing to load model: {model_name}")
+            model_load_start = time.time()
             _, model = model_manager.load_model(model_name, model_key=model_key)
+            model_load_end = time.time()
+            print(f"Model loaded in {model_load_end - model_load_start:.2f} seconds")
             model.eval()
 
             # Load and configure prompts
