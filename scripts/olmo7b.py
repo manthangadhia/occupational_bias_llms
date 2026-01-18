@@ -27,25 +27,16 @@ models_dir = Path(models_dir_path)
 print(f"Directing ModelSingleton to: {models_dir}")
 
 # Model configuration
-# BASE_MODEL = "allenai/Olmo-3-1025-7B"
-# SFT_MODEL = "allenai/Olmo-3-7B-Instruct-SFT"
-# DPO_MODEL = "allenai/Olmo-3-7B-Instruct-DPO"
-# RLVR_MODEL = "allenai/Olmo-3-7B-Instruct"
-
-# MODELS = {
-#     "base": BASE_MODEL,
-#     "sft": SFT_MODEL,
-#     "dpo": DPO_MODEL,
-#     "rlvr": RLVR_MODEL,
-# }
-
-# Qwen 2.5 models
-BASE_MODEL = "Qwen/Qwen2.5-0.5B"
-IFT_MODEL = "Qwen/Qwen2.5-0.5B-Instruct"
+BASE_MODEL = "allenai/Olmo-3-1025-7B"
+SFT_MODEL = "allenai/Olmo-3-7B-Instruct-SFT"
+DPO_MODEL = "allenai/Olmo-3-7B-Instruct-DPO"
+RLVR_MODEL = "allenai/Olmo-3-7B-Instruct"
 
 MODELS = {
     "base": BASE_MODEL,
-    "ift": IFT_MODEL
+    "sft": SFT_MODEL,
+    "dpo": DPO_MODEL,
+    "rlvr": RLVR_MODEL,
 }
 
 # default generation parameters
