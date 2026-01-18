@@ -51,7 +51,8 @@ DEFAULT_GENERATION_KWARGS = {
 
 def main(track_entropy: bool = True, 
          multigen: bool = True, 
-         num_prompts: int = 50
+         num_prompts: int = 50,
+         temperature: float = 0.7
         ):
     """Run analysis for selected models with optional entropy tracking."""
 
@@ -97,6 +98,7 @@ def main(track_entropy: bool = True,
                         result_entropy = model_manager.generate_with_entropy(
                             prompt=prompt_text,
                             clip_input=True,
+                            temperature=temperature
                         )
 
                         response = result_entropy['text']
@@ -147,5 +149,9 @@ if __name__ == "__main__":
                         type=int, 
                         default=5, 
                         help="Number of prompts to process per model.")
+    parser.add_argument("--temperature",
+                        type=float, 
+                        default=0.7, 
+                        help="Temperature for text generation.")
     args = parser.parse_args()
     main(num_prompts=args.num_prompts)
