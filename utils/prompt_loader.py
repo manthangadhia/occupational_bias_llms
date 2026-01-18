@@ -11,7 +11,7 @@ data_dir = root_dir / "data"
 
 def load_prompts_for_model(model_type: str, 
                            prompt_file: str = "prompts_gender_assumed", 
-                           limit: int = None
+                           limit: int = 0
                            ) -> List[Dict]:
     """
     Load prompts for a specific model type.
@@ -36,7 +36,7 @@ def load_prompts_for_model(model_type: str,
     with open(filepath, 'r', encoding='utf-8') as f:
         prompts = json.load(f)
     
-    if limit:
+    if limit > 0:
         prompts = prompts[:limit]
     
     return prompts
