@@ -5,7 +5,7 @@ Ensures only one model is loaded in memory at a time.
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from pathlib import Path
-from typing import Optional, Tuple
+from typing import Optional, Tuple, Dict, Any
 import numpy as np
 import gc
 
@@ -37,6 +37,56 @@ class ModelSingleton:
         """Set the cache directory for model downloads."""
         self.cache_dir = cache_dir
         self.cache_dir.mkdir(exist_ok=True)
+    
+    def hard_cleanup_memory(self, *objects_to_delete, verbose: bool = True) -> Dict[str, Any]:
+        """
+        Perform aggressive memory cleanup and track memory usage.
+        
+        Args:
+        *objects_to_delete: Variable number of objects to delete
+            verbose: Whether to print memory statistics
+            
+        Returns:
+            Dictionary with memory statistics before and after cleanup
+        """
+        stats = {}
+        
+        # Get memory before cleanup (if using CUDA)
+        if self.device == "cuda" and torch.cuda.is_available():
+            torch.cuda.synchronize()
+            stats['memory_allocated_before_mb'] = torch.cuda.memory_allocated() / 1024**2
+            stats['memory_reserved_before_mb'] = torch.cuda.memory_reserved() / 1024**2
+        
+        # Delete provided objects
+        for obj in objects_to_delete:
+            if obj is not None:
+                del obj
+        
+        # Force garbage collection
+        gc.collect()
+        
+        # Clear CUDA cache if using GPU
+        if self.device == "cuda" and torch.cuda.is_available():
+            torch.cuda.empty_cache()
+            torch.cuda.ipc_collect()
+            torch.cuda.synchronize()
+            
+            # Get memory after cleanup
+            stats['memory_allocated_after_mb'] = torch.cuda.memory_allocated() / 1024**2
+            stats['memory_reserved_after_mb'] = torch.cuda.memory_reserved() / 1024**2
+            stats['memory_freed_mb'] = stats['memory_allocated_before_mb'] - stats['memory_allocated_after_mb']
+            stats['reserved_freed_mb'] = stats['memory_reserved_before_mb'] - stats['memory_reserved_after_mb']
+            
+            if verbose:
+                print(f"\n[Memory Cleanup Stats]")
+                print(f"  Allocated: {stats['memory_allocated_before_mb']:.2f} MB → {stats['memory_allocated_after_mb']:.2f} MB")
+                print(f"  Reserved:  {stats['memory_reserved_before_mb']:.2f} MB → {stats['memory_reserved_after_mb']:.2f} MB")
+                print(f"  Freed:     {stats['memory_freed_mb']:.2f} MB (allocated), {stats['reserved_freed_mb']:.2f} MB (reserved)")
+        else:
+            if verbose:
+                print("[Memory Cleanup] Running on CPU - CUDA stats not available")
+        
+        return stats
     
     def load_model(self, model_name: str, model_key: Optional[str] = None) -> Tuple[AutoTokenizer, AutoModelForCausalLM]:
         """
@@ -77,6 +127,8 @@ class ModelSingleton:
         self.current_model_name = model_name
         self.current_model_key = model_key
         print(f"Model {model_name} loaded successfully on {self.device}")
+        if self.device == "cuda" and torch.cuda.is_available():
+            print(f"Memory after load: {torch.cuda.memory_allocated() / 1024**2:.2f} MB allocated, {torch.cuda.memory_reserved() / 1024**2:.2f} MB reserved")
         
         return self.tokenizer, self.model
     
@@ -85,20 +137,18 @@ class ModelSingleton:
         if self.model is not None:
             del self.model
             del self.tokenizer
+            
             self.model = None
             self.tokenizer = None
             self.current_model_name = None
             self.current_model_key = None
 
-            # Force immediate garbage collection
-            gc.collect()
-            
-            # Clear CUDA cache if using GPU
-            if self.device == "cuda":
+            if self.device == "cuda" and torch.cuda.is_available():
                 torch.cuda.empty_cache()
                 torch.cuda.ipc_collect()
                 torch.cuda.synchronize()
-            
+                
+            gc.collect()
             print("Model unloaded and memory cleared")
     
     def generate(self, prompt: str, 
@@ -226,7 +276,11 @@ class ModelSingleton:
                 if next_token.item() == self.tokenizer.eos_token_id:
                     break
                 
+                # Delete tensors before overwriting
+                del logits, probs
+                
                 # Continue generation with KV-cache
+                old_past_key_values = past_key_values
                 outputs = self.model(
                     input_ids=next_token,
                     past_key_values=past_key_values,
@@ -234,6 +288,9 @@ class ModelSingleton:
                 )
                 past_key_values = outputs.past_key_values
                 next_token_logits = outputs.logits[:, -1, :]
+                
+                # Delete old KV cache and next_token
+                del old_past_key_values, next_token
         
         # Decode generated tokens
         generated_text = self.tokenizer.decode(generated_token_ids, skip_special_tokens=True)
@@ -263,14 +320,13 @@ class ModelSingleton:
             result['top_k_data'] = top_k_data
 
         # Hard cleanup for GPU memory
-        del past_key_values
-        del logits
-        del next_token_logits
-        del outputs
-        del input_ids 
-        del probs
-        torch.cuda.empty_cache()
-        gc.collect()
+        self.hard_cleanup_memory(
+            past_key_values,
+            next_token_logits,
+            outputs,
+            input_ids,
+            verbose=False  # Set to True to see memory stats after each generation
+        )
         
         return result
     
