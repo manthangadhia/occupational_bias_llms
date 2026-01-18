@@ -10,7 +10,7 @@ import argparse
 root_dir = Path(__file__).parent.parent
 sys.path.insert(0, str(root_dir))
 
-from utils import ModelSingleton, load_prompts_for_model
+from utils import ModelSingleton, load_prompts_for_model, load_model, generate, generate_with_entropy, cleanup_model
 
 # -------------------------
 # Configuration
@@ -27,16 +27,25 @@ models_dir = Path(models_dir_path)
 print(f"Directing ModelSingleton to: {models_dir}")
 
 # Model configuration
-BASE_MODEL = "allenai/Olmo-3-1025-7B"
-SFT_MODEL = "allenai/Olmo-3-7B-Instruct-SFT"
-DPO_MODEL = "allenai/Olmo-3-7B-Instruct-DPO"
-RLVR_MODEL = "allenai/Olmo-3-7B-Instruct"
+# BASE_MODEL = "allenai/Olmo-3-1025-7B"
+# SFT_MODEL = "allenai/Olmo-3-7B-Instruct-SFT"
+# DPO_MODEL = "allenai/Olmo-3-7B-Instruct-DPO"
+# RLVR_MODEL = "allenai/Olmo-3-7B-Instruct"
+
+# MODELS = {
+#     "base": BASE_MODEL,
+#     "sft": SFT_MODEL,
+#     "dpo": DPO_MODEL,
+#     "rlvr": RLVR_MODEL,
+# }
+
+# Qwen 2.5 models
+BASE_MODEL = "Qwen/Qwen2.5-0.5B"
+IFT_MODEL = "Qwen/Qwen2.5-0.5B-Instruct"
 
 MODELS = {
     "base": BASE_MODEL,
-    "sft": SFT_MODEL,
-    "dpo": DPO_MODEL,
-    "rlvr": RLVR_MODEL,
+    "ift": IFT_MODEL
 }
 
 # default generation parameters
@@ -48,7 +57,6 @@ DEFAULT_GENERATION_KWARGS = {
     "temperature": 0.7,
 }
 
-
 def main(track_entropy: bool = True, 
          multigen: bool = True, 
          num_prompts: int = 50,
@@ -56,18 +64,12 @@ def main(track_entropy: bool = True,
         ):
     """Run analysis for selected models with optional entropy tracking."""
 
-    # Create model_manager
-    model_manager = ModelSingleton()
-    model_manager.set_cache_dir(models_dir)
-    device = model_manager.get_device()
-    print(f"Using device: {device}")
-
     with open(output_dir / "olmo7b_results.jsonl", "w", encoding="utf-8") as out_file:
         for model_key in MODELS.keys():
             model_name = MODELS[model_key]
             print(f"\nPreparing to load model: {model_name}")
             model_load_start = time.time()
-            _, model = model_manager.load_model(model_name, model_key=model_key)
+            tokenizer, model = load_model(model_name, cache_dir=models_dir)
             model_load_end = time.time()
             print(f"Model loaded in {model_load_end - model_load_start:.2f} seconds")
             model.eval()
@@ -98,7 +100,9 @@ def main(track_entropy: bool = True,
                     print(f"[{model_key}] Generating response {n}/{num_gens} for profile {profile_id}...")
 
                     if track_entropy: # generate response with entropy tracking
-                        result_entropy = model_manager.generate_with_entropy(
+                        result_entropy = generate_with_entropy(
+                            model=model,
+                            tokenizer=tokenizer,
                             prompt=prompt_text,
                             clip_input=True,
                             temperature=temperature
@@ -123,7 +127,9 @@ def main(track_entropy: bool = True,
                             })
                     
                     else: # generate response without entropy tracking
-                        response = model_manager.generate(
+                        response = generate(
+                            model=model,
+                            tokenizer=tokenizer,
                             prompt=prompt_text,
                             clip_input=True
                         )
@@ -144,17 +150,19 @@ def main(track_entropy: bool = True,
             elapsed_time = model_end_time - model_start_time
             print(f"\n[{model_key}] Total generation time: {elapsed_time:.2f} seconds ({elapsed_time/60:.2f} minutes)")
             print(f"[{model_key}] Results saved to disk ✓")
+            # Cleanup model from memory
+            model, tokenizer = cleanup_model(model, tokenizer)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run Olmo-7B model analysis.")
     parser.add_argument("--num_prompts", 
                         type=int, 
-                        default=5, 
+                        default=1, 
                         help="Number of prompts to process per model.")
     parser.add_argument("--temperature",
                         type=float, 
                         default=0.7, 
                         help="Temperature for text generation.")
     args = parser.parse_args()
-    main(num_prompts=args.num_prompts)
+    main(num_prompts=args.num_prompts, multigen=False)
