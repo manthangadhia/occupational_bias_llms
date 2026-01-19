@@ -10,7 +10,7 @@ import argparse
 root_dir = Path(__file__).parent.parent
 sys.path.insert(0, str(root_dir))
 
-from utils import ModelSingleton, load_prompts_for_model, load_model, generate, generate_with_entropy, cleanup_model
+from utils import load_prompts_for_model, load_model, generate, generate_with_entropy, cleanup_model
 
 # -------------------------
 # Configuration
