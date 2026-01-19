@@ -96,6 +96,7 @@ def load_model(model_name: str, cache_dir: Optional[Path] = None) -> Tuple[AutoT
     print(f"Model {model_name} loaded successfully on {device}")
     if device == "cuda" and torch.cuda.is_available():
         print(f"Memory after load: {torch.cuda.memory_allocated() / 1024**2:.2f} MB allocated, {torch.cuda.memory_reserved() / 1024**2:.2f} MB reserved")
+        print(f"Total GPU memory: {torch.cuda.get_device_properties(0).total_memory / 1024**2:.2f} MB")
     
     return tokenizer, model
 

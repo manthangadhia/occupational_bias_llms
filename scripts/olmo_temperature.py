@@ -48,7 +48,7 @@ DEFAULT_GENERATION_KWARGS = {
     "temperature": 0.7,
 }
 
-TEMPERATURES = [0.3, 0.5, 0.9, 1.0, 1.2, 1.5, 1.8]
+TEMPERATURES = [0.3, 0.5, 1.0, 1.2, 1.5]
 
 def main(track_entropy: bool = True, 
          multigen: bool = True, 
@@ -167,7 +167,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run Olmo-7B model analysis.")
     parser.add_argument("--num_prompts", 
                         type=int, 
-                        default=1, 
+                        default=10, 
                         help="Number of prompts to process per model.")
     parser.add_argument("--temperature",
                         type=float, 
