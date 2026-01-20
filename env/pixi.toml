@@ -30,3 +30,4 @@ torchvision = { version = ">=0.20.1", index = "https://download.pytorch.org/whl/
 bitsandbytes-windows = ">=0.37.5, <0.38"
 evaluate = ">=0.4.6, <0.5"
 diversity = ">=0.3.0, <0.4"
+pandarallel = ">=1.6.5, <2"
