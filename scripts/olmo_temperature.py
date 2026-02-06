@@ -48,7 +48,7 @@ DEFAULT_GENERATION_KWARGS = {
     "temperature": 0.7,
 }
 
-TEMPERATURES = [0.3, 0.5, 1.0, 1.2, 1.5]
+TEMPERATURES = [0.2, 0.5, 0.7, 1.0, 1.2]
 
 def main(track_entropy: bool = True, 
          multigen: bool = True, 
