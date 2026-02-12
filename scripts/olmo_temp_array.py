@@ -68,8 +68,8 @@ def get_model_family(family: str) -> dict:
             "base": BASE_MODEL,
             "ift": IFT_MODEL
         }
-        
         return MODELS
+     
     elif family == 'olmo':
         # Model configuration
         BASE_MODEL = "allenai/Olmo-3-1025-7B"
