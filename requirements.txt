@@ -1,0 +1,23 @@
+# Python packages from pixi.toml
+# Note: Some conda packages may have different names on PyPI
+
+# Data science
+pandas>=2.3.3,<3
+scikit-learn>=1.7.2,<2
+numpy>=2.3.5,<3
+
+# Utilities
+tqdm>=4.67.1,<5
+
+# ML/NLP packages
+transformers>=4.57.3,<5
+datasets>=4.4.1,<5
+accelerate>=1.12.0,<2
+sentencepiece>=0.2.1,<0.3
+einops>=0.8.1,<0.9
+evaluate>=0.4.6,<0.5
+protobuf>=6.33.5,<7
+
+# PyTorch (CUDA 12.6) - install from PyTorch index
+--index-url https://download.pytorch.org/whl/cu126
+torch>=2.5.1
