@@ -224,6 +224,9 @@ def generate_with_entropy(
             
             # Convert to probabilities
             probs = torch.softmax(logits, dim=-1)
+
+            # TODO: Implement Top_P (nucleus sampling) and POTENTIALLY Top_K (keep only K tokens)
+            # TODO: Remove "track_top_k" logic from this generation function, I am not making use of it at all 
             
             # Calculate entropy on GPU (more efficient than numpy)
             token_entropy = -torch.where(
