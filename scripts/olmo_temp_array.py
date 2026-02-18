@@ -225,7 +225,7 @@ def main(track_entropy: bool = True,
         # Save results once per prompt case
         output_df = pd.DataFrame(output_rows_by_case[prompt_case])
         output_path = output_dir / f"olmo7b_{model_key}_{prompt_case}_all_temps.json"
-        output_df.to_json(output_path, orient="records", force_ascii=True)
+        output_df.to_json(output_path, orient="records", force_ascii=True, indent=4)
         print(f"[{model_key}] Results saved to {output_path} ✓")
 
     # End timing for this model
