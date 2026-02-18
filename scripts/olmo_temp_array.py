@@ -187,6 +187,10 @@ def main(track_entropy: bool = True,
                         max_entropy = result_entropy['max_entropy']
                         min_entropy = result_entropy['min_entropy']
                         std_entropy = result_entropy['std_entropy']
+                        mean_entropy_nucleus = result_entropy['mean_entropy_nucleus']
+                        max_entropy_nucleus = result_entropy['max_entropy_nucleus']
+                        min_entropy_nucleus = result_entropy['min_entropy_nucleus']
+                        std_entropy_nucleus = result_entropy['std_entropy_nucleus']
                         model_output.update({
                             "response_number": n,
                             "response": response,
@@ -194,6 +198,10 @@ def main(track_entropy: bool = True,
                             "max_entropy": max_entropy,
                             "min_entropy": min_entropy,
                             "std_entropy": std_entropy,
+                            "mean_entropy_nucleus": mean_entropy_nucleus,
+                            "max_entropy_nucleus": max_entropy_nucleus,
+                            "min_entropy_nucleus": min_entropy_nucleus,
+                            "std_entropy_nucleus": std_entropy_nucleus,
                             })
                     
                     else: # generate response without entropy tracking
