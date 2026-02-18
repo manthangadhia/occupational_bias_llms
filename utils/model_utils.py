@@ -168,8 +168,7 @@ def generate_with_entropy(
     max_new_tokens: int = 300,
     temperature: float = 0.7,
     clip_input: bool = False,
-    track_top_k: Optional[int] = None,
-    return_per_token_entropy: bool = False
+    top_p: float = 0.9
 ) -> dict:
     """
     Generate text while tracking entropy metrics.
@@ -181,9 +180,6 @@ def generate_with_entropy(
         max_new_tokens: Maximum number of tokens to generate
         temperature: Sampling temperature
         clip_input: Whether to exclude input prompt from returned text
-        track_top_k: If set, store top-k token candidates per position (None = don't track)
-        return_per_token_entropy: Whether to return the full list of per-token entropies
-        
     Returns:
         dict with keys:
             - 'text': generated text (with or without prompt based on clip_input)
@@ -192,9 +188,6 @@ def generate_with_entropy(
             - 'min_entropy': minimum entropy value
             - 'std_entropy': standard deviation of entropy
             - 'num_tokens': number of tokens generated
-            - 'per_token_entropy': list of entropy values (only if return_per_token_entropy=True)
-            - 'tokens': list of generated token strings
-            - 'top_k_data': per-position top-k info (only if track_top_k is set)
     """
     device = get_device()
     
@@ -204,8 +197,8 @@ def generate_with_entropy(
     
     # Storage for metrics
     token_entropies = []
+    token_entropies_nucleus = []
     generated_token_ids = []
-    top_k_data = [] if track_top_k else None
     
     # Manual generation with KV-cache
     past_key_values = None
@@ -225,43 +218,66 @@ def generate_with_entropy(
             # Convert to probabilities
             probs = torch.softmax(logits, dim=-1)
 
-            # TODO: Implement Top_P (nucleus sampling) and POTENTIALLY Top_K (keep only K tokens)
-            # TODO: Remove "track_top_k" logic from this generation function, I am not making use of it at all 
-            
-            # Calculate entropy on GPU (more efficient than numpy)
+            # Calculate entropy for the full distribution before nucleus sampling
             token_entropy = -torch.where(
                 probs > 0,
                 probs * probs.log(),
                 torch.zeros_like(probs)
             ).sum(dim=-1).item()
             token_entropies.append(float(token_entropy))
-            
-            # Track top-k if requested
-            if track_top_k:
-                top_k_probs, top_k_indices = torch.topk(probs, track_top_k)
-                # Move to CPU immediately
-                top_k_probs_cpu = top_k_probs.cpu().numpy()[0].tolist()
-                top_k_tokens_cpu = [tokenizer.decode([idx.item()]) for idx in top_k_indices[0].cpu()]
-                # Delete GPU tensors immediately
-                del top_k_probs, top_k_indices
-                
-                top_k_data.append({
-                    'probs': top_k_probs_cpu,
-                    'tokens': top_k_tokens_cpu
-                })
-            
-            # Sample next token
-            next_token = torch.multinomial(probs, num_samples=1)
+
+            # TODO: Implement Top_P (nucleus sampling)
+            sorted_probs, sorted_indices = torch.sort(probs, descending=True, dim=-1)
+            cumulative_probs = torch.cumsum(sorted_probs, dim=-1)
+
+            # Create mask to remove tokens after cumulative prob exceeds top_p
+            sorted_indices_to_remove = cumulative_probs > top_p
+
+            # Shift right by one to keep the first token that exceeds threshold
+            sorted_indices_to_remove[..., 1:] = sorted_indices_to_remove[..., :-1].clone()
+            sorted_indices_to_remove[..., 0] = False  # Never remove the top token
+
+            # Map the mask back to original indices before sorting with scatter_
+            indices_to_remove = torch.zeros_like(probs, dtype=torch.bool)
+            indices_to_remove.scatter_(
+                dim=-1,
+                index=sorted_indices,
+                src=sorted_indices_to_remove
+            )
+
+            # Apply mask and renormalise
+            probs_nucleus = probs.clone()
+            probs_nucleus[indices_to_remove] = 0.0
+            probs_nucleus = probs_nucleus / probs_nucleus.sum(dim=-1, keepdim=True)
+
+            # Calculate entropy on nucleus distribution
+            token_entropy_nucleus = -torch.where(
+                probs_nucleus > 0,
+                probs_nucleus * probs_nucleus.log(),
+                torch.zeros_like(probs_nucleus)
+            ).sum(dim=-1).item()
+            token_entropies_nucleus.append(float(token_entropy_nucleus))
+
+            # Sample from nucleus distribution
+            next_token = torch.multinomial(probs_nucleus, num_samples=1)
+
+            token_entropies_nucleus.append(float(-torch.where(
+                probs_nucleus > 0,
+                probs_nucleus * probs_nucleus.log(),
+                torch.zeros_like(probs_nucleus)
+            ).sum(dim=-1).item()))
+
+            # Sample next token from nucleus distribution
+            next_token = torch.multinomial(probs_nucleus, num_samples=1)
             generated_token_ids.append(next_token.item())
             
             # Check for EOS
             if next_token.item() == tokenizer.eos_token_id:
-                del logits, probs, next_token
+                del logits, probs, probs_nucleus, next_token
                 break
             
             # Delete tensors before overwriting
-            del logits, probs
-            
+            del logits, probs, probs_nucleus
             # Continue generation with KV-cache
             old_past_key_values = past_key_values
             outputs = model(
@@ -291,17 +307,14 @@ def generate_with_entropy(
         'max_entropy': float(np.max(token_entropies)),
         'min_entropy': float(np.min(token_entropies)),
         'std_entropy': float(np.std(token_entropies)),
-        'num_tokens': len(generated_token_ids),
-        'tokens': [tokenizer.decode([token_id]) for token_id in generated_token_ids]
+        'mean_entropy_nucleus': float(np.mean(token_entropies_nucleus)),
+        'max_entropy_nucleus': float(np.max(token_entropies_nucleus)),
+        'min_entropy_nucleus': float(np.min(token_entropies_nucleus)),
+        'std_entropy_nucleus': float(np.std(token_entropies_nucleus)),
+        'num_tokens': len(generated_token_ids)
+        
     }
     
-    # Add optional fields
-    if return_per_token_entropy:
-        result['per_token_entropy'] = token_entropies
-    
-    if track_top_k:
-        result['top_k_data'] = top_k_data
-
     # Hard cleanup for GPU memory
     hard_cleanup_memory(
         past_key_values,
