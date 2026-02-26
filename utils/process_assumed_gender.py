@@ -14,7 +14,7 @@ import argparse
 root_dir = Path(__file__).parent.parent
 data_dir = root_dir / "data"
 prompts_dir = data_dir / "gender_prompts"
-results_dir = data_dir / "olmo7b_results"
+results_dir = data_dir / "olmo7b_results" / "v2"
 
 def get_gender_assignment(assumed_results_df, batch_size):
     # Filter out rows with empty or null responses
@@ -37,7 +37,7 @@ def get_gender_assignment(assumed_results_df, batch_size):
 
     # Define gender candidate labels and hypothesis statement for model classification
     candidate_labels = ["male", "female", "unspecified"]
-    hypothesis_template = "The writer assumed a gender for the character. This gender is {}."
+    hypothesis_template = "The writer or assistant assumed a gender for the character. This gender is {}."
 
     # Run inference
     results = []
@@ -89,6 +89,6 @@ if __name__ == "__main__":
         all_assumed_dfs[name] = get_gender_assignment(df, batch_size=args.batch_size)
         
         # Save the updated DataFrame with gender assignments
-        output_path = results_dir / str(name)
+        output_path = results_dir / f"processed_{str(name)}"
         all_assumed_dfs[name].to_json(output_path, orient='records', force_ascii=True, indent=4)
         print(f"✓ Saved results to {output_path.name}")
