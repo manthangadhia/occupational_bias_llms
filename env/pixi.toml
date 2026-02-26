@@ -6,6 +6,7 @@ platforms = ["win-64"]
 version = "0.1.0"
 
 [tasks]
+setup-spacy = "python -m spacy download en_core_web_sm"
 
 [dependencies]
 python = "3.11.*"
@@ -19,6 +20,7 @@ tqdm = ">=4.67.1,<5"
 nomkl = ">=1.0,<2"
 numpy = ">=2.3.5,<3"
 ipywidgets = ">=8.1.8,<9"
+pip = ">=26.0.1,<27"
 
 [pypi-dependencies]
 transformers = ">=4.57.3, <5"
@@ -34,3 +36,5 @@ diversity = ">=0.3.0, <0.4"
 pandarallel = ">=1.6.5, <2"
 protobuf = ">=6.33.5, <7"
 huggingface-hub = ">=0.36.2, <0.37"
+spacy = ">=3.8.11, <4"
+urllib3 = ">=2.6.3, <3"
