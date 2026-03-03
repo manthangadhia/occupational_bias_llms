@@ -27,3 +27,16 @@ def load_json_data(results_dir: Path, file_name_keyword: str = None) -> dict:
             data_frames[file.stem] = pd.read_json(file)
 
     return data_frames
+
+def save_dataframes(data_frames: dict, output_dir: Path):
+    """
+    Save the dataframes in the output directory as json files.
+
+    Args:
+        data_frames (dict): A dictionary of dataframes with keys as file names and values as dataframes.
+        output_dir (Path): Path to the output directory.
+    """
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    for key, df in data_frames.items():
+        df.to_json(output_dir / f"{key}.json", orient='records', indent=4)
