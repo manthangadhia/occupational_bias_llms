@@ -3,6 +3,7 @@ import pandas as pd
 import sys
 import argparse
 from functools import partial
+import torch
 
 # Add utils to path
 root_dir = Path(__file__).parent.parent
@@ -12,7 +13,7 @@ from utils import load_json_data, save_dataframes
 # Configuration
 # -------------------------
 data_dir = root_dir / "data"
-results_dir = data_dir / "olmo7b_results"
+results_dir = data_dir / "olmo7b_results" / "v2"
 
 from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 from nltk.tokenize import word_tokenize
@@ -27,7 +28,7 @@ def self_bleu(texts: list[str], ns: list[int] = [2, 3, 4, 5]) -> dict:
     Returns combined geometric mean over n-gram orders, I don't think I need the per n-gram results.
     """
     tokenized = [word_tokenize(t.lower()) for t in texts]
-    # smoothing = SmoothingFunction().method1                 # This is useful when texts being compared are short, mine are quite lengthy
+    smoothing = SmoothingFunction().method1                 # This is useful when texts being compared are short, mine are quite lengthy
 
     scores_per_n = {n: [] for n in ns}
 
@@ -35,7 +36,7 @@ def self_bleu(texts: list[str], ns: list[int] = [2, 3, 4, 5]) -> dict:
         refs = [t for j, t in enumerate(tokenized) if j != i]
         for n in ns:
             weights = tuple(1/n for _ in range(n))
-            score = sentence_bleu(refs, hyp, weights=weights) # can add smoothing function if needed
+            score = sentence_bleu(refs, hyp, weights=weights, smoothing_function=smoothing) # can add smoothing function if needed
             scores_per_n[n].append(score)
 
     results = {f"self_bleu_{n}": float(np.mean(scores_per_n[n])) for n in ns}
@@ -64,37 +65,13 @@ def semantic_diversity(model, texts: list[str]):
     
     return avg_distance
 
-import torch
-from transformers import GPT2LMHeadModel, GPT2TokenizerFast
-# perplexity_tokenizer = GPT2TokenizerFast.from_pretrained("gpt2")
-# perplexity_model = GPT2LMHeadModel.from_pretrained("gpt2")
-
-def perplexity(model, tokenizer, texts: list[str]) -> float:
-    """
-    For a given set of texts, compute per-text perplexity using a causal LM (e.g. GPT-2).
-    Returns average perplexity across all texts.
-    """
-    model.eval()
-    perplexities = []
-
-    with torch.no_grad():
-        for text in texts:
-            inputs = tokenizer(text, return_tensors="pt").to(model.device)
-            loss = model(**inputs, labels=inputs["input_ids"]).loss
-            perplexities.append(torch.exp(loss).item())
-
-    return float(np.mean(perplexities))
-
-def apply_all_metrics(responses_series, semantic_model, perplexity_model, perplexity_tokenizer):
-    responses_list = list(responses_series)                     # convert the grouped series to a list
+def apply_all_metrics(responses_series, semantic_model):
+    responses_list = list(responses_series)                 # convert the grouped series to a list
 
     results = {
         "self_bleu": self_bleu(texts=responses_list),
         "semantic_div": semantic_diversity(model=semantic_model, 
                                            texts=responses_list),
-        "perplexity": perplexity(model=perplexity_model, 
-                                 tokenizer=perplexity_tokenizer, 
-                                 texts=responses_list),
     }
 
     return pd.Series(results)
@@ -118,17 +95,13 @@ if __name__ == "__main__":
     tqdm.pandas(desc="Applying metrics by group")
 
     # Initialize shared models once and reuse for all groups/dataframes
-    device = "cuda" if torch.cuda.is_available() else "cpu"    
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    print(f"Using device: {device}")
     semantic_model = SentenceTransformer('all-MiniLM-L6-v2', device=device)
-    perplexity_tokenizer = GPT2TokenizerFast.from_pretrained("gpt2")
-    perplexity_model = GPT2LMHeadModel.from_pretrained("gpt2")
-    perplexity_model.to(device)
 
     metrics_aggregator = partial(
         apply_all_metrics,
         semantic_model=semantic_model,
-        perplexity_model=perplexity_model,
-        perplexity_tokenizer=perplexity_tokenizer,
     )
 
     # go through one df at a time, 
@@ -136,6 +109,7 @@ if __name__ == "__main__":
        'occupation_category', 'attended_university', 'response_number',
        'mean_entropy', 'mean_entropy_nucleus', 'gender']
     for k, df in tqdm(data_frames.items(), total=len(data_frames), desc="Processing files"):
+        print(f"### Processing file [{k}]...")
         metric_df = df[cols_to_keep].copy()
         # group by profile id and temp
         metrics = (
