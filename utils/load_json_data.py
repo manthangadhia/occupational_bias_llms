@@ -19,7 +19,7 @@ def load_json_data(results_dir: Path, file_name_keyword: str = None) -> dict:
     data_frames = {}
 
     # Load results files
-    for file in results_dir.glob('*.json'):
+    for file in results_dir.glob('olmo7b*.json'):
         if file_name_keyword:
             if file_name_keyword in file.name:
                 data_frames[file.stem] = pd.read_json(file)
