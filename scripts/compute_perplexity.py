@@ -18,7 +18,9 @@ from utils import load_json_data, save_dataframes
 # Configuration
 # -------------------------
 data_dir = root_dir / "data"
-results_dir = data_dir / "olmo7b_results"
+results_dir = data_dir / "olmo7b_results" / "v2"
+# models_dir = root_dir / "models"
+# models_dir.mkdir(parents=True, exist_ok=True)
 
 
 def perplexity(model, tokenizer, texts: list[str]) -> float:
@@ -31,15 +33,24 @@ def perplexity(model, tokenizer, texts: list[str]) -> float:
 
     with torch.no_grad():
         for text in texts:
-            inputs = tokenizer(text, return_tensors="pt").to(model.device)
+            inputs = tokenizer(text, return_tensors="pt", truncation=True).to(model.device) # truncate for good practice, limit is 1024 tokens (i have way fewer per sequence)
+            if inputs["input_ids"].numel() == 0 or inputs["input_ids"].shape[-1] == 0:      # skip inputs with no tokens
+                continue
             loss = model(**inputs, labels=inputs["input_ids"]).loss
             perplexities.append(torch.exp(loss).item())
+
+    if not perplexities:
+        return float("nan")
 
     return float(np.mean(perplexities))
 
 
 def apply_perplexity(responses_series, perplexity_model, perplexity_tokenizer):
-    responses_list = list(responses_series)
+    responses_list = [
+        str(response).strip()
+        for response in responses_series
+        if pd.notna(response) and str(response).strip()
+    ] # filter out empty or NaN responses, and strip whitespace
     results = {
         "perplexity": perplexity(
             model=perplexity_model,
@@ -60,6 +71,7 @@ if __name__ == "__main__":
     tqdm.pandas(desc="Applying perplexity by group")
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
+    # Load from cache if available, otherwise initialize and cache for future use
     perplexity_tokenizer = GPT2TokenizerFast.from_pretrained("gpt2")
     perplexity_model = GPT2LMHeadModel.from_pretrained("gpt2")
     perplexity_model.to(device)
