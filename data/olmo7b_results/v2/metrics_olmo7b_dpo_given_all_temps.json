@@ -38021,7 +38021,7 @@
         "gender":"male",
         "self_bleu":0.0691158645,
         "semantic_div":0.6348904228,
-        "perplexity":null
+        "perplexity":32.8802595139
     },
     {
         "model_key":"dpo",
@@ -38035,7 +38035,7 @@
         "gender":"male",
         "self_bleu":0.0691158645,
         "semantic_div":0.6348904228,
-        "perplexity":null
+        "perplexity":32.8802595139
     },
     {
         "model_key":"dpo",
@@ -38049,7 +38049,7 @@
         "gender":"male",
         "self_bleu":0.0691158645,
         "semantic_div":0.6348904228,
-        "perplexity":null
+        "perplexity":32.8802595139
     },
     {
         "model_key":"dpo",
@@ -38063,7 +38063,7 @@
         "gender":"male",
         "self_bleu":0.0691158645,
         "semantic_div":0.6348904228,
-        "perplexity":null
+        "perplexity":32.8802595139
     },
     {
         "model_key":"dpo",
@@ -38077,7 +38077,7 @@
         "gender":"male",
         "self_bleu":0.0691158645,
         "semantic_div":0.6348904228,
-        "perplexity":null
+        "perplexity":32.8802595139
     },
     {
         "model_key":"dpo",

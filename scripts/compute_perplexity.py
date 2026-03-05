@@ -34,10 +34,17 @@ def perplexity(model, tokenizer, texts: list[str]) -> float:
     with torch.no_grad():
         for text in texts:
             inputs = tokenizer(text, return_tensors="pt", truncation=True).to(model.device) # truncate for good practice, limit is 1024 tokens (i have way fewer per sequence)
-            if inputs["input_ids"].numel() == 0 or inputs["input_ids"].shape[-1] == 0:      # skip inputs with no tokens
+            token_count = inputs["input_ids"].shape[-1]
+            # Causal LM loss needs at least 2 tokens after label shifting.
+            if inputs["input_ids"].numel() == 0 or token_count < 2:
                 continue
             loss = model(**inputs, labels=inputs["input_ids"]).loss
-            perplexities.append(torch.exp(loss).item())
+            if not torch.isfinite(loss):
+                continue
+
+            ppl = torch.exp(loss).item()
+            if np.isfinite(ppl):
+                perplexities.append(ppl)
 
     if not perplexities:
         return float("nan")
