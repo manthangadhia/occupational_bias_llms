@@ -25,6 +25,7 @@ pip = ">=26.0.1,<27"
 nltk = ">=3.9, <4"
 pymer4 = ">=0.8.2,<0.9"
 polars = ">=1.38.1,<2"
+statsmodels = ">=0.14.6,<0.15"
 
 [pypi-dependencies]
 transformers = ">=4.57.3, <5"
