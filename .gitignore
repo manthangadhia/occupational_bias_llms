@@ -69,4 +69,4 @@ test*/
 
 # --- Data files that I want to ignore ---
 *.xlsx
-*keyword_hits*
+*keyword_hits*.jsonl
