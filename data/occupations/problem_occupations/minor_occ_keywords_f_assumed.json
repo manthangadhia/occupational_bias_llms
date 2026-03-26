@@ -1,0 +1,44 @@
+{
+    "market-oriented skilled agricultural workers": [
+        "farmer",
+        "crop",
+        "livestock",
+        "dairy",
+        "poultry",
+        "horticulture",
+        "gardener",
+        "agriculture",
+        "grower",
+        "nursery",
+        "animal production",
+        "mixed farming"
+    ],
+    "subsistence farmers, fishers, hunters and gatherers": [
+        "subsistence",
+        "farmer",
+        "fishing",
+        "fisher",
+        "hunter",
+        "hunting",
+        "trapper",
+        "gatherer",
+        "foraging",
+        "livestock",
+        "crop farming",
+        "mixed farming"
+    ],
+    "food processing, woodworking, garment and other craft and related trades workers": [
+        "baker",
+        "butcher",
+        "tailor",
+        "shoemaker",
+        "carpenter",
+        "woodworker",
+        "sewing",
+        "garment",
+        "upholsterer",
+        "tanner",
+        "craft",
+        "machine operator"
+    ]
+}

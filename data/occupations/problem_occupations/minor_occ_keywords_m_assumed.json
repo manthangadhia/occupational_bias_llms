@@ -1,0 +1,44 @@
+{
+    "sales workers": [
+        "sales",
+        "seller",
+        "retail",
+        "shop",
+        "cashier",
+        "store",
+        "vendor",
+        "market",
+        "assistant",
+        "customer",
+        "ticket",
+        "attendant"
+    ],
+    "administrative and commercial managers": [
+            "manager",
+            "management",
+            "finance",
+            "hr",
+            "human resources",
+            "marketing",
+            "sales manager",
+            "administration",
+            "business manager",
+            "director",
+            "planning",
+            "operations"
+    ],
+    "business and administration professionals": [
+        "accountant",
+        "analyst",
+        "consultant",
+        "economist",
+        "finance",
+        "marketing",
+        "hr",
+        "policy",
+        "advisor",
+        "adviser",
+        "sales",
+        "business"
+    ]
+}

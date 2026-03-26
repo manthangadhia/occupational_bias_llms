@@ -69,4 +69,4 @@ test*/
 
 # --- Data files that I want to ignore ---
 *.xlsx
-problem_occupations/
+*keyword_hits*
