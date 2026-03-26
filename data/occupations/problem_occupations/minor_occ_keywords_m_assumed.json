@@ -14,18 +14,17 @@
         "attendant"
     ],
     "administrative and commercial managers": [
-            "manager",
-            "management",
-            "finance",
-            "hr",
-            "human resources",
-            "marketing",
-            "sales manager",
-            "administration",
-            "business manager",
-            "director",
-            "planning",
-            "operations"
+        "manager",
+        "management",
+        "finance",
+        "human resources",
+        "marketing",
+        "sales manager",
+        "administration",
+        "business manager",
+        "director",
+        "planning",
+        "operations"
     ],
     "business and administration professionals": [
         "accountant",
@@ -34,7 +33,6 @@
         "economist",
         "finance",
         "marketing",
-        "hr",
         "policy",
         "advisor",
         "adviser",
