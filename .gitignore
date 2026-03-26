@@ -66,3 +66,7 @@ archive/
 notes/
 notebooks/scratchpad.ipynb
 test*/
+
+# --- Data files that I want to ignore ---
+*.xlsx
+problem_occupations/
