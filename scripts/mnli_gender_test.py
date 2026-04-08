@@ -19,6 +19,7 @@ import datasets as ds
 
 import json
 import argparse
+from nltk.tokenize import word_tokenize
 
 def load_samples_streaming(filename):
     infile = data_dir / filename
@@ -28,7 +29,7 @@ def load_samples_streaming(filename):
 def label_match_in_doc(label, doc):
     # check if the label matched a whole word in the doc, if not, skip the sample
     # split doc into words and check for exact match with label
-    words = doc.split()
+    words = word_tokenize(doc)
     return label in words
 
 def write_output(results, output_name):
