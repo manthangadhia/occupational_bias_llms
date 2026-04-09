@@ -5,7 +5,12 @@ Given a data and results directory Path, load all the files as pandas dataframes
 from pathlib import Path
 import pandas as pd
 
-def load_json_data(results_dir: Path, file_name_keyword: str = None, prefix: str = None) -> dict:
+def load_json_data(
+    results_dir: Path,
+    file_name_keyword: str = None,
+    prefix: str = None,
+    exclude_keyword: str = None,
+) -> dict:
     """
     Load all the json files in the results directory as pandas dataframes and return a dictionary of dataframes.
 
@@ -13,6 +18,7 @@ def load_json_data(results_dir: Path, file_name_keyword: str = None, prefix: str
         results_dir (Path): Path to the results directory.
         file_name_keyword (str, optional): Keyword to filter the files to be loaded. Defaults to None.
         prefix (str, optional): Prefix to filter the files to be loaded. Defaults to None.
+        exclude_keyword (str, optional): Keyword to exclude files from being loaded. Defaults to None.
     Returns:
         dict: A dictionary of dataframes with keys as file names and values as dataframes.
     """
@@ -20,6 +26,9 @@ def load_json_data(results_dir: Path, file_name_keyword: str = None, prefix: str
 
     # Load results files
     for file in results_dir.glob('*.json'):
+        if exclude_keyword and exclude_keyword in file.name:
+            continue
+
         if prefix:
             if file.name.startswith(prefix):
                 if file_name_keyword:
