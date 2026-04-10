@@ -32,8 +32,6 @@ from datasets import load_dataset
 import pandas as pd
 import faiss
 import numpy as np
-from pandarallel import pandarallel
-pandarallel.initialize(nb_workers=8)
 
 EMBED_BATCH_SIZE = 64
 FLUSH_EVERY = 10_000
@@ -51,7 +49,7 @@ def load_gender_prompts(data_dir: Path) -> pd.DataFrame:
     Load the gender_assumed and gender_given prompts from the data directory
     (instruct-prompts only) and return as a DataFrame
     """
-    return load_json_data(data_dir, keyword="assumed", exclude_keyword="base")
+    return load_json_data(data_dir, file_name_keyword="assumed", exclude_keyword="base")
 
 def count_tokens(text, tokenizer): 
     """Fast token counting without padding or tensors"""
@@ -142,18 +140,20 @@ def query_index(model, tokenizer, top_k = 10):
     else:        raise ValueError(f"Expected one prompts dataframe, but got {len(prompts_dfs)}.")
 
     # Ensure each prompt is within the max token length, else process
-    df["prompt_text"] = df["prompt_text"].apply(lambda x: process_prompt_text(x, tokenizer), show_progress_bar=True, desc="Processing prompt texts")
-    
+    df["prompt_text"] = df["prompt_text"].apply(lambda x: process_prompt_text(x, tokenizer))
     # Pass final prompt_text as query_text
-    df["sample_distances"], df["sample_faiss_ids"] = zip(*df["prompt_text"].parallel_apply(lambda x: query_embedding_model(x, model, faiss.read_index(str(dolci_index_path)), top_k=top_k)))
-    # Use the faiss_ids to get hf_row_idx and turn_idx from the metadata, then get corresponding text from dolci
+    index = faiss.read_index(str(dolci_index_path))
+    results = df["prompt_text"].apply(
+        lambda x: query_embedding_model(x, model, index, top_k=top_k)
+    )
+    df["sample_distances"], df["sample_faiss_ids"] = zip(*results)    # Use the faiss_ids to get hf_row_idx and turn_idx from the metadata, then get corresponding text from dolci
     meta_df = pd.read_parquet(dolci_meta_path)
     df["retrieved_samples"] = df["sample_faiss_ids"].apply(lambda faiss_ids: meta_df[meta_df["faiss_id"].isin(faiss_ids)][["hf_row_idx", "turn_idx"]].to_dict(orient="records"))
     # Save the resulting dataframe with prompts and retrieved samples to a new parquet file for analysis
     output_path = gender_prompts_dir / "gender_assumed_prompts_with_retrieved_dolci.parquet"
     df.to_parquet(output_path, index=False)
     print(f"Querying complete. Results saved to {output_path}.")
-    
+
 def main(args):
     # Load model and tokenizer as object in retrieval_utils
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
