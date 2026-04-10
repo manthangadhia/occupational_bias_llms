@@ -207,6 +207,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/50/3d/9373ad9c56321fdab5b41197068e1d8c25883b3fea29dd361f9b55116869/dill-0.4.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/2a/09/f8d8f8f31e4483c10a906437b4ce31bdf3d6d417b73fe33f1a8b59e34228/einops-0.8.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/3e/af/3e990d8d4002bbc9342adb4facd59506e653da93b2417de0fa6027cb86b1/evaluate-0.4.6-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/14/6d/40439a05e4e60a0e889aa68b08ec70f5c8e32901f75f2be25c593a2e050e/faiss_cpu-1.13.2-cp311-cp311-win_amd64.whl
       - pypi: https://files.pythonhosted.org/packages/5c/35/d8e3906a6887e7dfbaf1d09fc9a7c16f117064eefc139ddacf7595b0db20/fastcoref-2.1.6.tar.gz
       - pypi: https://files.pythonhosted.org/packages/f9/0b/de6f54d4a8bedfe8645c41497f3c18d749f0bd3218170c667bf4b81d0cdd/filelock-3.25.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/0a/f5/603d0d6a02cfd4c8f2a095a54672b3cf967ad688a60fb9faf04fc4887f65/frozenlist-1.8.0-cp311-cp311-win_amd64.whl
@@ -246,7 +247,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/a2/09/77d55d46fd61b4a135c444fc97158ef34a095e5681d0a6c10b75bf356191/sympy-1.14.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/4c/a9/49391a40d703efc0f7a451310373261835f71fd3e6e2e8cfc08ee02f78ad/thinc-8.3.13-cp311-cp311-win_amd64.whl
       - pypi: https://files.pythonhosted.org/packages/c1/02/40725eebedea8175918bd59ab80b2174d6ef3b3ef9ac8ec996e84c38d3ca/tokenizers-0.15.2-cp311-none-win_amd64.whl
-      - pypi: https://download.pytorch.org/whl/cu126/torch-2.10.0%2Bcu126-cp311-cp311-win_amd64.whl#sha256=4749cd32e32ed55179ff2ff0407e0ae5077fe4d332bfa49258f4578d09eccb40
+      - pypi: https://download-r2.pytorch.org/whl/cu126/torch-2.10.0%2Bcu126-cp311-cp311-win_amd64.whl#sha256=4749cd32e32ed55179ff2ff0407e0ae5077fe4d332bfa49258f4578d09eccb40
       - pypi: https://download-r2.pytorch.org/whl/cu126/torchvision-0.25.0%2Bcu126-cp311-cp311-win_amd64.whl#sha256=3476ee36355960b9559beee84491b8bd3d062e63ef612dd84a54b3c127eaa5d8
       - pypi: https://files.pythonhosted.org/packages/12/dd/f17b11a93a9ca27728e12512d167eb1281c151c4c6881d3ab59eb58f4127/transformers-4.35.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/4a/91/48db081e7a63bb37284f9fbcefda7c44c277b18b0e13fbc36ea2335b71e6/typer-0.24.1-py3-none-any.whl
@@ -1191,6 +1192,14 @@ packages:
   - pkg:pypi/executing?source=hash-mapping
   size: 30753
   timestamp: 1756729456476
+- pypi: https://files.pythonhosted.org/packages/14/6d/40439a05e4e60a0e889aa68b08ec70f5c8e32901f75f2be25c593a2e050e/faiss_cpu-1.13.2-cp311-cp311-win_amd64.whl
+  name: faiss-cpu
+  version: 1.13.2
+  sha256: 7c5944d7807d58fe7244b6aba06be710ee7ed99343365ed92699349efe979f51
+  requires_dist:
+  - numpy>=1.25.0,<3.0
+  - packaging
+  requires_python: '>=3.10,<3.15'
 - pypi: https://files.pythonhosted.org/packages/5c/35/d8e3906a6887e7dfbaf1d09fc9a7c16f117064eefc139ddacf7595b0db20/fastcoref-2.1.6.tar.gz
   name: fastcoref
   version: 2.1.6
@@ -3834,7 +3843,7 @@ packages:
   - setuptools-rust ; extra == 'docs'
   - tokenizers[testing] ; extra == 'dev'
   requires_python: '>=3.7'
-- pypi: https://download.pytorch.org/whl/cu126/torch-2.10.0%2Bcu126-cp311-cp311-win_amd64.whl#sha256=4749cd32e32ed55179ff2ff0407e0ae5077fe4d332bfa49258f4578d09eccb40
+- pypi: https://download-r2.pytorch.org/whl/cu126/torch-2.10.0%2Bcu126-cp311-cp311-win_amd64.whl#sha256=4749cd32e32ed55179ff2ff0407e0ae5077fe4d332bfa49258f4578d09eccb40
   name: torch
   version: 2.10.0+cu126
   sha256: 4749cd32e32ed55179ff2ff0407e0ae5077fe4d332bfa49258f4578d09eccb40
