@@ -6,12 +6,15 @@ import sys
 
 cwd = Path(__file__).parent
 root_dir = cwd.parent.parent                # .py < scripts < occ_bias < root > models         # structure on euler
+gender_prompts_dir = root_dir / "occ_bias" / "data" / "gender_prompts"
 dolci_data_dir = root_dir / "occ_bias" / "data" / "dolci_sft"
 dolci_data_path = root_dir / "occ_bias" / "data" / "dolci_sft" / "dolci_sft.parquet"  # path to parquet file on euler
+dolci_index_path = dolci_data_dir / "dolci_user.index"
+dolci_meta_path = dolci_data_dir / "dolci_meta.parquet"
 
 # Add utils to path
 sys.path.insert(0, str(root_dir))
-from occ_bias.utils import load_json_data, load_embedding_model, embed_batch
+from occ_bias.utils import load_json_data, load_embedding_model, embed_batch, query_embedding_model
 
 staged_models = os.getenv("HF_HOME") or os.getenv("MODEL_ROOT")
 models_dir = Path(staged_models) if staged_models else (root_dir / "models" / "embeddings")
@@ -29,6 +32,8 @@ from datasets import load_dataset
 import pandas as pd
 import faiss
 import numpy as np
+from pandarallel import pandarallel
+pandarallel.initialize(nb_workers=8)
 
 EMBED_BATCH_SIZE = 64
 FLUSH_EVERY = 10_000
@@ -46,7 +51,7 @@ def load_gender_prompts(data_dir: Path) -> pd.DataFrame:
     Load the gender_assumed and gender_given prompts from the data directory
     (instruct-prompts only) and return as a DataFrame
     """
-    return load_json_data(data_dir, prefix="prompts_gender", exclude_keyword="base")
+    return load_json_data(data_dir, keyword="assumed", exclude_keyword="base")
 
 def count_tokens(text, tokenizer): 
     """Fast token counting without padding or tensors"""
@@ -59,14 +64,15 @@ def truncate_and_concatenate(text, tokenizer, max_length=MAX_LENGTH):
     truncated_end = tokenizer.decode(tokenizer.encode(text)[-half_max:], skip_special_tokens=True)
     return truncated_start + " " + truncated_end
 
-# Main functionality
-def main(args):
-    # Load model and tokenizer as object in retrieval_utils
-    device = 'cuda' if torch.cuda.is_available() else 'cpu'
-    print(f"Using device: {device}")
-    model = load_embedding_model(device=device, cache_dir=models_dir)
-    tokenizer = model.tokenizer
+def process_prompt_text(prompt_text, tokenizer, max_length=MAX_LENGTH):
+    """Ensure prompt text is within max token length, else truncate and concatenate."""
+    token_len = count_tokens(prompt_text, tokenizer)
+    if token_len > max_length:
+        return truncate_and_concatenate(prompt_text, tokenizer, max_length)
+    return prompt_text
 
+# Main functionality
+def create_index(model, tokenizer):
     # Load the dataset from local memory (parquet file on euler)
     ds = load_dataset("parquet", data_files=str(dolci_data_path))["train"]
     total_len_ds = len(ds)
@@ -123,11 +129,47 @@ def main(args):
     if text_buffer:
         flush_buffer(text_buffer, meta_buffer, model, index, metadata)
 
-    faiss.write_index(index, str(dolci_data_dir / "dolci_user.index"))
-    pd.DataFrame(metadata).to_parquet(dolci_data_dir / "dolci_meta.parquet", index=False)
+    faiss.write_index(index, str(dolci_index_path))
+    pd.DataFrame(metadata).to_parquet(dolci_meta_path, index=False)
     print(f"Done. {index.ntotal} vectors indexed.")
+
+def query_index(model, tokenizer, top_k = 10):
+    # Load prompts
+    prompts_dfs = load_gender_prompts(gender_prompts_dir)
+    print(f"Loaded {len(prompts_dfs)} gender prompt files.")
+    if len(prompts_dfs) == 1: # which it should be, then just take the one dataframe out of the dict
+        df = next(iter(prompts_dfs.values()))
+    else:        raise ValueError(f"Expected one prompts dataframe, but got {len(prompts_dfs)}.")
+
+    # Ensure each prompt is within the max token length, else process
+    df["prompt_text"] = df["prompt_text"].apply(lambda x: process_prompt_text(x, tokenizer), show_progress_bar=True, desc="Processing prompt texts")
+    
+    # Pass final prompt_text as query_text
+    df["sample_distances"], df["sample_faiss_ids"] = zip(*df["prompt_text"].parallel_apply(lambda x: query_embedding_model(x, model, faiss.read_index(str(dolci_index_path)), top_k=top_k)))
+    # Use the faiss_ids to get hf_row_idx and turn_idx from the metadata, then get corresponding text from dolci
+    meta_df = pd.read_parquet(dolci_meta_path)
+    df["retrieved_samples"] = df["sample_faiss_ids"].apply(lambda faiss_ids: meta_df[meta_df["faiss_id"].isin(faiss_ids)][["hf_row_idx", "turn_idx"]].to_dict(orient="records"))
+    # Save the resulting dataframe with prompts and retrieved samples to a new parquet file for analysis
+    output_path = gender_prompts_dir / "gender_assumed_prompts_with_retrieved_dolci.parquet"
+    df.to_parquet(output_path, index=False)
+    print(f"Querying complete. Results saved to {output_path}.")
+    
+def main(args):
+    # Load model and tokenizer as object in retrieval_utils
+    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    print(f"Using device: {device}")
+    model = load_embedding_model(device=device, cache_dir=models_dir)
+    tokenizer = model.tokenizer
+
+    if args.pipeline == "index":
+        print("Creating index...")
+        create_index(model, tokenizer)
+    else: # args.pipeline == "query"
+        print("Querying...")
+        query_index(model, tokenizer)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--max_rows", type=int, default=None)
+    parser.add_argument("--pipeline", type=str, default="index", help="Whether to run the indexing or querying pipeline.")
     main(parser.parse_args())

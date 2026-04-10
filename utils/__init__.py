@@ -8,6 +8,6 @@ except ImportError:
     print("WARNING UTILS: model_utils could not be loaded; ensure that torch is installed if you intend to use it.")
 
 try:
-    from .retrieval_utils import load_model as load_embedding_model, embed_batch
+    from .retrieval_utils import load_model as load_embedding_model, embed_batch, query as query_embedding_model
 except ImportError:
     print("WARNING UTILS: retrieval_utils could not be loaded; ensure that sentence_transformers is installed if you intend to use it.")
