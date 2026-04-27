@@ -28,6 +28,7 @@ HF_TOKEN = os.getenv("HF_TOKEN")
 
 from sentence_transformers import SentenceTransformer
 import torch
+import datasets
 from datasets import load_dataset
 import pandas as pd
 import faiss
@@ -51,6 +52,10 @@ def load_gender_prompts(data_dir: Path) -> pd.DataFrame:
     """
     return load_json_data(data_dir, file_name_keyword="assumed", exclude_keyword="base")
 
+def load_dolci_data(data_path: Path) -> datasets.Dataset:
+    """Load the Dolci-SFT dataset from the given parquet file path."""
+    return load_dataset("parquet", data_files=str(data_path))["train"]
+
 def count_tokens(text, tokenizer): 
     """Fast token counting without padding or tensors"""
     return len(tokenizer.encode(text, add_special_tokens=False))
@@ -69,10 +74,23 @@ def process_prompt_text(prompt_text, tokenizer, max_length=MAX_LENGTH):
         return truncate_and_concatenate(prompt_text, tokenizer, max_length)
     return prompt_text
 
+def retrieve_text_for_retrieved_samples(df_samples, ds):
+    # Explode df_samples so that each row corresponds to one retrieved sample
+    exploded = df_samples.explode("retrieved_samples").reset_index(drop=True)
+    retrieved_texts = []
+    for idx, row in exploded.iterrows():
+        retrieved_sample = row["retrieved_samples"]
+        hf_row_idx = retrieved_sample["hf_row_idx"]
+        turn_idx = retrieved_sample["turn_idx"]
+        text = ds[hf_row_idx]["messages"][turn_idx]["content"]
+        retrieved_texts.append(text)
+    exploded["retrieved_text"] = retrieved_texts
+    return exploded
+
 # Main functionality
 def create_index(model, tokenizer):
     # Load the dataset from local memory (parquet file on euler)
-    ds = load_dataset("parquet", data_files=str(dolci_data_path))["train"]
+    ds = load_dolci_data(dolci_data_path)
     total_len_ds = len(ds)
     # limit the domains that are loaded and processed
     allowed_domains = {"chat", "other", "reasoning", "safety", "precise if"}
@@ -144,15 +162,22 @@ def query_index(model, tokenizer, top_k = 10):
     # Pass final prompt_text as query_text
     index = faiss.read_index(str(dolci_index_path))
     results = df["prompt_text"].apply(
-        lambda x: query_embedding_model(x, model, index, top_k=top_k)
+        lambda x: query_embedding_model(x, model, index, k=top_k)
     )
     df["sample_distances"], df["sample_faiss_ids"] = zip(*results)    # Use the faiss_ids to get hf_row_idx and turn_idx from the metadata, then get corresponding text from dolci
     meta_df = pd.read_parquet(dolci_meta_path)
     df["retrieved_samples"] = df["sample_faiss_ids"].apply(lambda faiss_ids: meta_df[meta_df["faiss_id"].isin(faiss_ids)][["hf_row_idx", "turn_idx"]].to_dict(orient="records"))
-    # Save the resulting dataframe with prompts and retrieved samples to a new parquet file for analysis
+    #TODO: for each retrieved sample, also get the corresponding text from the original dataset and include in the final dataframe
+    ds = load_dolci_data(dolci_data_path)
+    df_with_text = retrieve_text_for_retrieved_samples(df, ds)
+
+    # # Save the resulting dataframe with prompts and retrieved samples to a new parquet file for analysis
     output_path = gender_prompts_dir / "gender_assumed_prompts_with_retrieved_dolci.parquet"
     df.to_parquet(output_path, index=False)
-    print(f"Querying complete. Results saved to {output_path}.")
+
+    text_output_path = gender_prompts_dir / "gender_assumed_prompts_with_retrieved_dolci_text.parquet"
+    df_with_text.to_parquet(text_output_path, index=False)
+    print(f"Querying complete. Results saved to {output_path} and {text_output_path}.")
 
 def main(args):
     # Load model and tokenizer as object in retrieval_utils
