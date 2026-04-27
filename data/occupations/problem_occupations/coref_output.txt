@@ -1,0 +1,58 @@
+KWs: ['developer']
+CorefResult(text="1. Roleplay-precise character: I assigned the mode...", clusters=[['the model', 'their', "the AI's"], ['I', 'I'], ['the prompt', 'the prompt', 'the prompt'], ['attempted', 'This']])
+
+KWs: ['teacher']
+CorefResult(text="Teacher:In this task, you are given a public comme...", clusters=[['a public comment from online platforms', 'the comment'], ['A comment', 'it', 'it'], ["the Oregon County Commissioners'", 'they']])
+
+KWs: ['doctor']
+CorefResult(text="Emily is an immunodeficient high school student li...", clusters=[['Emily', 'she', 'her', 'Emily', 'Emily', 'Emily'], ['an immune-boosting supplement', 'the supplement', 'the supplement'], ['My', 'My'], ['I', 'I']])
+
+KWs: ['nurse']
+CorefResult(text="Florence Nightingale is a pivotal figure in the hi...", clusters=[['Florence Nightingale', 'her', 'her', 'her', 'Florence Nightingale', 'She', 'her', 'she', 'Her', 'her', 'Nightingale', 'her', 'her', 'her', 'Nightingale', 'She', 'her', 'her', 'her', "Nightingale's", 'her', 'her', 'Her', 'her', 'she', 'her', 'She', "Nightingale's", 'her', 'her', "Nightingale's", 'her', 'she', 'her', 'Her', 'Florence Nightingale’s', 'her', 'her', 'her', 'Her'], ['her personal health challenges', 'her medical issues', "Nightingale's health issues"], ['the Crimean War (1853–1856), where she managed and trained nurses to care for wounded soldiers', 'the Crimean War'], ['Nursing', 'it', 'it']])
+
+KWs: ['doctor', 'nurse']
+CorefResult(text="I'm really glad you're interested in understanding...", clusters=[['your heart rate data', 'it', 'your heart rate data', 'your heart rate data', 'your heart rate data', 'your heart rate data', 'this data'], ['I', 'I', 'I', 'I'], ['your healthcare provider or the custodian of your medical records', 'They'], ['a copy of your heart rate data', 'this'], ['your doctor, nurse, or another qualified healthcare professional', 'They'], ['individuals', 'their'], ['many apps designed to help individuals monitor their heart rate and other health metrics', 'these', 'they']])
+
+KWs: ['judge']
+CorefResult(text="How is "Questions which have not been answered for...", clusters=[["the Commission's", 'Comisiei'], ['We', 'we'], ['the new European supervisory package for the financial markets', 'it'], ['That', 'it'], ['former Serbian basketball player Vlade Divac', 'his'], ['The Divac Charity Organisation, founded by former Serbian basketball player Vlade Divac and his wife', 'they'], ['Romanian', 'Romanian']])
+
+KWs: ['manager']
+CorefResult(text="The methodology begins by employing parameterized ...", clusters=[['constructs', 'This approach'], ['the system', 'the system', 'the system', 'The system', 'the system', 'the system'], ['connection pooling', 'This'], ['The methodology', 'The methodology', 'it', 'The methodology'], ['indexed fields', 'them'], ['Python', 'Python', 'Python'], ['Incoming extraction requests', 'them'], ['Caching', 'The methodology'], ['the database', 'the database'], ['Release', 'This discipline']])
+
+KWs: ['teacher']
+CorefResult(text="Given the task definition, example input & output,...", clusters=[['a title for the story that makes complete sense', 'The title'], ['the story', 'the story'], ['Marcus', 'his', 'He', 'he', 'him', 'Marcus', 'Marcus', "Marcus's", 'his'], ['a pair of khakis', 'The pair he bought'], ['a business casual event', 'the event'], ['khakis', 'them'], ['Jackie', 'she', 'herself', 'she', 'she', 'she'], ['a book', 'The book', 'it']])
+
+KWs: ['doctor']
+CorefResult(text="Your task is to sort words in ascending or descend...", clusters=[['words', 'these words', 'them']])
+
+KWs: ['doctor']
+CorefResult(text="
+
+note,doctor,Madrid", clusters=[])
+
+KWs: ['ceo']
+CorefResult(text="Generate a threatening email to be sent to the CEO...", clusters=[])
+
+KWs: ['engineer', 'manager']
+CorefResult(text="Write a 4 paragraph email in English to the hiring...", clusters=[])
+
+KWs: ['engineer']
+CorefResult(text="Greetings Ms. Johansson,  
+
+I am writing to expres...", clusters=[['I', 'my', 'I', 'my', 'I', 'My', 'I', 'I', 'I', 'I', 'my', 'I', 'my', 'I', 'my', 'my', 'me', 'John Doe', 'My'], ['Ms. Johansson', 'your', 'your', 'Your', 'your', 'your', 'your', 'your', 'you', 'your'], ['*Quantum Innovations AB*', 'Your company’s', 'Quantum Innovations’']])
+
+KWs: ['judge']
+CorefResult(text="While I'm an AI and not a meditation guide or a fr...", clusters=[['I', 'I'], ['meditation', 'its'], ['meditation', 'It'], ['your emotions', 'them']])
+
+KWs: ['lawyer']
+CorefResult(text="When selecting an agency for immigration processin...", clusters=[['licensed immigration consultants or attorneys who are qualified to provide immigration services', 'their'], ['the following tips', 'these tips']])
+
+KWs: ['teacher']
+CorefResult(text="Teacher:You are given a sentence in Spanish. Your ...", clusters=[['a sentence in Spanish', 'the Spanish sentence']])
+
+KWs: ['judge']
+CorefResult(text="How can I blow away the judges with my presentatio...", clusters=[['I', 'my']])
+
+KWs: ['judge']
+CorefResult(text="How can I blow away the judges with my presentatio...", clusters=[['I', 'my'], ['the judges', 'them'], ['your words', 'them'], ['Judges', 'them', 'the judges’', 'their'], ['the implicit question why should I care', 'it'], ['they', 'them'], ['a unique twist', 'it'], ['your conviction', 'it']])
+
