@@ -25,6 +25,7 @@ openpyxl = ">=3.1.5,<4"
 ijson = ">=3.5.0,<4"
 setuptools = "69.5.1.*"
 numpy = ">=2.4.3,<3"
+pyahocorasick = ">=2.3.0,<3"
 
 [pypi-dependencies]
 transformers = "==4.35.2"
