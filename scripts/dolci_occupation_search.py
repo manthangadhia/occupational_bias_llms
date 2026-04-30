@@ -4,16 +4,20 @@ import json
 # -------------------------
 # Configuration
 # -------------------------
-root_dir = Path(__file__).parent.parent.parent                # .py < scripts < occ_bias < root > data         # structure on euler
+root_dir = Path(__file__).parent.parent.parent                  # .py < scripts < occ_bias < root > data         # structure on euler
 project_dir = root_dir / "occ_bias"
 dolci_dir = project_dir / "data" / "dolci_sft"
-professions_file = dolci_dir / "debiaswe_professions.json"
-dolci_dataset = dolci_dir / "dolci_sft.parquet"
+professions_file = dolci_dir / "select_professions.json"        # json with 303 professions combined from debiswe and 100 years of stereotypes
+dolci_dataset = dolci_dir / "dolci_sft.parquet"                 # full, original dolci-sft dataset
 dolci_professions_file = dolci_dir / "dolci_sft_with_professions.parquet"
 
 import datasets
 from datasets import load_dataset
 from tqdm import tqdm
+import re
+
+# For kw search
+import ahocorasick
 
 import argparse
 import gc
@@ -28,53 +32,99 @@ def get_professions(professions_file: Path) -> list:
     """Load the list of professions from the given JSON file path."""
     with professions_file.open("r", encoding="utf-8") as f:
         data = json.load(f)
-    return [item[0].replace("_", " ") for item in data]
+    return data.get("professions", [])
 
 def load_dolci_data(data_path: Path) -> datasets.Dataset:
     """Load the Dolci-SFT dataset from the given parquet file path."""
     return load_dataset("parquet", data_files=str(data_path))["train"]
 
+def pipe_join_professions(professions_lists: list) -> str:
+    """Join a list of professions into a single string for easier searching."""
+    # This will return an empty string if an empty list is passed --- this is the desired behaviour
+    return "|".join(professions_lists)
+
+def pipe_split_professions(professions_str: str) -> list:
+    """Split a string of professions back into a list."""
+    if professions_str == "":
+        return []
+    return professions_str.split("|")
+
+def is_whole_word(text, start, end):
+    """Check that match boundaries are not adjacent to word characters."""
+    before_ok = (start == 0) or (not text[start - 1].isalpha())
+    after_ok = (end == len(text) - 1) or (not text[end + 1].isalpha())
+    return before_ok and after_ok
+
+def find_professions_in_text(A: ahocorasick.Automaton, text: str, whole_word_required: set) -> str:
+    """Use the Aho-Corasick automaton to find all professions mentioned in the given text."""
+    found_professions = set()
+    for end_index, (prof_index, prof) in A.iter(text):
+        start_index = end_index - len(prof) + 1
+        if prof in whole_word_required:
+            if not is_whole_word(text, start_index, end_index):
+                continue  # skip substring matches for this keyword
+        found_professions.add(prof)
+    found_professions_list = sorted(found_professions)
+    return pipe_join_professions(found_professions_list)
+
 def search_dolci_for_professions() -> pd.DataFrame:
     # Load all professions and dolci data
     professions = get_professions(professions_file)
+    whole_word_required = set({"dj", "cop"})
     print(f"Loaded {len(professions)} professions.")
     dolci_data = load_dolci_data(dolci_dataset)
 
     total_samples = len(dolci_data)
+    print(f"Loaded Dolci-SFT dataset with {total_samples} samples.")
+
+    # Create Aho-Corasick automaton for efficient keyword searching
+    A = ahocorasick.Automaton()
+    for i, prof in enumerate(professions):
+        A.add_word(prof.lower(), (i, prof))
+    A.make_automaton()
 
     # Across all dolci samples, label each sample with the mentioned and filter
     instruct_professions = []
     response_professions = []
+    all_professions = []        # this is to keep track of all professions in that entry, across instruct and response
+
     for row in tqdm(dolci_data):
-        temp_instruct_profs = []
-        temp_response_profs = []
+        instruct_prof_str = ""
+        response_prof_str = ""
         for turn in row["messages"]:
             content = turn["content"]
             if content is None:
-                temp_instruct_profs.extend([])
-                temp_response_profs.extend([])
                 continue
             content = content.lower()  # lowercase for matching
             if turn["role"] == "user":
-                temp_instruct_profs.extend([prof for prof in professions if prof in content])
+                instruct_prof_str += find_professions_in_text(A, content, whole_word_required) + "|" 
             elif turn["role"] == "assistant":
-                temp_response_profs.extend([prof for prof in professions if prof in content])
-        instruct_professions.append(temp_instruct_profs)
-        response_professions.append(temp_response_profs)
+                response_prof_str += find_professions_in_text(A, content, whole_word_required) + "|"
+        # remove trailing "|" if present
+        instruct_prof_str = instruct_prof_str.rstrip("|")
+        response_prof_str = response_prof_str.rstrip("|")
+        all_prof_str = instruct_prof_str + "|" + response_prof_str
+        all_prof_str = all_prof_str.strip("|")  # remove leading or trailing pipes
+
+        instruct_professions.append(instruct_prof_str)
+        response_professions.append(response_prof_str)
+        all_professions.append(all_prof_str)
 
     assert len(instruct_professions) == total_samples, f"Mismatch in number of samples and instruct professions: {len(instruct_professions)} != {total_samples}"
     assert len(response_professions) == total_samples, f"Mismatch in number of samples and response professions: {len(response_professions)} != {total_samples}"
+    assert len(all_professions) == total_samples, f"Mismatch in number of samples and all professions: {len(all_professions)} != {total_samples}"
 
     # Convert ds to df and add professions to dataframe and save
     dolci_df = pd.DataFrame()
     dolci_df = dolci_data.to_pandas()
+    dolci_df["original_index"] = dolci_df.index
     dolci_df["instruct_professions"] = instruct_professions
     dolci_df["response_professions"] = response_professions
+    dolci_df["all_professions"] = all_professions
 
-    # Filter dolci df to samples where either instruct/response occ columns are non empty || drop rows with two empty lists
+    # Filter dolci df to samples where there are at least some professions mentioned
     dolci_df = dolci_df[
-        (dolci_df["instruct_professions"].apply(lambda x: len(x) > 0)) |
-        (dolci_df["response_professions"].apply(lambda x: len(x) > 0))
+        (dolci_df["all_professions"].apply(lambda x: len(x) > 0))
     ]    
     print(f"Filtered to {len(dolci_df)} samples with at least one profession mentioned in either instruction or response. {len(dolci_df)/total_samples:.2%} of total samples retained.")
 
@@ -94,11 +144,18 @@ def compute_profession_stats():
     # get the list of instruct and response professions
     instruct_professions = dolci_df["instruct_professions"].tolist()
     response_professions = dolci_df["response_professions"].tolist()
-    # flatten these lists and count frequency.
+    
+    # process the profession strings into lists and count the frequency of each profession in instruct vs response
     from collections import Counter
-    instruct_prof_counter = Counter([prof for sublist in instruct_professions for prof in sublist])
-    response_prof_counter = Counter([prof for sublist in response_professions for prof in sublist])
-        # are all 320 professions represented? which ones are not represented at all?
+    instruct_prof_counter = Counter()
+    response_prof_counter = Counter()
+    for prof_str in instruct_professions:
+        prof_list = pipe_split_professions(prof_str)
+        instruct_prof_counter.update(prof_list)
+    for prof_str in response_professions:
+        prof_list = pipe_split_professions(prof_str)
+        response_prof_counter.update(prof_list)
+    # are all 303 professions represented? which ones are not represented at all?
     professions = get_professions(professions_file)
     instruct_prof_set = set(instruct_prof_counter.keys())
     response_prof_set = set(response_prof_counter.keys())
