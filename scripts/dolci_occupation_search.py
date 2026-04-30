@@ -38,7 +38,7 @@ def load_dolci_data(data_path: Path) -> datasets.Dataset:
     """Load the Dolci-SFT dataset from the given parquet file path."""
     return load_dataset("parquet", data_files=str(data_path))["train"]
 
-def pipe_join_professions(professions_lists: list) -> str:
+def pipe_join_professions(professions_lists) -> str:
     """Join a list of professions into a single string for easier searching."""
     # This will return an empty string if an empty list is passed --- this is the desired behaviour
     return "|".join(professions_lists)
@@ -65,13 +65,13 @@ def find_professions_in_text(A: ahocorasick.Automaton, text: str, whole_word_req
                 continue  # skip substring matches for this keyword
         found_professions.add(prof)
     found_professions_list = sorted(found_professions)
-    return pipe_join_professions(found_professions_list)
+    return found_professions_list
 
-def search_dolci_for_professions() -> pd.DataFrame:
+def search_dolci_for_professions():    
     # Load all professions and dolci data
     professions = get_professions(professions_file)
-    whole_word_required = set({"dj", "cop"})
     print(f"Loaded {len(professions)} professions.")
+    whole_word_required = set({"dj", "cop"})
     dolci_data = load_dolci_data(dolci_dataset)
 
     total_samples = len(dolci_data)
@@ -89,22 +89,25 @@ def search_dolci_for_professions() -> pd.DataFrame:
     all_professions = []        # this is to keep track of all professions in that entry, across instruct and response
 
     for row in tqdm(dolci_data):
-        instruct_prof_str = ""
-        response_prof_str = ""
+        instruct_prof_temp = []
+        response_prof_temp = []
         for turn in row["messages"]:
             content = turn["content"]
             if content is None:
                 continue
             content = content.lower()  # lowercase for matching
             if turn["role"] == "user":
-                instruct_prof_str += find_professions_in_text(A, content, whole_word_required) + "|" 
+                instruct_prof_temp += find_professions_in_text(A, content, whole_word_required)
             elif turn["role"] == "assistant":
-                response_prof_str += find_professions_in_text(A, content, whole_word_required) + "|"
-        # remove trailing "|" if present
-        instruct_prof_str = instruct_prof_str.rstrip("|")
-        response_prof_str = response_prof_str.rstrip("|")
-        all_prof_str = instruct_prof_str + "|" + response_prof_str
-        all_prof_str = all_prof_str.strip("|")  # remove leading or trailing pipes
+                response_prof_temp += find_professions_in_text(A, content, whole_word_required)
+
+        # combine instruct and response into a set for tracking all professions
+        all_prof_set = set(instruct_prof_temp + response_prof_temp)
+        # convert all lists/sets to pipe-joined strings for storage
+        instruct_prof_str = pipe_join_professions(instruct_prof_temp)
+        response_prof_str = pipe_join_professions(response_prof_temp)
+        all_prof_str = pipe_join_professions(all_prof_set)
+        print(f"Instruct professions: {instruct_prof_str}, Response professions: {response_prof_str}, All professions: {all_prof_str}")
 
         instruct_professions.append(instruct_prof_str)
         response_professions.append(response_prof_str)
