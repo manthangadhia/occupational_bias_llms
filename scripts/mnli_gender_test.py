@@ -55,7 +55,7 @@ def write_output(results, output_name):
 
 if __name__ == "__main__":
     # Setup pipeline for zero-shot classification
-    candidate_gender = ["male", "female", "none", "ambiguous"]
+    candidate_gender = ["male", "female", "none"]
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
 
