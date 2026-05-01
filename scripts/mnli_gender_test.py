@@ -29,7 +29,7 @@ def load_samples_streaming(filename):
 def label_match_in_doc(label, doc):
     # check if the label matched a whole word in the doc, if not, skip the sample
     # split doc into words and check for exact match with label
-    words = word_tokenize(doc)
+    words = set(word_tokenize(doc))
     return label in words
 
 def write_output(results, output_name):
@@ -94,10 +94,6 @@ if __name__ == "__main__":
             id = sample['id']
 
             for occ in occupations:
-                # check if the label matched a whole word in the doc, if not, skip the sample
-                if not label_match_in_doc(occ, doc):
-                    skipped += 1
-                    continue
                 hypothesis_template = f"The {occ} in the sample text is {{}}."
                 output = pipe(doc, candidate_gender, hypothesis_template=hypothesis_template, multi_label=False)
                 classification = output['labels'][0]
