@@ -104,7 +104,6 @@
     "editor",
     "educator",
     "electrician",
-    "employee",
     "engineer",
     "entertainer",
     "entrepreneur",
@@ -187,8 +186,6 @@
     "nun",
     "nurse",
     "officer",
-    "official",
-    "operator",
     "organist",
     "painter",
     "paralegal",
@@ -271,7 +268,6 @@
     "strategist",
     "student",
     "stylist",
-    "substitute",
     "superintendent",
     "supervisor",
     "surgeon",
@@ -301,7 +297,6 @@
     "warrior",
     "weaver",
     "welder",
-    "worker",
     "wrestler",
     "writer"
   ]
