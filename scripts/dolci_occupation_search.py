@@ -44,7 +44,7 @@ import re
 # For kw search
 import ahocorasick
 import spacy
-nlp = spacy.load("en_core_web_sm", disable=["parser", "ner"])
+nlp = spacy.load("en_core_web_sm", disable=["parser", "ner", "lemmatizer", "attribute_ruler"])
 
 import argparse
 import gc
@@ -76,36 +76,37 @@ def pipe_split_professions(professions_str: str) -> list:
         return []
     return professions_str.split("|")
 
-def confirm_noun_usage(text, profession):
-    """Check if the profession is used as a noun in the given text."""
-    doc = nlp(text)
-    for token in doc:
-        if token.text.lower() == profession.lower() and token.pos_ in {"NOUN", "PROPN"}:
-            return True
-    return False
-
 def is_whole_word(text, start, end):
     """Check that match boundaries are not adjacent to word characters."""
     before_ok = (start == 0) or (not text[start - 1].isalpha())
     after_ok = (end == len(text) - 1) or (not text[end + 1].isalpha())
     return before_ok and after_ok
 
-def find_professions_in_text(A: ahocorasick.Automaton, text: str, 
+def find_professions_in_text(A: ahocorasick.Automaton, 
+                             text: str, original_text: str,
                              whole_word_required=whole_word_required,
                              ambiguous_professions=ambiguous_professions) -> list:
     """Use the Aho-Corasick automaton to find all professions mentioned in the given text."""
     found_professions = set()
+    ambiguous_hits = set()  # to track which ambiguous professions were hit for later checking
     for end_index, (prof_index, prof) in A.iter(text):
         start_index = end_index - len(prof) + 1
-        if prof in whole_word_required:
-            if not is_whole_word(text, start_index, end_index):
-                continue  # skip substring matches for this keyword
+        if prof in whole_word_required and not is_whole_word(text, start_index, end_index):
+            continue  # skip substring matches for this keyword
         if prof in ambiguous_professions:
-            if not confirm_noun_usage(text, prof):
-                continue  # skip matches that are not used as nouns
-        found_professions.add(prof)
-    found_professions_list = sorted(found_professions)
-    return found_professions_list
+            ambiguous_hits.add(prof)
+        else:
+            found_professions.add(prof)
+        
+    # if this sample has any ambiguous professions, then tokenise text once and do pos tagging
+    if ambiguous_hits:
+        doc = nlp(original_text)
+        noun_tokens = {token.text.lower() for token in doc if token.pos_ in {"NOUN", "PROPN"}}
+        for prof in ambiguous_hits:
+            if prof in noun_tokens:
+                found_professions.add(prof)
+
+    return sorted(found_professions)
 
 def search_dolci_for_professions():    
     # Load all professions and dolci data
@@ -131,14 +132,16 @@ def search_dolci_for_professions():
         instruct_prof_temp = []
         response_prof_temp = []
         for turn in row["messages"]:
+            role = turn["role"]
             content = turn["content"]
             if content is None:
                 continue
-            content = content.lower()  # lowercase for matching
-            if turn["role"] == "user":
-                instruct_prof_temp += find_professions_in_text(A, content)
-            elif turn["role"] == "assistant":
-                response_prof_temp += find_professions_in_text(A, content)
+            original_text = content  # keep the original text for POS tagging
+            text = content.lower()  # lowercase for matching
+            if role == "user":
+                instruct_prof_temp += find_professions_in_text(A, text=text, original_text=original_text)
+            elif role == "assistant":
+                response_prof_temp += find_professions_in_text(A, text=text, original_text=original_text)
 
         # combine instruct and response into a set for tracking all professions
         all_prof_set = set(instruct_prof_temp + response_prof_temp)
