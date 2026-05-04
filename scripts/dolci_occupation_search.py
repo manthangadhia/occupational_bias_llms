@@ -11,6 +11,31 @@ professions_file = dolci_dir / "select_professions.json"        # json with 303 
 dolci_dataset = dolci_dir / "dolci_sft.parquet"                 # full, original dolci-sft dataset
 dolci_professions_file = dolci_dir / "dolci_sft_with_professions.parquet"
 
+# Special sets for KW search
+# (need extra processing/checking throughout the pipeline)
+whole_word_required = set({     # if these words are found, check that they are whole words!
+    "dj", ""
+    "cop"})
+ambiguous_professions = set({   # if these words are found, do POS tagging and ensure noun
+    "coach",
+    "cook",
+    "guard",
+    "judge",
+    "nurse",
+    "pilot",
+    "doctor",
+    "broker",
+    "tutor",
+    "captain",
+    "minister",
+    "soldier",
+    "steward",
+    "advocate",
+    "clerk",
+    "engineer",
+    "planner",
+    "porter", })
+
 import datasets
 from datasets import load_dataset
 from tqdm import tqdm
@@ -18,6 +43,8 @@ import re
 
 # For kw search
 import ahocorasick
+import spacy
+nlp = spacy.load("en_core_web_sm", disable=["parser", "ner"])
 
 import argparse
 import gc
@@ -49,13 +76,23 @@ def pipe_split_professions(professions_str: str) -> list:
         return []
     return professions_str.split("|")
 
+def confirm_noun_usage(text, profession):
+    """Check if the profession is used as a noun in the given text."""
+    doc = nlp(text)
+    for token in doc:
+        if token.text.lower() == profession.lower() and token.pos_ in {"NOUN", "PROPN"}:
+            return True
+    return False
+
 def is_whole_word(text, start, end):
     """Check that match boundaries are not adjacent to word characters."""
     before_ok = (start == 0) or (not text[start - 1].isalpha())
     after_ok = (end == len(text) - 1) or (not text[end + 1].isalpha())
     return before_ok and after_ok
 
-def find_professions_in_text(A: ahocorasick.Automaton, text: str, whole_word_required: set) -> str:
+def find_professions_in_text(A: ahocorasick.Automaton, text: str, 
+                             whole_word_required=whole_word_required,
+                             ambiguous_professions=ambiguous_professions) -> list:
     """Use the Aho-Corasick automaton to find all professions mentioned in the given text."""
     found_professions = set()
     for end_index, (prof_index, prof) in A.iter(text):
@@ -63,6 +100,9 @@ def find_professions_in_text(A: ahocorasick.Automaton, text: str, whole_word_req
         if prof in whole_word_required:
             if not is_whole_word(text, start_index, end_index):
                 continue  # skip substring matches for this keyword
+        if prof in ambiguous_professions:
+            if not confirm_noun_usage(text, prof):
+                continue  # skip matches that are not used as nouns
         found_professions.add(prof)
     found_professions_list = sorted(found_professions)
     return found_professions_list
@@ -71,7 +111,6 @@ def search_dolci_for_professions():
     # Load all professions and dolci data
     professions = get_professions(professions_file)
     print(f"Loaded {len(professions)} professions.")
-    whole_word_required = set({"dj", "cop"})
     dolci_data = load_dolci_data(dolci_dataset)
 
     total_samples = len(dolci_data)
@@ -97,9 +136,9 @@ def search_dolci_for_professions():
                 continue
             content = content.lower()  # lowercase for matching
             if turn["role"] == "user":
-                instruct_prof_temp += find_professions_in_text(A, content, whole_word_required)
+                instruct_prof_temp += find_professions_in_text(A, content)
             elif turn["role"] == "assistant":
-                response_prof_temp += find_professions_in_text(A, content, whole_word_required)
+                response_prof_temp += find_professions_in_text(A, content)
 
         # combine instruct and response into a set for tracking all professions
         all_prof_set = set(instruct_prof_temp + response_prof_temp)
@@ -107,7 +146,6 @@ def search_dolci_for_professions():
         instruct_prof_str = pipe_join_professions(instruct_prof_temp)
         response_prof_str = pipe_join_professions(response_prof_temp)
         all_prof_str = pipe_join_professions(all_prof_set)
-        print(f"Instruct professions: {instruct_prof_str}, Response professions: {response_prof_str}, All professions: {all_prof_str}")
 
         instruct_professions.append(instruct_prof_str)
         response_professions.append(response_prof_str)
