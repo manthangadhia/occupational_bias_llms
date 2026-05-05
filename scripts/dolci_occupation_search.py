@@ -58,7 +58,9 @@ def get_professions(professions_file: Path) -> list:
 
 def load_dolci_data(data_path: Path) -> datasets.Dataset:
     """Load the Dolci-SFT dataset from the given parquet file path."""
-    return load_dataset("parquet", data_files=str(data_path))["train"]
+    ds = pd.read_parquet("parquet", data_files=str(data_path))["train"]
+    ds["messages"] = ds["messages"].apply(lambda x: json.loads(x))   # convert messages back from json
+    return datasets.Dataset.from_pandas(ds)
 
 def pipe_join_professions(professions_lists) -> str:
     """Join a list of professions into a single string for easier searching."""
@@ -162,7 +164,7 @@ def search_dolci_for_professions():
     
     #TODO: manage ambiguous hits rows. check pos, and then decide to keep/remove the sample from final collection.
     # if row_idx is in the dict keys, this means the row has an ambiguous occupation
-    print(f"Found {len(track_ambiguous_rows.keys())} ({(len(track_ambiguous_rows.keys()) / total_samples)*100 :3f}%) rows that need POS tagging")
+    print(f"Found {len(track_ambiguous_rows.keys())} ({(len(track_ambiguous_rows.keys()) / total_samples)*100:2%}%) rows that need POS tagging")
     with open(dolci_dir / "ambiguous_rows_info.json", "w", encoding="utf-8") as f:
         data_to_dump = {
             row_id: {
@@ -180,8 +182,10 @@ def search_dolci_for_professions():
         row = dolci_data[row_id]
         all_content = "" 
         for turn in row["messages"]:
+            if not turn["content"]:
+                continue
             if turn["role"] == role:
-                all_content += turn["content"]      # this will give me all the original text with capitalisation and all for that role (even if each role has multiple turns)
+                all_content += turn["content"]     # this will give me all the original text with capitalisation and all for that role (even if each role has multiple turns)
         info["text"] = all_content
         track_ambiguous_rows[row_id] = info         # update the dict with all the original text for each row
     
