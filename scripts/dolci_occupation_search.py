@@ -14,27 +14,22 @@ dolci_professions_file = dolci_dir / "dolci_sft_with_professions.parquet"
 # Special sets for KW search
 # (need extra processing/checking throughout the pipeline)
 whole_word_required = set({     # if these words are found, check that they are whole words!
-    "dj", ""
-    "cop"})
+    "dj",
+    "cop",
+    })
 ambiguous_professions = set({   # if these words are found, do POS tagging and ensure noun
+    "author",
     "coach",
     "cook",
     "guard",
     "judge",
     "nurse",
     "pilot",
-    "doctor",
     "broker",
     "tutor",
-    "captain",
     "minister",
-    "soldier",
-    "steward",
     "advocate",
-    "clerk",
-    "engineer",
-    "planner",
-    "porter", })
+    })
 
 import datasets
 from datasets import load_dataset
@@ -44,7 +39,7 @@ import re
 # For kw search
 import ahocorasick
 import spacy
-nlp = spacy.load("en_core_web_sm", disable=["parser", "ner", "lemmatizer", "attribute_ruler"])
+pos_nlp = spacy.load("en_core_web_trf", disable=["parser", "ner", "lemmatizer", "attribute_ruler"])
 
 import argparse
 import gc
@@ -76,6 +71,13 @@ def pipe_split_professions(professions_str: str) -> list:
         return []
     return professions_str.split("|")
 
+def remove_prof_from_pipe(professions_str: str, prof_to_remove: str) -> str:
+    """Remove a specific profession from a pipe-separated string of professions."""
+    professions = pipe_split_professions(professions_str)
+    if prof_to_remove in professions:
+        professions.remove(prof_to_remove)
+    return pipe_join_professions(professions)
+
 def is_whole_word(text, start, end):
     """Check that match boundaries are not adjacent to word characters."""
     before_ok = (start == 0) or (not text[start - 1].isalpha())
@@ -83,7 +85,10 @@ def is_whole_word(text, start, end):
     return before_ok and after_ok
 
 def find_professions_in_text(A: ahocorasick.Automaton, 
-                             text: str, original_text: str,
+                             text: str, 
+                             row_idx: int,
+                             track_ambiguous_rows: dict,
+                             role: str,
                              whole_word_required=whole_word_required,
                              ambiguous_professions=ambiguous_professions) -> list:
     """Use the Aho-Corasick automaton to find all professions mentioned in the given text."""
@@ -95,16 +100,17 @@ def find_professions_in_text(A: ahocorasick.Automaton,
             continue  # skip substring matches for this keyword
         if prof in ambiguous_professions:
             ambiguous_hits.add(prof)
-        else:
-            found_professions.add(prof)
+        found_professions.add(prof)
         
-    # if this sample has any ambiguous professions, then tokenise text once and do pos tagging
+    # if this sample has any ambiguous professions, edit mutable dict object
     if ambiguous_hits:
-        doc = nlp(original_text)
-        noun_tokens = {token.text.lower() for token in doc if token.pos_ in {"NOUN", "PROPN"}}
-        for prof in ambiguous_hits:
-            if prof in noun_tokens:
-                found_professions.add(prof)
+        temp_ambiguous_dict = {"role": role, "labels": ambiguous_hits}
+        track_ambiguous_rows[row_idx] = temp_ambiguous_dict
+        # doc = nlp(original_text)
+        # noun_tokens = {token.text.lower() for token in doc if token.pos_ in {"NOUN", "PROPN"}}
+        # for prof in ambiguous_hits:
+        #     if prof in noun_tokens:
+        #         found_professions.add(prof)
 
     return sorted(found_professions)
 
@@ -127,8 +133,9 @@ def search_dolci_for_professions():
     instruct_professions = []
     response_professions = []
     all_professions = []        # this is to keep track of all professions in that entry, across instruct and response
+    track_ambiguous_rows = {}   # to keep track of which rows had ambiguous profession hits for later checking
 
-    for row in tqdm(dolci_data):
+    for row_idx, row in enumerate(tqdm(dolci_data)):
         instruct_prof_temp = []
         response_prof_temp = []
         for turn in row["messages"]:
@@ -136,12 +143,11 @@ def search_dolci_for_professions():
             content = turn["content"]
             if content is None:
                 continue
-            original_text = content  # keep the original text for POS tagging
-            text = content.lower()  # lowercase for matching
+            content = content.lower()  # lowercase for matching
             if role == "user":
-                instruct_prof_temp += find_professions_in_text(A, text=text, original_text=original_text)
+                instruct_prof_temp += find_professions_in_text(A, text=content, row_idx=row_idx, track_ambiguous_rows=track_ambiguous_rows, role=role)
             elif role == "assistant":
-                response_prof_temp += find_professions_in_text(A, text=text, original_text=original_text)
+                response_prof_temp += find_professions_in_text(A, text=content, row_idx=row_idx, track_ambiguous_rows=track_ambiguous_rows, role=role)
 
         # combine instruct and response into a set for tracking all professions
         all_prof_set = set(instruct_prof_temp + response_prof_temp)
@@ -153,6 +159,47 @@ def search_dolci_for_professions():
         instruct_professions.append(instruct_prof_str)
         response_professions.append(response_prof_str)
         all_professions.append(all_prof_str)
+    
+    #TODO: manage ambiguous hits rows. check pos, and then decide to keep/remove the sample from final collection.
+    # if row_idx is in the dict keys, this means the row has an ambiguous occupation
+    print(f"Found {len(track_ambiguous_rows.keys())} ({(len(track_ambiguous_rows.keys()) / total_samples)*100 :3f}%) rows that need POS tagging")
+    with open(dolci_dir / "ambiguous_rows_info.json", "w", encoding="utf-8") as f:
+        data_to_dump = {
+            row_id: {
+                "role": info["role"],
+                "labels": list(info["labels"])  # Convert set to list
+            }
+            for row_id, info in track_ambiguous_rows.items()
+        }
+        json.dump(data_to_dump, f, indent=4, ensure_ascii=False)
+    print(f"Saved info on ambiguous rows to {dolci_dir / 'ambiguous_rows_info.json'} for later POS tagging and checking.")
+    # Now my dict is in the form: {row_id: {"role": role:str, "labels": ambiguous_hits:set}}
+    # I need to get the role-relevant text,
+    for row_id, info in track_ambiguous_rows.items():
+        role, labels = info["role"], info["labels"]
+        row = dolci_data[row_id]
+        all_content = "" 
+        for turn in row["messages"]:
+            if turn["role"] == role:
+                all_content += turn["content"]      # this will give me all the original text with capitalisation and all for that role (even if each role has multiple turns)
+        info["text"] = all_content
+        track_ambiguous_rows[row_id] = info         # update the dict with all the original text for each row
+    
+    # # collect all rows of text and row ids for the ambiguous hits 
+    all_ambiguous_texts = [(row["text"], row_id) for row_id, row in track_ambiguous_rows.items()]
+    # check POS for each label, 
+    for doc, row_id in pos_nlp.pipe(all_ambiguous_texts, batch_size=16, as_tuples=True):
+        noun_tokens = {token.text.lower() for token in doc if token.pos_ in {"NOUN", "PROPN"}}
+        labels = track_ambiguous_rows[row_id]["labels"]     # this is a set
+        int_row_id = int(row_id)  # int for indexing into the professions lists
+        for l in labels:
+        # and remove the label from the pipe if its fails the check 
+            if l not in noun_tokens: # if the ambiguous profession is not used as a noun in the text, then we remove it from the pipe string for that row
+                if track_ambiguous_rows[row_id]["role"] == "user":
+                    instruct_professions[int_row_id] = remove_prof_from_pipe(instruct_professions[int_row_id], l)
+                elif track_ambiguous_rows[row_id]["role"] == "assistant":
+                    response_professions[int_row_id] = remove_prof_from_pipe(response_professions[int_row_id], l)
+                all_professions[int_row_id] = pipe_join_professions(pipe_split_professions(instruct_professions[int_row_id]) + pipe_split_professions(response_professions[int_row_id]))
 
     assert len(instruct_professions) == total_samples, f"Mismatch in number of samples and instruct professions: {len(instruct_professions)} != {total_samples}"
     assert len(response_professions) == total_samples, f"Mismatch in number of samples and response professions: {len(response_professions)} != {total_samples}"
@@ -161,6 +208,7 @@ def search_dolci_for_professions():
     # Convert ds to df and add professions to dataframe and save
     dolci_df = pd.DataFrame()
     dolci_df = dolci_data.to_pandas()
+    dolci_df["messages"] = dolci_df["messages"].apply(lambda x: json.dumps(x))   # convert messages to json to comply with parquet default types
     dolci_df["original_index"] = dolci_df.index
     dolci_df["instruct_professions"] = instruct_professions
     dolci_df["response_professions"] = response_professions
@@ -185,20 +233,28 @@ def compute_profession_stats():
     """
     # Load dolci df with professions
     dolci_df = pd.read_parquet(dolci_professions_file, engine="fastparquet")
+    dolci_df["messages"] = dolci_df["messages"].apply(lambda x: json.loads(x))   # convert messages back from json
     # get the list of instruct and response professions
     instruct_professions = dolci_df["instruct_professions"].tolist()
     response_professions = dolci_df["response_professions"].tolist()
+
+    # read ambiguous rows json
+    with open(dolci_dir / "ambiguous_rows_info.json", "r", encoding="utf-8") as f:
+        ambiguous_rows_data = json.load(f)
     
     # process the profession strings into lists and count the frequency of each profession in instruct vs response
     from collections import Counter
     instruct_prof_counter = Counter()
     response_prof_counter = Counter()
-    for prof_str in instruct_professions:
-        prof_list = pipe_split_professions(prof_str)
-        instruct_prof_counter.update(prof_list)
-    for prof_str in response_professions:
-        prof_list = pipe_split_professions(prof_str)
-        response_prof_counter.update(prof_list)
+    ambiguous_counter = 0   # to track how many rows in my final filtered collection had ambiguous profession hits
+    for idx, instruct_str, response_str in enumerate(zip(instruct_professions, response_professions)):
+        instruct_prof_list = pipe_split_professions(instruct_str)
+        instruct_prof_counter.update(instruct_prof_list)
+        response_prof_list = pipe_split_professions(response_str)
+        response_prof_counter.update(response_prof_list)
+        # check if this row had an ambiguous profession hit and if so, update the ambiguous counter
+        if idx in ambiguous_rows_data:   # the keys
+            ambiguous_counter += 1
     # are all 303 professions represented? which ones are not represented at all?
     professions = get_professions(professions_file)
     instruct_prof_set = set(instruct_prof_counter.keys())
@@ -222,6 +278,7 @@ def compute_profession_stats():
         "bottom_k_professions_in_instructions": bottom_instruct_profs,
         "top_k_professions_in_responses": top_response_profs,
         "bottom_k_professions_in_responses": bottom_response_profs,
+        "ambiguous_rows_in_final_collection": ambiguous_counter,
     }
     stats_output_path = dolci_dir / "dolci_profession_stats.json"
     with stats_output_path.open("w", encoding="utf-8") as f:
