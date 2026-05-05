@@ -1,6 +1,8 @@
 """This script downloads the Dolci Instruct SFT dataset from Hugging Face and saves it as a parquet file in the data directory."""
 
 from datasets import load_dataset
+import pandas as pd
+import json
 import sys
 import os
 from pathlib import Path
@@ -21,8 +23,10 @@ def main():
         split="train",
         token=HF_TOKEN
     )
+    df = ds.to_pandas()
+    df["messages"] = df["messages"].apply(lambda x: json.dumps(x))   # convert messages to json string for easier storage in parquet
 
-    ds.to_parquet(dolci_sft_dir / "dolci_sft.parquet")
+    df.to_parquet(dolci_sft_dir / "dolci_sft.parquet", index=False)
 
 if __name__ == "__main__":
     main()
