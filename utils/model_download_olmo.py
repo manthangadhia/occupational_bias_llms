@@ -8,7 +8,7 @@ models = [
     "allenai/Olmo-3-7B-Instruct-SFT"
 ]
 
-cache_dir = "/cluster/scratch/mg/olmo/models"
+cache_dir = "/cluster/scratch/mgadhia/models/olmo"
 
 for model_name in models:
     print(f"Downloading {model_name}...")

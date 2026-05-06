@@ -6,9 +6,6 @@ load_dotenv()
 HF_TOKEN = os.getenv("HF_TOKEN")
 
 models = [
-    "FacebookAI/roberta-base",
-    "FacebookAI/roberta-large",
-    "microsoft/deberta-v3-large",
     "MoritzLaurer/deberta-v3-large-zeroshot-v2.0"
 ]
 
