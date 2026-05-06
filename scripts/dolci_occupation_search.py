@@ -213,16 +213,17 @@ def compute_profession_stats():
     # read ambiguous rows json
     with open(dolci_dir / "ambiguous_rows_info.json", "r", encoding="utf-8") as f:
         ambiguous_rows_data = json.load(f)
+        ambiguous_rows_data = {int(k): v for k, v in ambiguous_rows_data.items()}
     
     # process the profession strings into lists and count the frequency of each profession in instruct vs response
     from collections import Counter
     prof_counter = Counter()
     ambiguous_counter = 0   # to track how many rows in my final filtered collection had ambiguous profession hits
-    for idx, instruct_str in enumerate(zip(professions)):
-        prof_list = pipe_split_professions(instruct_str)
+    for profession_str, original_index in zip(professions, dolci_df["original_index"]):
+        prof_list = pipe_split_professions(profession_str)
         prof_counter.update(prof_list)
         # check if this row had an ambiguous profession hit and if so, update the ambiguous counter
-        if idx in ambiguous_rows_data:   # the keys
+        if int(original_index) in ambiguous_rows_data:   # the keys
             ambiguous_counter += 1
     # are all 303 professions represented? which ones are not represented at all?
     professions = get_professions(professions_file)
