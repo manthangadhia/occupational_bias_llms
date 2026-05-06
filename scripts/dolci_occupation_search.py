@@ -44,8 +44,8 @@ import re
 # For kw search
 import ahocorasick
 import spacy
+spacy.require_gpu()
 pos_nlp = spacy.load("en_core_web_trf", disable=["parser", "ner", "lemmatizer", "attribute_ruler"])
-spacy.prefer_gpu()
 
 import argparse
 import gc
@@ -165,6 +165,8 @@ def search_dolci_for_professions():
     with open(dolci_dir / "ambiguous_rows_info.json", "w", encoding="utf-8") as f:
         json.dump(track_ambiguous_rows, f, indent=4, ensure_ascii=False)
     print(f"Saved info on ambiguous rows to {dolci_dir / 'ambiguous_rows_info.json'} for later POS tagging and checking.")
+
+    assert len(all_professions) == total_samples, f"Mismatch in number of samples and all professions: {len(all_professions)} != {total_samples}"
     
     # Now my dict is in the form: {row_id: {"labels": ambiguous_hits:list, "text": all_content}}
     # collect all rows of text and row ids for the ambiguous hits 
@@ -179,8 +181,6 @@ def search_dolci_for_professions():
             if l not in noun_tokens: # if the ambiguous profession is not used as a noun in the text, then we remove it from the pipe string for that row
                 all_professions[int_row_id] = remove_prof_from_pipe(all_professions[int_row_id], l)
 
-    assert len(all_professions) == total_samples, f"Mismatch in number of samples and all professions: {len(all_professions)} != {total_samples}"
-
     # Convert ds to df and add professions to dataframe and save
     dolci_df = pd.DataFrame()
     dolci_df = dolci_data.to_pandas()
@@ -189,7 +189,7 @@ def search_dolci_for_professions():
 
     # Filter dolci df to samples where there are at least some professions mentioned
     dolci_df = dolci_df[
-        (dolci_df["all_professions"].apply(lambda x: len(x) > 0))
+        (dolci_df["professions"].apply(lambda x: len(x) > 0))
     ]    
     print(f"Filtered to {len(dolci_df)} samples with at least one profession mentioned in either instruction or response. {len(dolci_df)/total_samples:.2%} of total samples retained.")
 
@@ -207,9 +207,8 @@ def compute_profession_stats():
     # Load dolci df with professions
     dolci_df = pd.read_parquet(dolci_professions_file, engine="pyarrow")
     dolci_df["messages"] = dolci_df["messages"].apply(json.loads)   # convert messages back from json
-    # get the list of instruct and response professions
-    instruct_professions = dolci_df["instruct_professions"].tolist()
-    response_professions = dolci_df["response_professions"].tolist()
+    # get the list of professions
+    professions = dolci_df["professions"].tolist()
 
     # read ambiguous rows json
     with open(dolci_dir / "ambiguous_rows_info.json", "r", encoding="utf-8") as f:
@@ -217,40 +216,28 @@ def compute_profession_stats():
     
     # process the profession strings into lists and count the frequency of each profession in instruct vs response
     from collections import Counter
-    instruct_prof_counter = Counter()
-    response_prof_counter = Counter()
+    prof_counter = Counter()
     ambiguous_counter = 0   # to track how many rows in my final filtered collection had ambiguous profession hits
-    for idx, instruct_str, response_str in enumerate(zip(instruct_professions, response_professions)):
-        instruct_prof_list = pipe_split_professions(instruct_str)
-        instruct_prof_counter.update(instruct_prof_list)
-        response_prof_list = pipe_split_professions(response_str)
-        response_prof_counter.update(response_prof_list)
+    for idx, instruct_str in enumerate(zip(professions)):
+        prof_list = pipe_split_professions(instruct_str)
+        prof_counter.update(prof_list)
         # check if this row had an ambiguous profession hit and if so, update the ambiguous counter
         if idx in ambiguous_rows_data:   # the keys
             ambiguous_counter += 1
     # are all 303 professions represented? which ones are not represented at all?
     professions = get_professions(professions_file)
-    instruct_prof_set = set(instruct_prof_counter.keys())
-    response_prof_set = set(response_prof_counter.keys())
-    all_prof_set = instruct_prof_set.union(response_prof_set)
+    all_prof_set = set(prof_counter.keys())
         # what are the top_k most frequently mentioned professions in instruct vs response?
     top_k = 25
-    top_instruct_profs = instruct_prof_counter.most_common(top_k)
-    bottom_instruct_profs = instruct_prof_counter.most_common()[:-top_k-1:-1]
-    top_response_profs = response_prof_counter.most_common(top_k)
-    bottom_response_profs = response_prof_counter.most_common()[:-top_k-1:-1]
+    top_profs = prof_counter.most_common(top_k)
+    bottom_profs = prof_counter.most_common()[:-top_k-1:-1]
 
     # save these stats to a json file for analysis
     stats_output = {
-        "total_unique_professions_in_instructions": len(instruct_prof_set),
-        "total_unique_professions_in_responses": len(response_prof_set),
-        "total_unique_professions_in_both": len(all_prof_set),
-        "professions_not_mentioned_at_all_instructions": list(set(professions) - instruct_prof_set),
-        "professions_not_mentioned_at_all_responses": list(set(professions) - response_prof_set),
-        "top_k_professions_in_instructions": top_instruct_profs,
-        "bottom_k_professions_in_instructions": bottom_instruct_profs,
-        "top_k_professions_in_responses": top_response_profs,
-        "bottom_k_professions_in_responses": bottom_response_profs,
+        "total_unique_professions": len(all_prof_set),
+        "professions_not_mentioned_at_all": list(set(professions) - all_prof_set),
+        "top_k_professions_mentioned": top_profs,
+        "bottom_k_professions_mentioned": bottom_profs,
         "ambiguous_rows_in_final_collection": ambiguous_counter,
     }
     stats_output_path = dolci_dir / "dolci_profession_stats.json"
