@@ -1,3 +1,8 @@
+"""
+The Aho-Corasick search works quite fast, taking ~5min to search the whole dataset. 
+POS tagging is the computational bottleneck, but it is helpful to do it at this stage and filter out false positives.
+"""
+
 import pandas as pd
 from pathlib import Path
 import json
@@ -40,6 +45,7 @@ import re
 import ahocorasick
 import spacy
 pos_nlp = spacy.load("en_core_web_trf", disable=["parser", "ner", "lemmatizer", "attribute_ruler"])
+spacy.prefer_gpu()
 
 import argparse
 import gc
@@ -58,9 +64,7 @@ def get_professions(professions_file: Path) -> list:
 
 def load_dolci_data(data_path: Path) -> datasets.Dataset:
     """Load the Dolci-SFT dataset from the given parquet file path."""
-    ds = pd.read_parquet("parquet", data_files=str(data_path))["train"]
-    ds["messages"] = ds["messages"].apply(lambda x: json.loads(x))   # convert messages back from json
-    return datasets.Dataset.from_pandas(ds)
+    return load_dataset("parquet", data_files=str(data_path))["train"]
 
 def pipe_join_professions(professions_lists) -> str:
     """Join a list of professions into a single string for easier searching."""
@@ -89,11 +93,12 @@ def is_whole_word(text, start, end):
 def find_professions_in_text(A: ahocorasick.Automaton, 
                              text: str, 
                              row_idx: int,
-                             track_ambiguous_rows: dict,
-                             role: str,
+                             ambiguous_labels: set,
                              whole_word_required=whole_word_required,
                              ambiguous_professions=ambiguous_professions) -> list:
     """Use the Aho-Corasick automaton to find all professions mentioned in the given text."""
+    # all incoming text needs to be made lowercase
+    text = text.lower()
     found_professions = set()
     ambiguous_hits = set()  # to track which ambiguous professions were hit for later checking
     for end_index, (prof_index, prof) in A.iter(text):
@@ -103,17 +108,9 @@ def find_professions_in_text(A: ahocorasick.Automaton,
         if prof in ambiguous_professions:
             ambiguous_hits.add(prof)
         found_professions.add(prof)
-        
     # if this sample has any ambiguous professions, edit mutable dict object
     if ambiguous_hits:
-        temp_ambiguous_dict = {"role": role, "labels": ambiguous_hits}
-        track_ambiguous_rows[row_idx] = temp_ambiguous_dict
-        # doc = nlp(original_text)
-        # noun_tokens = {token.text.lower() for token in doc if token.pos_ in {"NOUN", "PROPN"}}
-        # for prof in ambiguous_hits:
-        #     if prof in noun_tokens:
-        #         found_professions.add(prof)
-
+        ambiguous_labels.update(ambiguous_hits)   # add the ambiguous professions found in this sample to the set for that sample   
     return sorted(found_professions)
 
 def search_dolci_for_professions():    
@@ -132,91 +129,63 @@ def search_dolci_for_professions():
     A.make_automaton()
 
     # Across all dolci samples, label each sample with the mentioned and filter
-    instruct_professions = []
-    response_professions = []
     all_professions = []        # this is to keep track of all professions in that entry, across instruct and response
     track_ambiguous_rows = {}   # to keep track of which rows had ambiguous profession hits for later checking
 
     for row_idx, row in enumerate(tqdm(dolci_data)):
-        instruct_prof_temp = []
-        response_prof_temp = []
+        temp_found_professions = []
+        all_content = ""                # this is refreshed per row, and stored at the end of the loop if we find some ambiguous labels in the text
+        ambiguous_labels = set()        # this is a mutable object and keeps getting built and then refreshed per row
         for turn in row["messages"]:
-            role = turn["role"]
+            # role = turn["role"]               # I don't need this
             content = turn["content"]
             if content is None:
                 continue
-            content = content.lower()  # lowercase for matching
-            if role == "user":
-                instruct_prof_temp += find_professions_in_text(A, text=content, row_idx=row_idx, track_ambiguous_rows=track_ambiguous_rows, role=role)
-            elif role == "assistant":
-                response_prof_temp += find_professions_in_text(A, text=content, row_idx=row_idx, track_ambiguous_rows=track_ambiguous_rows, role=role)
+            all_content += content + " "
+        if not all_content:
+            # add an empty string to all_prof list to have the same len as dolci
+            all_professions.append("")
+            continue # because there was no content in this row
 
-        # combine instruct and response into a set for tracking all professions
-        all_prof_set = set(instruct_prof_temp + response_prof_temp)
-        # convert all lists/sets to pipe-joined strings for storage
-        instruct_prof_str = pipe_join_professions(instruct_prof_temp)
-        response_prof_str = pipe_join_professions(response_prof_temp)
-        all_prof_str = pipe_join_professions(all_prof_set)
+        # after collecting all the text, we can run one keyword search (lowercasing is done during processing)
+        temp_found_professions += find_professions_in_text(A, text=all_content, row_idx=row_idx, ambiguous_labels=ambiguous_labels)
 
-        instruct_professions.append(instruct_prof_str)
-        response_professions.append(response_prof_str)
+        # if we had some ambiguous label hits in this row
+        if ambiguous_labels:
+            temp_dict = {"labels": list(ambiguous_labels), "text": all_content}
+            track_ambiguous_rows[row_idx] = temp_dict
+
+        # convert temp list to set (avoid duplicates) and then to pipe-joined string for storage
+        temp_found_set = set(temp_found_professions)
+        all_prof_str = pipe_join_professions(temp_found_set)
         all_professions.append(all_prof_str)
     
-    #TODO: manage ambiguous hits rows. check pos, and then decide to keep/remove the sample from final collection.
-    # if row_idx is in the dict keys, this means the row has an ambiguous occupation
+    # Now manage all the rows where we had ambiguous hits! Check if the label is present as a noun, and remove the label from that row if not
     print(f"Found {len(track_ambiguous_rows.keys())} ({(len(track_ambiguous_rows.keys()) / total_samples)*100:2%}%) rows that need POS tagging")
     with open(dolci_dir / "ambiguous_rows_info.json", "w", encoding="utf-8") as f:
-        data_to_dump = {
-            row_id: {
-                "role": info["role"],
-                "labels": list(info["labels"])  # Convert set to list
-            }
-            for row_id, info in track_ambiguous_rows.items()
-        }
-        json.dump(data_to_dump, f, indent=4, ensure_ascii=False)
+        json.dump(track_ambiguous_rows, f, indent=4, ensure_ascii=False)
     print(f"Saved info on ambiguous rows to {dolci_dir / 'ambiguous_rows_info.json'} for later POS tagging and checking.")
-    # Now my dict is in the form: {row_id: {"role": role:str, "labels": ambiguous_hits:set}}
-    # I need to get the role-relevant text,
-    for row_id, info in track_ambiguous_rows.items():
-        role, labels = info["role"], info["labels"]
-        row = dolci_data[row_id]
-        all_content = "" 
-        for turn in row["messages"]:
-            if not turn["content"]:
-                continue
-            if turn["role"] == role:
-                all_content += turn["content"]     # this will give me all the original text with capitalisation and all for that role (even if each role has multiple turns)
-        info["text"] = all_content
-        track_ambiguous_rows[row_id] = info         # update the dict with all the original text for each row
     
-    # # collect all rows of text and row ids for the ambiguous hits 
+    # Now my dict is in the form: {row_id: {"labels": ambiguous_hits:list, "text": all_content}}
+    # collect all rows of text and row ids for the ambiguous hits 
     all_ambiguous_texts = [(row["text"], row_id) for row_id, row in track_ambiguous_rows.items()]
     # check POS for each label, 
     for doc, row_id in pos_nlp.pipe(all_ambiguous_texts, batch_size=16, as_tuples=True):
         noun_tokens = {token.text.lower() for token in doc if token.pos_ in {"NOUN", "PROPN"}}
-        labels = track_ambiguous_rows[row_id]["labels"]     # this is a set
+        labels = track_ambiguous_rows[row_id]["labels"]     # this is a list
         int_row_id = int(row_id)  # int for indexing into the professions lists
         for l in labels:
         # and remove the label from the pipe if its fails the check 
             if l not in noun_tokens: # if the ambiguous profession is not used as a noun in the text, then we remove it from the pipe string for that row
-                if track_ambiguous_rows[row_id]["role"] == "user":
-                    instruct_professions[int_row_id] = remove_prof_from_pipe(instruct_professions[int_row_id], l)
-                elif track_ambiguous_rows[row_id]["role"] == "assistant":
-                    response_professions[int_row_id] = remove_prof_from_pipe(response_professions[int_row_id], l)
-                all_professions[int_row_id] = pipe_join_professions(pipe_split_professions(instruct_professions[int_row_id]) + pipe_split_professions(response_professions[int_row_id]))
+                all_professions[int_row_id] = remove_prof_from_pipe(all_professions[int_row_id], l)
 
-    assert len(instruct_professions) == total_samples, f"Mismatch in number of samples and instruct professions: {len(instruct_professions)} != {total_samples}"
-    assert len(response_professions) == total_samples, f"Mismatch in number of samples and response professions: {len(response_professions)} != {total_samples}"
     assert len(all_professions) == total_samples, f"Mismatch in number of samples and all professions: {len(all_professions)} != {total_samples}"
 
     # Convert ds to df and add professions to dataframe and save
     dolci_df = pd.DataFrame()
     dolci_df = dolci_data.to_pandas()
-    dolci_df["messages"] = dolci_df["messages"].apply(lambda x: json.dumps(x))   # convert messages to json to comply with parquet default types
     dolci_df["original_index"] = dolci_df.index
-    dolci_df["instruct_professions"] = instruct_professions
-    dolci_df["response_professions"] = response_professions
-    dolci_df["all_professions"] = all_professions
+    dolci_df["professions"] = all_professions
 
     # Filter dolci df to samples where there are at least some professions mentioned
     dolci_df = dolci_df[
@@ -226,7 +195,7 @@ def search_dolci_for_professions():
 
     # Save the updated dataframe with professions
     output_path = dolci_professions_file
-    dolci_df.to_parquet(output_path, index=False)
+    dolci_df.to_parquet(output_path, index=False, engine="pyarrow")
     print(f"Saved updated Dolci-SFT dataframe with professions to {output_path}")
 
 def compute_profession_stats():
@@ -236,8 +205,8 @@ def compute_profession_stats():
     o	then run a gender signal nli check on top_k most present occupations. 
     """
     # Load dolci df with professions
-    dolci_df = pd.read_parquet(dolci_professions_file, engine="fastparquet")
-    dolci_df["messages"] = dolci_df["messages"].apply(lambda x: json.loads(x))   # convert messages back from json
+    dolci_df = pd.read_parquet(dolci_professions_file, engine="pyarrow")
+    dolci_df["messages"] = dolci_df["messages"].apply(json.loads)   # convert messages back from json
     # get the list of instruct and response professions
     instruct_professions = dolci_df["instruct_professions"].tolist()
     response_professions = dolci_df["response_professions"].tolist()
