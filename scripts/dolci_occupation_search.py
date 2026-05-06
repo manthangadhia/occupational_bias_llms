@@ -162,9 +162,12 @@ def search_dolci_for_professions():
     
     # Now manage all the rows where we had ambiguous hits! Check if the label is present as a noun, and remove the label from that row if not
     print(f"Found {len(track_ambiguous_rows.keys())} ({(len(track_ambiguous_rows.keys()) / total_samples)*100:2%}%) rows that need POS tagging")
-    with open(dolci_dir / "ambiguous_rows_info.json", "w", encoding="utf-8") as f:
-        json.dump(track_ambiguous_rows, f, indent=4, ensure_ascii=False)
-    print(f"Saved info on ambiguous rows to {dolci_dir / 'ambiguous_rows_info.json'} for later POS tagging and checking.")
+    ambiguous_rows_path = dolci_dir / "ambiguous_rows_info.jsonl"
+    with open(ambiguous_rows_path, "w", encoding="utf-8") as f:
+        for row_id, row in track_ambiguous_rows.items():
+            record = {"row_id": row_id, **row}
+            f.write(json.dumps(record, ensure_ascii=False) + "\n")
+    print(f"Saved info on ambiguous rows to {ambiguous_rows_path} for later POS tagging and checking.")
 
     assert len(all_professions) == total_samples, f"Mismatch in number of samples and all professions: {len(all_professions)} != {total_samples}"
     
@@ -210,10 +213,15 @@ def compute_profession_stats():
     # get the list of professions
     professions = dolci_df["professions"].tolist()
 
-    # read ambiguous rows json
-    with open(dolci_dir / "ambiguous_rows_info.json", "r", encoding="utf-8") as f:
-        ambiguous_rows_data = json.load(f)
-        ambiguous_rows_data = {int(k): v for k, v in ambiguous_rows_data.items()}
+    # read ambiguous rows jsonl
+    ambiguous_rows_data = {}
+    with open(dolci_dir / "ambiguous_rows_info.jsonl", "r", encoding="utf-8") as f:
+        for line in f:
+            if not line.strip():
+                continue
+            record = json.loads(line)
+            row_id = int(record["row_id"])
+            ambiguous_rows_data[row_id] = record
     
     # process the profession strings into lists and count the frequency of each profession in instruct vs response
     from collections import Counter
