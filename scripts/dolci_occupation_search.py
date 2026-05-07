@@ -21,6 +21,14 @@ dolci_professions_file = dolci_dir / "dolci_sft_with_professions.parquet"
 whole_word_required = set({     # if these words are found, check that they are whole words!
     "dj",
     "cop",
+    "author",
+    "authors",
+    "nurse",
+    "nurses",
+    "pilot",
+    "pilots",
+    "judge",
+    "judges",
     })
 ambiguous_professions = set({   # if these words are found, do POS tagging and ensure noun
     "author",
@@ -45,7 +53,7 @@ import re
 import ahocorasick
 import spacy
 spacy.require_gpu()
-pos_nlp = spacy.load("en_core_web_trf", disable=["parser", "ner", "lemmatizer", "attribute_ruler"])
+pos_nlp = spacy.load("en_core_web_trf", disable=["parser", "ner", "lemmatizer"])
 
 import argparse
 import gc
@@ -89,6 +97,29 @@ def is_whole_word(text, start, end):
     before_ok = (start == 0) or (not text[start - 1].isalpha())
     after_ok = (end == len(text) - 1) or (not text[end + 1].isalpha())
     return before_ok and after_ok
+
+def extract_text_window(text, keyword, window_size=30) -> str:
+    """Extract a window of text around a keyword."""
+    doc = pos_nlp(text)
+    tokens = [token.text for token in doc]
+    tokens_lower = [token.lower() for token in tokens]
+    keyword_lower = keyword.lower()
+    indices = [i for i, tok in enumerate(tokens_lower) if tok == keyword_lower]
+    if not indices:
+        return ""
+
+    windows = []
+    seen_ranges = set()
+    for index in indices:
+        window_start = max(0, index - window_size)
+        window_end = min(len(tokens), index + window_size + 1)
+        range_key = (window_start, window_end)
+        if range_key in seen_ranges:
+            continue
+        seen_ranges.add(range_key)
+        windows.append(" ".join(tokens[window_start:window_end]) + ".")
+
+    return " ".join(windows)
 
 def find_professions_in_text(A: ahocorasick.Automaton, 
                              text: str, 
@@ -152,7 +183,8 @@ def search_dolci_for_professions():
 
         # if we had some ambiguous label hits in this row
         if ambiguous_labels:
-            temp_dict = {"labels": list(ambiguous_labels), "text": all_content}
+            context_window = "".join([extract_text_window(all_content, l) for l in ambiguous_labels])   # joint string of 30-token windows around each label occurrence
+            temp_dict = {"labels": list(ambiguous_labels), "text": context_window}
             track_ambiguous_rows[row_idx] = temp_dict
 
         # convert temp list to set (avoid duplicates) and then to pipe-joined string for storage
@@ -161,7 +193,7 @@ def search_dolci_for_professions():
         all_professions.append(all_prof_str)
     
     # Now manage all the rows where we had ambiguous hits! Check if the label is present as a noun, and remove the label from that row if not
-    print(f"Found {len(track_ambiguous_rows.keys())} ({(len(track_ambiguous_rows.keys()) / total_samples)*100:2%}%) rows that need POS tagging")
+    print(f"Found {len(track_ambiguous_rows.keys())} ({(len(track_ambiguous_rows) / total_samples):.2%}) rows that need POS tagging out of the complete dataset.")
     ambiguous_rows_path = dolci_dir / "ambiguous_rows_info.jsonl"
     with open(ambiguous_rows_path, "w", encoding="utf-8") as f:
         for row_id, row in track_ambiguous_rows.items():
@@ -175,7 +207,7 @@ def search_dolci_for_professions():
     # collect all rows of text and row ids for the ambiguous hits 
     all_ambiguous_texts = [(row["text"], row_id) for row_id, row in track_ambiguous_rows.items()]
     # check POS for each label, 
-    for doc, row_id in pos_nlp.pipe(all_ambiguous_texts, batch_size=16, as_tuples=True):
+    for doc, row_id in tqdm(pos_nlp.pipe(all_ambiguous_texts, batch_size=8, as_tuples=True), total=len(all_ambiguous_texts)):
         noun_tokens = {token.text.lower() for token in doc if token.pos_ in {"NOUN", "PROPN"}}
         labels = track_ambiguous_rows[row_id]["labels"]     # this is a list
         int_row_id = int(row_id)  # int for indexing into the professions lists
