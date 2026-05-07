@@ -55,6 +55,10 @@ import spacy
 spacy.require_gpu()
 pos_nlp = spacy.load("en_core_web_trf", disable=["parser", "ner", "lemmatizer"])
 
+import nltk
+nltk.download("punkt_tab")
+from nltk.tokenize import word_tokenize
+
 import argparse
 import gc
 # Args helper function
@@ -100,8 +104,7 @@ def is_whole_word(text, start, end):
 
 def extract_text_window(text, keyword, window_size=30) -> str:
     """Extract a window of text around a keyword."""
-    doc = pos_nlp(text)
-    tokens = [token.text for token in doc]
+    tokens = word_tokenize(text)
     tokens_lower = [token.lower() for token in tokens]
     keyword_lower = keyword.lower()
     indices = [i for i, tok in enumerate(tokens_lower) if tok == keyword_lower]
