@@ -4,6 +4,7 @@ POS tagging is the computational bottleneck, but it is helpful to do it at this 
 """
 
 import pandas as pd
+import pyarrow.parquet as pq
 from pathlib import Path
 import json
 # -------------------------
@@ -48,16 +49,11 @@ import datasets
 from datasets import load_dataset
 from tqdm import tqdm
 import re
+from collections import defaultdict
 
 # For kw search
 import ahocorasick
-import spacy
-spacy.require_gpu()
-pos_nlp = spacy.load("en_core_web_trf", disable=["parser", "ner", "lemmatizer"])
 
-import nltk
-nltk.download("punkt_tab")
-from nltk.tokenize import word_tokenize
 
 import argparse
 import gc
@@ -102,14 +98,17 @@ def is_whole_word(text, start, end):
     after_ok = (end == len(text) - 1) or (not text[end + 1].isalpha())
     return before_ok and after_ok
 
-def extract_text_window(text, keyword, window_size=30) -> str:
+def extract_text_window(tokens, token_indices, keyword, window_size=30) -> str:
     """Extract a window of text around a keyword."""
-    tokens = word_tokenize(text)
-    tokens_lower = [token.lower() for token in tokens]
-    keyword_lower = keyword.lower()
-    indices = [i for i, tok in enumerate(tokens_lower) if tok == keyword_lower]
+    indices = token_indices.get(keyword.lower(), [])
     if not indices:
-        return ""
+        # Substring match instead of exact token equality
+        indices = [
+            i for i, tok in enumerate(tokens)
+            if keyword.lower() in tok.lower()
+        ]
+        if not indices:
+            return ""
 
     windows = []
     seen_ranges = set()
@@ -148,6 +147,15 @@ def find_professions_in_text(A: ahocorasick.Automaton,
     return sorted(found_professions)
 
 def search_dolci_for_professions():    
+    # conditional imports for when doing search and POS
+    import spacy
+    spacy.require_gpu()
+    pos_nlp = spacy.load("en_core_web_trf", disable=["parser", "ner", "lemmatizer"])
+
+    import nltk
+    nltk.download("punkt_tab")
+    from nltk.tokenize import word_tokenize
+
     # Load all professions and dolci data
     professions = get_professions(professions_file)
     print(f"Loaded {len(professions)} professions.")
@@ -186,7 +194,15 @@ def search_dolci_for_professions():
 
         # if we had some ambiguous label hits in this row
         if ambiguous_labels:
-            context_window = "".join([extract_text_window(all_content, l) for l in ambiguous_labels])   # joint string of 30-token windows around each label occurrence
+            tokenized_content = word_tokenize(all_content)
+            tokens_lower = [t.lower() for t in tokenized_content]
+            # create index map for lookup to speed up truncation
+            token_indices = defaultdict(list)
+            for i, tok in enumerate(tokens_lower):
+                token_indices[tok].append(i)
+            context_window = "".join(
+                [extract_text_window(tokenized_content, token_indices, l) for l in ambiguous_labels]
+            )
             temp_dict = {"labels": list(ambiguous_labels), "text": context_window}
             track_ambiguous_rows[row_idx] = temp_dict
 
@@ -222,6 +238,7 @@ def search_dolci_for_professions():
     # Convert ds to df and add professions to dataframe and save
     dolci_df = pd.DataFrame()
     dolci_df = dolci_data.to_pandas()
+    dolci_df["messages"] = dolci_df["messages"].apply(json.dumps)
     dolci_df["original_index"] = dolci_df.index
     dolci_df["professions"] = all_professions
 
@@ -243,7 +260,8 @@ def compute_profession_stats():
     o	then run a gender signal nli check on top_k most present occupations. 
     """
     # Load dolci df with professions
-    dolci_df = pd.read_parquet(dolci_professions_file, engine="pyarrow")
+    dolci_professions_table = pq.read_table(dolci_professions_file)
+    dolci_df = dolci_professions_table.to_pandas()
     dolci_df["messages"] = dolci_df["messages"].apply(json.loads)   # convert messages back from json
     # get the list of professions
     professions = dolci_df["professions"].tolist()
