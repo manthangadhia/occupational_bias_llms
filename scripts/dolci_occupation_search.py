@@ -4,7 +4,6 @@ POS tagging is the computational bottleneck, but it is helpful to do it at this 
 """
 
 import pandas as pd
-import pyarrow.parquet as pq
 from pathlib import Path
 import json
 # -------------------------
@@ -260,8 +259,7 @@ def compute_profession_stats():
     o	then run a gender signal nli check on top_k most present occupations. 
     """
     # Load dolci df with professions
-    dolci_professions_table = pq.read_table(dolci_professions_file)
-    dolci_df = dolci_professions_table.to_pandas()
+    dolci_df = pd.read_parquet(dolci_professions_file, engine="pyarrow")
     dolci_df["messages"] = dolci_df["messages"].apply(json.loads)   # convert messages back from json
     # get the list of professions
     professions = dolci_df["professions"].tolist()
