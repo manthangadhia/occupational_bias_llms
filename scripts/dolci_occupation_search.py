@@ -29,6 +29,12 @@ whole_word_required = set({     # if these words are found, check that they are 
     "pilots",
     "judge",
     "judges",
+    "critic",
+    "critics",
+    "nun", 
+    "nuns",
+    "medic",
+    "medics",
     })
 ambiguous_professions = set({   # if these words are found, do POS tagging and ensure noun
     "author",
@@ -42,6 +48,8 @@ ambiguous_professions = set({   # if these words are found, do POS tagging and e
     "tutor",
     "minister",
     "advocate",
+    "principal",
+    "comic",
     })
 
 import datasets
@@ -237,7 +245,9 @@ def search_dolci_for_professions():
     # Convert ds to df and add professions to dataframe and save
     dolci_df = pd.DataFrame()
     dolci_df = dolci_data.to_pandas()
-    dolci_df["messages"] = dolci_df["messages"].apply(json.dumps)
+    dolci_df["messages"] = dolci_df["messages"].apply(
+        lambda msgs: json.dumps([dict(m) for m in msgs])
+    )
     dolci_df["original_index"] = dolci_df.index
     dolci_df["professions"] = all_professions
 
@@ -284,6 +294,12 @@ def compute_profession_stats():
         # check if this row had an ambiguous profession hit and if so, update the ambiguous counter
         if int(original_index) in ambiguous_rows_data:   # the keys
             ambiguous_counter += 1
+    # Save all profession counts to a json file
+    counts_output_path = dolci_dir / "dolci_profession_counts.json"
+    sorted_counts = [{"profession": p, "count": c} for p, c in prof_counter.most_common()]
+    with counts_output_path.open("w", encoding="utf-8") as f:
+        json.dump(sorted_counts, f, indent=2, ensure_ascii=False)
+    print(f"Saved profession counts to {counts_output_path}")
     # are all 303 professions represented? which ones are not represented at all?
     professions = get_professions(professions_file)
     all_prof_set = set(prof_counter.keys())
@@ -298,7 +314,7 @@ def compute_profession_stats():
         "professions_not_mentioned_at_all": list(set(professions) - all_prof_set),
         "top_k_professions_mentioned": top_profs,
         "bottom_k_professions_mentioned": bottom_profs,
-        "ambiguous_rows_in_final_collection": ambiguous_counter,
+        "ambiguous_rows_in_final_collection": f"{ambiguous_counter} out of {len(dolci_df)} ({(ambiguous_counter/len(dolci_df)):.2%}) rows." ,
     }
     stats_output_path = dolci_dir / "dolci_profession_stats.json"
     with stats_output_path.open("w", encoding="utf-8") as f:
