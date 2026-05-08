@@ -241,6 +241,10 @@ def search_dolci_for_professions():
         # and remove the label from the pipe if its fails the check 
             if l not in noun_tokens: # if the ambiguous profession is not used as a noun in the text, then we remove it from the pipe string for that row
                 all_professions[int_row_id] = remove_prof_from_pipe(all_professions[int_row_id], l)
+    del pos_nlp
+    del all_ambiguous_texts
+    del track_ambiguous_rows
+    gc.collect()
 
     # Convert ds to df and add professions to dataframe and save
     dolci_df = pd.DataFrame()
