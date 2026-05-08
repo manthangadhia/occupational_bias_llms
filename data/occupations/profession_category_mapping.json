@@ -1,0 +1,1213 @@
+{
+  "assignments": [
+    {
+      "profession": "accountant",
+      "category": "business and administration professionals"
+    },
+    {
+      "profession": "actor",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "actress",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "adjunct professor",
+      "category": "teaching professionals"
+    },
+    {
+      "profession": "administrator",
+      "category": "administrative and commercial managers"
+    },
+    {
+      "profession": "advocate",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "aide",
+      "category": "other clerical support workers",
+      "note": "very generic; could also be personal care worker or legislative aide"
+    },
+    {
+      "profession": "alderman",
+      "category": "chief executives, senior officials and legislators"
+    },
+    {
+      "profession": "ambassador",
+      "category": "chief executives, senior officials and legislators"
+    },
+    {
+      "profession": "analyst",
+      "category": "business and administration professionals"
+    },
+    {
+      "profession": "anthropologist",
+      "category": "legal, social and cultural professionals",
+      "note": "social science side; could also fit science and engineering professionals"
+    },
+    {
+      "profession": "archaeologist",
+      "category": "science and engineering professionals"
+    },
+    {
+      "profession": "archbishop",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "architect",
+      "category": "science and engineering professionals"
+    },
+    {
+      "profession": "artist",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "assistant professor",
+      "category": "teaching professionals"
+    },
+    {
+      "profession": "associate dean",
+      "category": "teaching professionals",
+      "note": "administrative academic role"
+    },
+    {
+      "profession": "associate professor",
+      "category": "teaching professionals"
+    },
+    {
+      "profession": "astronaut",
+      "category": "science and engineering professionals"
+    },
+    {
+      "profession": "astronomer",
+      "category": "science and engineering professionals"
+    },
+    {
+      "profession": "athlete",
+      "category": "legal, social, cultural and related associate professionals"
+    },
+    {
+      "profession": "attorney",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "auctioneer",
+      "category": "legal, social, cultural and related associate professionals"
+    },
+    {
+      "profession": "author",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "bailiff",
+      "category": "legal, social, cultural and related associate professionals"
+    },
+    {
+      "profession": "baker",
+      "category": "food processing, woodworking, garment and other craft and related trades workers"
+    },
+    {
+      "profession": "ballerina",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "banker",
+      "category": "business and administration professionals"
+    },
+    {
+      "profession": "barber",
+      "category": "personal service workers"
+    },
+    {
+      "profession": "barrister",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "bartender",
+      "category": "personal service workers"
+    },
+    {
+      "profession": "biologist",
+      "category": "science and engineering professionals"
+    },
+    {
+      "profession": "bishop",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "blacksmith",
+      "category": "metal, machinery and related trades workers"
+    },
+    {
+      "profession": "bodyguard",
+      "category": "protective services workers"
+    },
+    {
+      "profession": "bookkeeper",
+      "category": "numerical and material recording clerks"
+    },
+    {
+      "profession": "boxer",
+      "category": "legal, social, cultural and related associate professionals"
+    },
+    {
+      "profession": "broadcaster",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "broker",
+      "category": "business and administration associate professionals"
+    },
+    {
+      "profession": "bureaucrat",
+      "category": "business and administration professionals"
+    },
+    {
+      "profession": "butcher",
+      "category": "food processing, woodworking, garment and other craft and related trades workers"
+    },
+    {
+      "profession": "butler",
+      "category": "personal service workers"
+    },
+    {
+      "profession": "cab driver",
+      "category": "drivers and mobile plant operators"
+    },
+    {
+      "profession": "cabbie",
+      "category": "drivers and mobile plant operators"
+    },
+    {
+      "profession": "cameraman",
+      "category": "legal, social, cultural and related associate professionals"
+    },
+    {
+      "profession": "captain",
+      "category": "commissioned armed forces officers",
+      "note": "in military sense; ship/airline captains have no direct ILO category"
+    },
+    {
+      "profession": "cardiologist",
+      "category": "health professionals"
+    },
+    {
+      "profession": "caretaker",
+      "category": "personal care workers"
+    },
+    {
+      "profession": "carpenter",
+      "category": "building and related trades workers (excluding electricians)"
+    },
+    {
+      "profession": "cartoonist",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "cashier",
+      "category": "customer services clerks"
+    },
+    {
+      "profession": "cellist",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "chancellor",
+      "category": "chief executives, senior officials and legislators"
+    },
+    {
+      "profession": "chaplain",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "chef",
+      "category": "hospitality, retail and other services managers",
+      "note": "head chef/executive chef; line cooks → food preparation assistants"
+    },
+    {
+      "profession": "chemist",
+      "category": "science and engineering professionals"
+    },
+    {
+      "profession": "choreographer",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "cinematographer",
+      "category": "legal, social, cultural and related associate professionals"
+    },
+    {
+      "profession": "civil servant",
+      "category": "business and administration professionals"
+    },
+    {
+      "profession": "clergy",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "cleric",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "clerk",
+      "category": "general and keyboard clerks"
+    },
+    {
+      "profession": "coach",
+      "category": "legal, social, cultural and related associate professionals",
+      "note": "sports coach; life/academic coach → teaching professionals"
+    },
+    {
+      "profession": "collector",
+      "category": "other clerical support workers",
+      "note": "in debt/tax collection sense; art collector is not a profession"
+    },
+    {
+      "profession": "colonel",
+      "category": "commissioned armed forces officers"
+    },
+    {
+      "profession": "columnist",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "comedian",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "comic",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "commander",
+      "category": "commissioned armed forces officers"
+    },
+    {
+      "profession": "commentator",
+      "category": "business and administration associate professionals"
+    },
+    {
+      "profession": "commissioner",
+      "category": "chief executives, senior officials and legislators"
+    },
+    {
+      "profession": "composer",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "conductor",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "constable",
+      "category": "protective services workers"
+    },
+    {
+      "profession": "consultant",
+      "category": "business and administration professionals"
+    },
+    {
+      "profession": "cook",
+      "category": "food preparation assistants"
+    },
+    {
+      "profession": "cop",
+      "category": "protective services workers"
+    },
+    {
+      "profession": "correspondent",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "councilor",
+      "category": "chief executives, senior officials and legislators"
+    },
+    {
+      "profession": "counselor",
+      "category": "legal, social and cultural professionals",
+      "note": "in legal/social sense; therapeutic sense → health associate professionals"
+    },
+    {
+      "profession": "critic",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "curator",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "custodian",
+      "category": "cleaners and helpers"
+    },
+    {
+      "profession": "dancer",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "dean",
+      "category": "teaching professionals",
+      "note": "academic dean; administrative academic role"
+    },
+    {
+      "profession": "dentist",
+      "category": "health professionals"
+    },
+    {
+      "profession": "deputy",
+      "category": "chief executives, senior officials and legislators",
+      "note": "in political sense; also used for law enforcement"
+    },
+    {
+      "profession": "dermatologist",
+      "category": "health professionals"
+    },
+    {
+      "profession": "designer",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "detective",
+      "category": "protective services workers"
+    },
+    {
+      "profession": "diplomat",
+      "category": "chief executives, senior officials and legislators"
+    },
+    {
+      "profession": "director",
+      "category": "administrative and commercial managers"
+    },
+    {
+      "profession": "disc jockey",
+      "category": "legal, social, cultural and related associate professionals"
+    },
+    {
+      "profession": "dj",
+      "category": "legal, social, cultural and related associate professionals"
+    },
+    {
+      "profession": "doctor",
+      "category": "health professionals"
+    },
+    {
+      "profession": "driver",
+      "category": "drivers and mobile plant operators"
+    },
+    {
+      "profession": "drummer",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "economist",
+      "category": "business and administration professionals"
+    },
+    {
+      "profession": "economist",
+      "category": "science and engineering professionals",
+      "note": "also fits business and administration professionals"
+    },
+    {
+      "profession": "editor",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "educator",
+      "category": "teaching professionals"
+    },
+    {
+      "profession": "electrician",
+      "category": "electrical and electronics trades workers"
+    },
+    {
+      "profession": "engineer",
+      "category": "science and engineering professionals"
+    },
+    {
+      "profession": "entertainer",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "entrepreneur",
+      "category": "administrative and commercial managers"
+    },
+    {
+      "profession": "environmentalist",
+      "category": "legal, social and cultural professionals",
+      "note": "in advocacy sense; as researcher → science and engineering professionals"
+    },
+    {
+      "profession": "envoy",
+      "category": "chief executives, senior officials and legislators"
+    },
+    {
+      "profession": "epidemiologist",
+      "category": "science and engineering professionals"
+    },
+    {
+      "profession": "farmer",
+      "category": "market-oriented skilled agricultural workers"
+    },
+    {
+      "profession": "fashion designer",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "fighter pilot",
+      "category": "commissioned armed forces officers"
+    },
+    {
+      "profession": "filmmaker",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "financier",
+      "category": "business and administration professionals"
+    },
+    {
+      "profession": "firefighter",
+      "category": "protective services workers"
+    },
+    {
+      "profession": "fisher",
+      "category": "market-oriented skilled forestry, fishery and hunting workers"
+    },
+    {
+      "profession": "footballer",
+      "category": "legal, social, cultural and related associate professionals"
+    },
+    {
+      "profession": "foreman",
+      "category": "production and specialized services managers"
+    },
+    {
+      "profession": "freelance writer",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "gardener",
+      "category": "agricultural, forestry and fishery labourers"
+    },
+    {
+      "profession": "geologist",
+      "category": "science and engineering professionals"
+    },
+    {
+      "profession": "graphic designer",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "guard",
+      "category": "protective services workers"
+    },
+    {
+      "profession": "guidance counselor",
+      "category": "legal, social, cultural and related associate professionals"
+    },
+    {
+      "profession": "guitarist",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "hairdresser",
+      "category": "personal service workers"
+    },
+    {
+      "profession": "handyman",
+      "category": "building and related trades workers (excluding electricians)"
+    },
+    {
+      "profession": "headteacher",
+      "category": "teaching professionals"
+    },
+    {
+      "profession": "historian",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "housekeeper",
+      "category": "cleaners and helpers"
+    },
+    {
+      "profession": "illustrator",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "industrialist",
+      "category": "administrative and commercial managers"
+    },
+    {
+      "profession": "inspector",
+      "category": "business and administration associate professionals",
+      "note": "generic sense; could also fit protective services"
+    },
+    {
+      "profession": "instructor",
+      "category": "teaching professionals"
+    },
+    {
+      "profession": "interior designer",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "inventor",
+      "category": "science and engineering professionals"
+    },
+    {
+      "profession": "investigator",
+      "category": "protective services workers"
+    },
+    {
+      "profession": "investment banker",
+      "category": "business and administration professionals"
+    },
+    {
+      "profession": "janitor",
+      "category": "cleaners and helpers"
+    },
+    {
+      "profession": "jeweler",
+      "category": "handicraft and printing workers"
+    },
+    {
+      "profession": "journalist",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "judge",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "jurist",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "laborer",
+      "category": "labourers in mining, construction, manufacturing and transport"
+    },
+    {
+      "profession": "lawmaker",
+      "category": "chief executives, senior officials and legislators"
+    },
+    {
+      "profession": "lawyer",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "lecturer",
+      "category": "teaching professionals"
+    },
+    {
+      "profession": "legislator",
+      "category": "chief executives, senior officials and legislators"
+    },
+    {
+      "profession": "librarian",
+      "category": "legal, social, cultural and related associate professionals"
+    },
+    {
+      "profession": "lieutenant",
+      "category": "commissioned armed forces officers"
+    },
+    {
+      "profession": "lifeguard",
+      "category": "protective services workers"
+    },
+    {
+      "profession": "lyricist",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "maestro",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "magician",
+      "category": "legal, social, cultural and related associate professionals"
+    },
+    {
+      "profession": "magistrate",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "maid",
+      "category": "cleaners and helpers"
+    },
+    {
+      "profession": "manager",
+      "category": "administrative and commercial managers"
+    },
+    {
+      "profession": "marshal",
+      "category": "commissioned armed forces officers",
+      "note": "in military sense; in law enforcement sense → protective services workers"
+    },
+    {
+      "profession": "mason",
+      "category": "building and related trades workers (excluding electricians)"
+    },
+    {
+      "profession": "mathematician",
+      "category": "science and engineering professionals"
+    },
+    {
+      "profession": "mechanic",
+      "category": "metal, machinery and related trades workers"
+    },
+    {
+      "profession": "mediator",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "medic",
+      "category": "health associate professionals"
+    },
+    {
+      "profession": "midfielder",
+      "category": "legal, social, cultural and related associate professionals"
+    },
+    {
+      "profession": "midwife",
+      "category": "health associate professionals"
+    },
+    {
+      "profession": "minister",
+      "category": "chief executives, senior officials and legislators",
+      "note": "in political sense; in religious sense → legal, social and cultural professionals"
+    },
+    {
+      "profession": "missionary",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "monk",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "musician",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "nanny",
+      "category": "personal care workers"
+    },
+    {
+      "profession": "narrator",
+      "category": "legal, social, cultural and related associate professionals"
+    },
+    {
+      "profession": "naturalist",
+      "category": "legal, social and cultural professionals",
+      "note": "natural historian / science communicator sense"
+    },
+    {
+      "profession": "negotiator",
+      "category": "business and administration professionals"
+    },
+    {
+      "profession": "neurologist",
+      "category": "health professionals"
+    },
+    {
+      "profession": "neurosurgeon",
+      "category": "health professionals"
+    },
+    {
+      "profession": "novelist",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "nun",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "nurse",
+      "category": "health associate professionals"
+    },
+    {
+      "profession": "officer",
+      "category": "protective services workers",
+      "note": "in law enforcement sense; military officer → commissioned armed forces officers"
+    },
+    {
+      "profession": "organist",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "painter",
+      "category": "legal, social and cultural professionals",
+      "note": "in fine-art sense; house painter → building and related trades workers"
+    },
+    {
+      "profession": "paralegal",
+      "category": "legal, social, cultural and related associate professionals"
+    },
+    {
+      "profession": "parliamentarian",
+      "category": "chief executives, senior officials and legislators"
+    },
+    {
+      "profession": "pastor",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "pathologist",
+      "category": "health professionals"
+    },
+    {
+      "profession": "pediatrician",
+      "category": "health professionals"
+    },
+    {
+      "profession": "performer",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "pharmacist",
+      "category": "health professionals"
+    },
+    {
+      "profession": "philosopher",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "photographer",
+      "category": "legal, social, cultural and related associate professionals"
+    },
+    {
+      "profession": "photojournalist",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "physician",
+      "category": "health professionals"
+    },
+    {
+      "profession": "physicist",
+      "category": "science and engineering professionals"
+    },
+    {
+      "profession": "pianist",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "planner",
+      "category": "science and engineering professionals",
+      "note": "urban/systems planner; business planner → business and administration professionals"
+    },
+    {
+      "profession": "plastic surgeon",
+      "category": "health professionals"
+    },
+    {
+      "profession": "playwright",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "plumber",
+      "category": "building and related trades workers (excluding electricians)"
+    },
+    {
+      "profession": "poet",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "police",
+      "category": "protective services workers"
+    },
+    {
+      "profession": "politician",
+      "category": "chief executives, senior officials and legislators"
+    },
+    {
+      "profession": "pollster",
+      "category": "business and administration associate professionals"
+    },
+    {
+      "profession": "porter",
+      "category": "personal service workers"
+    },
+    {
+      "profession": "postmaster",
+      "category": "administrative and commercial managers"
+    },
+    {
+      "profession": "preacher",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "president",
+      "category": "chief executives, senior officials and legislators"
+    },
+    {
+      "profession": "priest",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "principal",
+      "category": "teaching professionals"
+    },
+    {
+      "profession": "professor",
+      "category": "teaching professionals"
+    },
+    {
+      "profession": "professor emeritus",
+      "category": "teaching professionals"
+    },
+    {
+      "profession": "programmer",
+      "category": "information and communications technology professionals"
+    },
+    {
+      "profession": "proprietor",
+      "category": "administrative and commercial managers"
+    },
+    {
+      "profession": "prosecutor",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "psychiatrist",
+      "category": "health professionals"
+    },
+    {
+      "profession": "psychologist",
+      "category": "health professionals"
+    },
+    {
+      "profession": "publicist",
+      "category": "business and administration associate professionals"
+    },
+    {
+      "profession": "pundit",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "rabbi",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "radiologist",
+      "category": "health professionals"
+    },
+    {
+      "profession": "ranger",
+      "category": "protective services workers",
+      "note": "in park ranger / law enforcement sense; forestry sense → market-oriented skilled forestry workers"
+    },
+    {
+      "profession": "realtor",
+      "category": "sales workers"
+    },
+    {
+      "profession": "receptionist",
+      "category": "customer services clerks"
+    },
+    {
+      "profession": "registered nurse",
+      "category": "health associate professionals"
+    },
+    {
+      "profession": "researcher",
+      "category": "science and engineering professionals"
+    },
+    {
+      "profession": "restaurateur",
+      "category": "hospitality, retail and other services managers"
+    },
+    {
+      "profession": "sailor",
+      "category": "armed forces occupations, other ranks"
+    },
+    {
+      "profession": "sales",
+      "category": "sales workers"
+    },
+    {
+      "profession": "saxophonist",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "scholar",
+      "category": "teaching professionals",
+      "note": "academic scholar; general thinker → legal, social and cultural professionals"
+    },
+    {
+      "profession": "scientist",
+      "category": "science and engineering professionals"
+    },
+    {
+      "profession": "screenwriter",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "sculptor",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "secretary",
+      "category": "general and keyboard clerks"
+    },
+    {
+      "profession": "senator",
+      "category": "chief executives, senior officials and legislators"
+    },
+    {
+      "profession": "sergeant",
+      "category": "non-commissioned armed forces officers"
+    },
+    {
+      "profession": "servant",
+      "category": "personal service workers"
+    },
+    {
+      "profession": "sheriff",
+      "category": "protective services workers"
+    },
+    {
+      "profession": "shoemaker",
+      "category": "food processing, woodworking, garment and other craft and related trades workers"
+    },
+    {
+      "profession": "shopkeeper",
+      "category": "hospitality, retail and other services managers"
+    },
+    {
+      "profession": "singer",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "smith",
+      "category": "metal, machinery and related trades workers"
+    },
+    {
+      "profession": "sociologist",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "soldier",
+      "category": "armed forces occupations, other ranks"
+    },
+    {
+      "profession": "solicitor",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "sportswriter",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "statistician",
+      "category": "science and engineering professionals"
+    },
+    {
+      "profession": "steward",
+      "category": "personal service workers",
+      "note": "in hospitality/cabin crew sense"
+    },
+    {
+      "profession": "stockbroker",
+      "category": "business and administration associate professionals"
+    },
+    {
+      "profession": "strategist",
+      "category": "business and administration professionals"
+    },
+    {
+      "profession": "stylist",
+      "category": "personal service workers"
+    },
+    {
+      "profession": "superintendent",
+      "category": "administrative and commercial managers"
+    },
+    {
+      "profession": "supervisor",
+      "category": "production and specialized services managers"
+    },
+    {
+      "profession": "surgeon",
+      "category": "health professionals"
+    },
+    {
+      "profession": "surveyor",
+      "category": "science and engineering associate professionals"
+    },
+    {
+      "profession": "swimmer",
+      "category": "legal, social, cultural and related associate professionals"
+    },
+    {
+      "profession": "tailor",
+      "category": "food processing, woodworking, garment and other craft and related trades workers"
+    },
+    {
+      "profession": "taxi driver",
+      "category": "drivers and mobile plant operators"
+    },
+    {
+      "profession": "teacher",
+      "category": "teaching professionals"
+    },
+    {
+      "profession": "technician",
+      "category": "science and engineering associate professionals"
+    },
+    {
+      "profession": "therapist",
+      "category": "health associate professionals"
+    },
+    {
+      "profession": "trader",
+      "category": "business and administration associate professionals"
+    },
+    {
+      "profession": "treasurer",
+      "category": "business and administration professionals"
+    },
+    {
+      "profession": "trooper",
+      "category": "non-commissioned armed forces officers",
+      "note": "in military sense; state trooper → protective services workers"
+    },
+    {
+      "profession": "trucker",
+      "category": "drivers and mobile plant operators"
+    },
+    {
+      "profession": "trumpeter",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "tutor",
+      "category": "teaching professionals"
+    },
+    {
+      "profession": "tycoon",
+      "category": "administrative and commercial managers"
+    },
+    {
+      "profession": "unemployed",
+      "category": "unemployed"
+    },
+    {
+      "profession": "vice chancellor",
+      "category": "chief executives, senior officials and legislators"
+    },
+    {
+      "profession": "violinist",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "vocalist",
+      "category": "legal, social and cultural professionals"
+    },
+    {
+      "profession": "waiter",
+      "category": "personal service workers"
+    },
+    {
+      "profession": "waitress",
+      "category": "personal service workers"
+    },
+    {
+      "profession": "warden",
+      "category": "protective services workers"
+    },
+    {
+      "profession": "warrior",
+      "category": "armed forces occupations, other ranks"
+    },
+    {
+      "profession": "weaver",
+      "category": "food processing, woodworking, garment and other craft and related trades workers"
+    },
+    {
+      "profession": "welder",
+      "category": "metal, machinery and related trades workers"
+    },
+    {
+      "profession": "wrestler",
+      "category": "legal, social, cultural and related associate professionals"
+    },
+    {
+      "profession": "writer",
+      "category": "legal, social and cultural professionals"
+    }
+  ],
+  "no_clear_fit": [
+    {
+      "profession": "assassin",
+      "reason": "Illegal activity; not a formally recognized occupation in any ILO classification."
+    },
+    {
+      "profession": "campaigner",
+      "reason": "Civic/political advocacy role without a defined ILO occupational category; not a stable employment type."
+    },
+    {
+      "profession": "doctoral student",
+      "reason": "Student status, not a professional occupation. ILO categories cover workers, not trainees/students (though some consider PhDs employed by universities)."
+    },
+    {
+      "profession": "gangster",
+      "reason": "Illegal activity; not a formally recognized occupation."
+    },
+    {
+      "profession": "homemaker",
+      "reason": "Domestic/household role; ILO formally excludes unpaid domestic work from occupational classifications."
+    },
+    {
+      "profession": "hooker",
+      "reason": "Sex work is informally classified and excluded from standard ILO categories (though the ILO does discuss it separately in informal economy contexts)."
+    },
+    {
+      "profession": "housewife",
+      "reason": "Domestic/household role; same as homemaker — excluded from formal ILO occupational classification."
+    },
+    {
+      "profession": "landlord",
+      "reason": "Property owner deriving passive rental income; not an active occupation in ILO terms."
+    },
+    {
+      "profession": "mobster",
+      "reason": "Illegal activity; not a formally recognized occupation."
+    },
+    {
+      "profession": "parishioner",
+      "reason": "Describes a religious community member, not an occupational role."
+    },
+    {
+      "profession": "philanthropist",
+      "reason": "Describes a social role and source of income use, not a formal occupation; no ILO category covers this."
+    },
+    {
+      "profession": "pilot",
+      "reason": "Aircraft pilots are classified under 'air transport professionals' in ISCO-08, a category not present in this ILO category list. 'Drivers and mobile plant operators' covers only surface transport. Closest fit is science and engineering associate professionals, but this is a stretch."
+    },
+    {
+      "profession": "prisoner",
+      "reason": "Legal/custodial status, not an occupation."
+    },
+    {
+      "profession": "protege",
+      "reason": "Describes a mentorship relationship, not an occupational category."
+    },
+    {
+      "profession": "protester",
+      "reason": "Civic activity, not a formal occupation."
+    },
+    {
+      "profession": "retiree",
+      "reason": "Describes employment status (retired), not an active occupation."
+    },
+    {
+      "profession": "saint",
+      "reason": "Religious/honorific status, not a formal occupation."
+    },
+    {
+      "profession": "student",
+      "reason": "Educational status; ILO occupational categories cover workers, not learners."
+    }
+  ]
+}
