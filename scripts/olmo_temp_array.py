@@ -145,8 +145,8 @@ def main(track_entropy: bool = True,
 
             # Inner loop to go through all prompts
             for prompt_data in prompts_df.itertuples():
-                profile_id = prompt_data.profile_id
-                prompt_text = prompt_data.prompt_text
+                profile_id = prompt_data.id
+                prompt_text = prompt_data.prompt
                 print(f"[{model_key}] Processing prompt for profile {profile_id}")
                 # Start tracking output for this prompt at this stage
                 model_output = {
@@ -154,7 +154,7 @@ def main(track_entropy: bool = True,
                     "model_name": model_name,
                     "profile_id": profile_id,
                     "temperature": temp,
-                    "occupation_category": prompt_data.occupation_category,
+                    "occupation_category": prompt_data.occupation,
                     "attended_university": prompt_data.attended_university,
                 }
                 # Include gender in the out file for the gender_given case
@@ -252,7 +252,7 @@ if __name__ == "__main__":
                         help="Key for model to load")
     parser.add_argument("--model_family",
                         type=str,
-                        default="qwen",
+                        default="olmo",
                         help="Name of the family of models to load")
     args = parser.parse_args()
     model_family = get_model_family(args.model_family)
