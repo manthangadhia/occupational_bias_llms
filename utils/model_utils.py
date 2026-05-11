@@ -254,15 +254,6 @@ def generate_with_entropy(
             ).sum(dim=-1).item()
             token_entropies_nucleus.append(float(token_entropy_nucleus))
 
-            # Sample from nucleus distribution
-            next_token = torch.multinomial(probs_nucleus, num_samples=1)
-
-            token_entropies_nucleus.append(float(-torch.where(
-                probs_nucleus > 0,
-                probs_nucleus * probs_nucleus.log(),
-                torch.zeros_like(probs_nucleus)
-            ).sum(dim=-1).item()))
-
             # Sample next token from nucleus distribution
             next_token = torch.multinomial(probs_nucleus, num_samples=1)
             generated_token_ids.append(next_token.item())
