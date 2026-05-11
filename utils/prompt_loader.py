@@ -7,7 +7,7 @@ import pandas as pd
 # -------------------------
 # Configuration
 # -------------------------
-root_dir = Path(__file__).parent.parent
+root_dir = Path(__file__).parent.parent         # .py < utils < occ_bias < root
 data_dir = root_dir / "data"
 prompts_dir = data_dir / "gender_prompts"
 

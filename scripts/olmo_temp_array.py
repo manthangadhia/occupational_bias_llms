@@ -6,10 +6,10 @@ import argparse
 import pandas as pd
 
 # Add utils to path
-root_dir = Path(__file__).parent.parent
+root_dir = Path(__file__).parent.parent     # .py < scripts < occ_bias < root > models
 sys.path.insert(0, str(root_dir))
 
-from utils import (
+from utils import (                         # .py < utils < occ_bias < root
     load_prompts_for_model, 
     load_model, 
     generate, 
