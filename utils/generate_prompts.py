@@ -8,7 +8,7 @@ prompts_dir = data_dir / "gender_prompts"
 occ_dir = data_dir / "occupations"
 prompts_dir.mkdir(parents=True, exist_ok=True)
 
-file_with_occupations = occ_dir / "select_professions.json"
+file_with_occupations = occ_dir / "filtered_professions.json"
 
 prompt_files = {
     "assumed": prompts_dir / "gender_assumed_prompts.json",
