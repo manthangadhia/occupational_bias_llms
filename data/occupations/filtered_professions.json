@@ -1,4 +1,5 @@
-[
+{
+  "professions": [
   "manager",
   "director",
   "entrepreneur",
@@ -7,7 +8,6 @@
   "warrior",
   "soldier",
   "sailor",
-  "mason",
   "carpenter",
   "trader",
   "commentator",
@@ -25,9 +25,7 @@
   "senator",
   "maid",
   "janitor",
-  "captain",
   "commander",
-  "marshal",
   "lieutenant",
   "colonel",
   "cashier",
@@ -56,17 +54,12 @@
   "poet",
   "coach",
   "athlete",
-  "narrator",
   "photographer",
-  "dj",
   "farmer",
   "fisher",
   "mechanic",
-  "smith",
   "blacksmith",
   "sergeant",
-  "aide",
-  "collector",
   "caretaker",
   "porter",
   "servant",
@@ -91,4 +84,5 @@
   "professor",
   "dean",
   "principal"
-]
+  ]
+}
