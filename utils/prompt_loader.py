@@ -23,10 +23,10 @@ def get_prompt_files(prompts_dir: Path = prompts_dir) -> Dict:
         Dict containing a name for each prompt_file and the path to that file
     """
 
-    given_prompts = prompts_dir / "prompts_gender_given_detailed.json"
-    given_prompts_base = prompts_dir / "prompts_gender_given_detailed_base.json"
-    assumed_prompts = prompts_dir / "prompts_gender_assumed_detailed.json"    
-    assumed_prompts_base = prompts_dir / "prompts_gender_assumed_detailed_base.json"
+    given_prompts = prompts_dir / "gender_given_prompts.json"
+    given_prompts_base = prompts_dir / "gender_given_base_prompts.json"
+    assumed_prompts = prompts_dir / "gender_assumed_prompts.json"
+    assumed_prompts_base = prompts_dir / "gender_assumed_base_prompts.json"
 
     all_prompt_files = {
         "given": given_prompts,
@@ -54,11 +54,6 @@ def load_prompts_for_model(model_type: str,
     Returns:
         Pandas DF containing prompt text along with all other detailed info stored in the json
     """
-    # prompt_files = {
-    #     'base': data_dir / f"{prompt_file}_base.json",
-    #     'instruct': data_dir / f"{prompt_file}.json"
-    # }
-
     # I want a prompt key which is either given/given_base/assumed/assumed_base
     prompt_key = f"{prompt_case}_base" if model_type == 'base' else prompt_case
     
