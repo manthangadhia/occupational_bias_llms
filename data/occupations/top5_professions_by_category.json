@@ -167,7 +167,7 @@
     {
         "profession":"cook",
         "category":"food preparation assistants",
-        "count":1963
+        "count":1960
     },
     {
         "profession":"tailor",
@@ -200,14 +200,9 @@
         "count":1026
     },
     {
-        "profession":"medic",
-        "category":"health associate professionals",
-        "count":52273
-    },
-    {
         "profession":"nurse",
         "category":"health associate professionals",
-        "count":5703
+        "count":5704
     },
     {
         "profession":"therapist",
@@ -260,14 +255,9 @@
         "count":139454
     },
     {
-        "profession":"critic",
-        "category":"legal, social and cultural professionals",
-        "count":83723
-    },
-    {
         "profession":"author",
         "category":"legal, social and cultural professionals",
-        "count":37425
+        "count":37423
     },
     {
         "profession":"artist",
@@ -278,6 +268,11 @@
         "profession":"writer",
         "category":"legal, social and cultural professionals",
         "count":17094
+    },
+    {
+        "profession":"poet",
+        "category":"legal, social and cultural professionals",
+        "count":11172
     },
     {
         "profession":"coach",
@@ -397,7 +392,7 @@
     {
         "profession":"guard",
         "category":"protective services workers",
-        "count":6571
+        "count":6568
     },
     {
         "profession":"detective",
@@ -450,11 +445,6 @@
         "count":19418
     },
     {
-        "profession":"principal",
-        "category":"teaching professionals",
-        "count":13120
-    },
-    {
         "profession":"professor",
         "category":"teaching professionals",
         "count":12953
@@ -463,5 +453,10 @@
         "profession":"dean",
         "category":"teaching professionals",
         "count":12208
+    },
+    {
+        "profession":"principal",
+        "category":"teaching professionals",
+        "count":5587
     }
 ]
