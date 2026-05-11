@@ -3,17 +3,15 @@ Utility functions for model loading, generation, and memory management.
 This module provides a functional approach to model handling without singletons.
 """
 import torch
-from transformers import AutoTokenizer, AutoModelForCausalLM
+from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 from pathlib import Path
 from typing import Optional, Tuple, Dict, Any
 import numpy as np
 import gc
 
-
 def get_device() -> str:
     """Get the current device (cuda or cpu)."""
     return "cuda" if torch.cuda.is_available() else "cpu"
-
 
 def hard_cleanup_memory(*objects_to_delete, verbose: bool = True) -> Dict[str, Any]:
     """
@@ -66,7 +64,6 @@ def hard_cleanup_memory(*objects_to_delete, verbose: bool = True) -> Dict[str, A
     
     return stats
 
-
 def load_model(model_name: str, cache_dir: Optional[Path] = None) -> Tuple[AutoTokenizer, AutoModelForCausalLM]:
     """
     Load and return model + tokenizer.
@@ -79,6 +76,7 @@ def load_model(model_name: str, cache_dir: Optional[Path] = None) -> Tuple[AutoT
         Tuple of (tokenizer, model)
     """
     device = get_device()
+    bnb_config = BitsAndBytesConfig(load_in_8bit=True) if device == "cuda" else None
     
     print(f"Loading model: {model_name}")
     tokenizer = AutoTokenizer.from_pretrained(
@@ -90,7 +88,8 @@ def load_model(model_name: str, cache_dir: Optional[Path] = None) -> Tuple[AutoT
         model_name,
         torch_dtype=torch.bfloat16 if device == "cuda" else torch.float32,
         device_map="auto",
-        cache_dir=cache_dir
+        cache_dir=cache_dir,
+        quantization_config=bnb_config
     )
     
     print(f"Model {model_name} loaded successfully on {device}")
@@ -99,7 +98,6 @@ def load_model(model_name: str, cache_dir: Optional[Path] = None) -> Tuple[AutoT
         print(f"Total GPU memory: {torch.cuda.get_device_properties(0).total_memory / 1024**2:.2f} MB")
     
     return tokenizer, model
-
 
 def cleanup_model(model: AutoModelForCausalLM, tokenizer: AutoTokenizer) -> Tuple[None, None]:
     """
@@ -116,7 +114,6 @@ def cleanup_model(model: AutoModelForCausalLM, tokenizer: AutoTokenizer) -> Tupl
     torch.cuda.ipc_collect()
     torch.cuda.synchronize()
     return None, None
-
 
 def generate(
     model: AutoModelForCausalLM,
@@ -159,7 +156,6 @@ def generate(
         generated_tokens = generated_tokens[input_length:]
     
     return tokenizer.decode(generated_tokens, skip_special_tokens=True)
-
 
 def generate_with_entropy(
     model: AutoModelForCausalLM,
@@ -312,8 +308,7 @@ def generate_with_entropy(
         'min_entropy_nucleus': float(np.min(token_entropies_nucleus)),
         'std_entropy_nucleus': float(np.std(token_entropies_nucleus)),
         'num_tokens': len(generated_token_ids)
-        
-    }
+}
     
     # Hard cleanup for GPU memory
     hard_cleanup_memory(
