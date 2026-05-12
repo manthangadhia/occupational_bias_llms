@@ -48,62 +48,25 @@ DEFAULT_GENERATION_KWARGS = {
 
 TEMPERATURES = [0.2, 0.5, 0.7, 1.0, 1.2]
 
-def get_model_family(family: str) -> dict:
-    """
-    A standard function to access a different model family for testing when I need to. The default is olmo:7b but 
-    later this can also be used to access olmo:32b, and Qwen2.5:0.5b for quick and dirty local testing for example.
-    
-    Args:
-        family: This is a string param to choose which family of models to load
-    
-    Returns:
-        MODELS: Dictionary containing the label and model_id (HF) for all models in the requested family
-    """
-    if family == 'qwen':
-        # Model configuration
-        BASE_MODEL = "Qwen/Qwen2.5-1.5B"
-        IFT_MODEL = "Qwen/Qwen2.5-1.5B-Instruct"
-
-        MODELS = {
-            "base": BASE_MODEL,
-            "ift": IFT_MODEL
-        }
-        return MODELS
-     
-    elif family == 'olmo':
-        # Model configuration
-        BASE_MODEL = "allenai/Olmo-3-1025-7B"
-        SFT_MODEL = "allenai/Olmo-3-7B-Instruct-SFT"
-        DPO_MODEL = "allenai/Olmo-3-7B-Instruct-DPO"
-        RLVR_MODEL = "allenai/Olmo-3-7B-Instruct"
-
-        MODELS = {
-            "base": BASE_MODEL,
-            "sft": SFT_MODEL,
-            "dpo": DPO_MODEL,
-            "rlvr": RLVR_MODEL,
-        }
-        return MODELS
-    else:
-        raise ValueError("Choose between Qwen and Olmo model families!")
+OLMO_MODELS = {
+    "base": "allenai/Olmo-3-1025-7B",
+    "sft": "allenai/Olmo-3-7B-Instruct-SFT",
+    "dpo": "allenai/Olmo-3-7B-Instruct-DPO",
+    "rlvr": "allenai/Olmo-3-7B-Instruct",
+}
 
 def main(track_entropy: bool = True, 
          multigen: bool = True, 
          temperature: float = None,
-         model_key: str = None,
-         MODELS: dict = None
+         model_key: str = None
         ):
     """Run analysis for selected models with optional entropy tracking."""
 
     # Make sure we have all the necessary inputs
-    try:
-        model_key is not None
-    except:
+    if model_key is None:
         raise ValueError("Model key cannot be none!")
-    try: 
-        MODELS is not None
-    except:
-        raise ValueError("Model family dict cannot be none!")
+    if model_key not in OLMO_MODELS:
+        raise ValueError(f"Unknown model_key '{model_key}'. Choose from {list(OLMO_MODELS.keys())}.")
 
     if temperature is None:
         temperature = TEMPERATURES
@@ -115,7 +78,7 @@ def main(track_entropy: bool = True,
     output_rows_by_case = {case: [] for case in PROMPT_CASES}
 
     # Load specific model and run inference on it
-    model_name = MODELS[model_key]
+    model_name = OLMO_MODELS[model_key]
     print(f"\nPreparing to load model: {model_name}")
     model_load_start = time.time()
     tokenizer, model = load_model(model_name, cache_dir=models_dir)
@@ -249,11 +212,7 @@ if __name__ == "__main__":
     parser.add_argument("--model_key",
                         type=str,
                         required=True,
+                        choices=sorted(OLMO_MODELS.keys()),
                         help="Key for model to load")
-    parser.add_argument("--model_family",
-                        type=str,
-                        default="olmo",
-                        help="Name of the family of models to load")
     args = parser.parse_args()
-    model_family = get_model_family(args.model_family)
-    main(model_key=args.model_key, MODELS=model_family)
+    main(model_key=args.model_key)
