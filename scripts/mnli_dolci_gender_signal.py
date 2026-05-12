@@ -30,11 +30,12 @@ from nltk.tokenize import word_tokenize
 # ------------ HELPER FUNCTIONS ------------
 def args_to_bool(arg):
     """Convert a string argument to a boolean."""
+    arg = str(arg).lower()
     if isinstance(arg, bool):
         return arg
-    if arg.lower() in ("yes", "true", "t", "y", "1"):
+    if arg in ("yes", "true", "t", "y", "1"):
         return True
-    elif arg.lower() in ("no", "false", "f", "n", "0"):
+    elif arg in ("no", "false", "f", "n", "0"):
         return False
     else:
         raise argparse.ArgumentTypeError("Boolean value expected.")
