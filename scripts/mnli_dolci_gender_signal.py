@@ -181,17 +181,19 @@ if __name__ == "__main__":
     progress_interval = 5000 if not args.testing else 10
     with open(output_path, "w", encoding="utf-8") as f:
         for row in labelled_data:
-            occupations = pipe_separate_professions(row['instruct_professions'])
+            occupations = pipe_separate_professions(row['professions'])
             if not occupations:
                 truncated += 1
                 continue            
             id = row['original_index']
             sample = row["messages"]
+            if isinstance(sample, str):
+                sample = json.loads(sample)
             content = ""
             # Get all the user (instruct) messages in one string
             for doc in sample:
                 #TODO: Come up with a strategy to deal with roles since they are no longer in the filtered dataset
-                if doc['role'] == 'user':
+                if doc.get('role') == 'user':
                     total_tokens = count_tokens(content + doc['content'], tokenizer)
                     if total_tokens < 512:
                         content += doc['content'] + " "
