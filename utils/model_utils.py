@@ -87,16 +87,16 @@ def load_model(model_name: str, cache_dir: Optional[Path] = None) -> Tuple[AutoT
     device = get_device()
     bnb_config = BitsAndBytesConfig(load_in_8bit=True) if device == "cuda" else None
     
-    print(f"Loading model: {model_name}")
+    print(f"Loading model: {model_name}\nTokenizer loading...")
     tokenizer = AutoTokenizer.from_pretrained(
         model_name,
         cache_dir=cache_dir,
         token=HF_TOKEN if HF_TOKEN else None
     )
-    
+    print(f"Tokenizer loaded successfully. Model loading...")
     model = AutoModelForCausalLM.from_pretrained(
         model_name,
-        torch_dtype=torch.float16 if device == "cuda" else torch.float32,
+        dtype=torch.float16 if device == "cuda" else torch.float32,
         device_map="auto",
         cache_dir=cache_dir,
         quantization_config=bnb_config,
