@@ -9,9 +9,18 @@ from typing import Optional, Tuple, Dict, Any
 import numpy as np
 import gc
 
+import os
+from dotenv import load_dotenv
+load_dotenv()  # Load environment variables from .env file if present
+HF_TOKEN = os.getenv("HF_TOKEN")  # HuggingFace token
+
 def get_device() -> str:
     """Get the current device (cuda or cpu)."""
-    return "cuda" if torch.cuda.is_available() else "cpu"
+    if torch.cuda.is_available():
+        print(f"CUDA available: {torch.cuda.is_available()}")
+        print(f"GPU: {torch.cuda.get_device_name(0)}")
+        return "cuda"
+    return "cpu"
 
 def hard_cleanup_memory(*objects_to_delete, verbose: bool = True) -> Dict[str, Any]:
     """
@@ -81,15 +90,17 @@ def load_model(model_name: str, cache_dir: Optional[Path] = None) -> Tuple[AutoT
     print(f"Loading model: {model_name}")
     tokenizer = AutoTokenizer.from_pretrained(
         model_name,
-        cache_dir=cache_dir
+        cache_dir=cache_dir,
+        token=HF_TOKEN if HF_TOKEN else None
     )
     
     model = AutoModelForCausalLM.from_pretrained(
         model_name,
-        torch_dtype=torch.bfloat16 if device == "cuda" else torch.float32,
+        torch_dtype=torch.float16 if device == "cuda" else torch.float32,
         device_map="auto",
         cache_dir=cache_dir,
-        quantization_config=bnb_config
+        quantization_config=bnb_config,
+        token=HF_TOKEN if HF_TOKEN else None
     )
     
     print(f"Model {model_name} loaded successfully on {device}")
