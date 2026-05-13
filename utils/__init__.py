@@ -9,5 +9,5 @@ except ImportError:
 
 try:
     from .retrieval_utils import load_model as load_embedding_model, embed_batch, query as query_embedding_model
-except ImportError:
-    print("WARNING UTILS: retrieval_utils could not be loaded; ensure that sentence_transformers is installed if you intend to use it.")
+except ImportError as e:
+    print(f"WARNING UTILS: retrieval_utils could not be loaded; Error details: {e}")
