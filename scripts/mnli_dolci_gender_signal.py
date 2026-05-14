@@ -176,13 +176,13 @@ if __name__ == "__main__":
                 "text": content
             })
     df_occtext = pd.DataFrame(rows)
-    del rows
-    gc.collect()
     # parallelapply the text processing function to the dataframe
     df_occtext["text"] = df_occtext.parallel_apply(lambda x: process_text_length(x["text"], x["prof"]), axis=1)
     # filter out rows where text is empty after processing
     df_occtext = df_occtext[df_occtext["text"] != ""]
     print(f"After processing text length, {len(df_occtext)} rows remain for classification. {len(rows) - len(df_occtext)} rows were removed due to empty text after processing.")
+    del rows
+    gc.collect()
 
     # Now the new df has a row for each profession and a corresponding word-token window.
     # Pass batches to the pipeline.
