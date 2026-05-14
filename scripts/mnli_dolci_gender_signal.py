@@ -23,12 +23,21 @@ from transformers import pipeline, AutoTokenizer, AutoModelForSequenceClassifica
 import torch
 import datasets as ds
 import pandas as pd
+from functools import lru_cache
+from pandarallel import pandarallel
+pandarallel.initialize(nb_workers=6, progress_bar=True)
+MAX_WORD_TOKENS = 480
 
 import json
 import argparse
 from tqdm import tqdm
 
 # ------------ HELPER FUNCTIONS ------------
+@lru_cache(maxsize=1)
+def _get_detokenizer():
+    from nltk.tokenize.treebank import TreebankWordDetokenizer
+    return TreebankWordDetokenizer()
+
 def args_to_bool(arg):
     """Convert a string argument to a boolean."""
     arg = str(arg).lower()
@@ -41,36 +50,32 @@ def args_to_bool(arg):
     else:
         raise argparse.ArgumentTypeError("Boolean value expected.")
     
-def process_text_length(text: str, occupation: str, tokenizer, input_id_cache: dict, max_tokens=512):
+def process_text_length(text: str, occupation: str, max_words: int = MAX_WORD_TOKENS):
     """
-        Slice the input text into chunks that fit within the max token limit.
+        Slice the input text into chunks that fit within the word-token limit.
         For each occupation:
         1. Identify all occurrences of the occupation in the text.
         2. If multiple occurrences, take the "middle" occurrence, and if no occurrence, return an empty string.
-        3. Create a window of `max_tokens` size around this occurrence (including the occupation tokens).
+        3. Create a window of `max_words` size around this occurrence (including the occupation tokens).
         4. Return the window as a string.
     """
-    #TODO: Deal with the case where occupation is not present in text
-    tokens = tokenizer(text, return_tensors="pt")
-    input_ids = tokens.input_ids[0].tolist()
-    num_tokens = len(input_ids)
-    if num_tokens <= max_tokens:
+    from nltk.tokenize import word_tokenize
+    detokenizer = _get_detokenizer()
+
+    text_tokens = word_tokenize(text)
+    num_tokens = len(text_tokens)
+    if num_tokens <= max_words:
         return text  # No truncation needed
 
-    # Find locations of occupation occurrences in the text
-    # Occupation tokens will almost always be found because the data are filtered already
-    # occupation strings will always be under go str.lower().strip() in main()
-    if occupation not in input_id_cache:
-        input_id_cache[occupation] = tokenizer(occupation, add_special_tokens=False).input_ids
-    occupation_token_ids = input_id_cache.get(occupation, [])
+    occupation_tokens = word_tokenize(occupation)
     occurrences = []
 
-    occ_len = len(occupation_token_ids)
+    occ_len = len(occupation_tokens)
     if occ_len == 0:
         return ""
 
-    for i in range(len(input_ids) - occ_len + 1):
-        if input_ids[i:i + occ_len] == occupation_token_ids:
+    for i in range(len(text_tokens) - occ_len + 1):
+        if text_tokens[i:i + occ_len] == occupation_tokens:
             occurrences.append((i, occ_len))
 
     if not occurrences:
@@ -85,13 +90,13 @@ def process_text_length(text: str, occupation: str, tokenizer, input_id_cache: d
         start_pos, occ_len = occurrences[0]  # Only one occurrence
 
     occ_center = start_pos + (occ_len // 2)
-    desired_start = occ_center - (max_tokens // 2)
-    max_start = max(len(input_ids) - max_tokens, 0)
+    desired_start = occ_center - (max_words // 2)
+    max_start = max(len(text_tokens) - max_words, 0)
     window_start = max(0, min(desired_start, max_start))
-    window_end = min(window_start + max_tokens, len(input_ids))
-    window_ids = input_ids[window_start:window_end]
+    window_end = min(window_start + max_words, len(text_tokens))
+    window_tokens = text_tokens[window_start:window_end]
 
-    return tokenizer.decode(window_ids, skip_special_tokens=True)
+    return detokenizer.detokenize(window_tokens)
 
 
 def pipe_separate_professions(professions_str):
@@ -146,49 +151,57 @@ if __name__ == "__main__":
     truncated = 0
     progress_interval = 5000 if not args.testing else 10
 
-    # create emtpy pandas df to store professions and text
-    cols = ["prof", "text", "id"]
-    df_occtext = pd.DataFrame(columns=cols)
-    occ_input_id = {}
-    with open(output_path, "w", encoding="utf-8") as f:
-        for row in tqdm(labelled_data, total=len(labelled_data), desc="Processing occupations and content"):
-            original_id = int(row["original_index"])
-            content = ""
-            # get all turns in the row, and all instruct content from each turn
-            turns = json.loads(row["messages"])
-            content = " ".join(
-                t["content"] for t in turns
-                if t.get("role") == "user" and t.get("content")
-            )
-            professions = pipe_separate_professions(row["professions"])
-            for prof in professions:
-                prof = prof.lower().strip()
-                processed_text = process_text_length(content, prof, tokenizer, occ_input_id)
-                if processed_text == "":
-                    continue
-                df_occtext.loc[len(df_occtext)] = [prof, processed_text, original_id]
-
-    # Now the new df has a row for each profession and a corresponding 512-token text.
-    # Pass batches to the pipeline.
-    for prof, group in tqdm(df_occtext.groupby("prof"), desc="Running batched zero-shot classification by profession"):
-        texts = group["text"].tolist()
-        ids = group["id"].tolist()
-        hypothesis_template = f"The {prof} in the sample text is {{}}."
-        
-        results = pipe(
-            texts,
-            candidate_gender,
-            hypothesis_template=hypothesis_template,
-            multi_label=False,
-            batch_size=batch_size
+    rows = []
+    df_occtext = pd.DataFrame()
+    for row in tqdm(labelled_data, total=len(labelled_data), desc="Processing occupations and content"):
+        original_id = int(row["original_index"])
+        content = ""
+        # get all turns in the row, and all instruct content from each turn
+        turns = json.loads(row["messages"])
+        content = " ".join(
+            t["content"] for t in turns
+            if t.get("role") == "user" and t.get("content")
         )
-        
-        for id_, text, result in zip(ids, texts, results):
-            record = {
-                "id": id_,
-                "occupation": prof,
-                "classification": result["labels"][0],
-                "score": result["scores"][0]
-            }
-            f.write(json.dumps(record) + "\n")
+        professions = pipe_separate_professions(row["professions"])
+        for prof in professions:
+            prof = prof.lower().strip()
+            # processed_text = process_text_length(content, prof, tokenizer, occ_input_id)
+            # if processed_text == "":
+            #     continue
+            rows.append({
+                "id": original_id,
+                "prof": prof,
+                "text": content
+            })
+    df_occtext = pd.DataFrame(rows)
+    # parallelapply the text processing function to the dataframe
+    df_occtext["text"] = df_occtext.parallel_apply(lambda x: process_text_length(x["text"], x["prof"]), axis=1)
+    # filter out rows where text is empty after processing
+    df_occtext = df_occtext[df_occtext["text"] != ""]
+    print(f"After processing text length, {len(df_occtext)} rows remain for classification. {len(rows) - len(df_occtext)} rows were removed due to empty text after processing.")
+
+    # Now the new df has a row for each profession and a corresponding word-token window.
+    # Pass batches to the pipeline.
+    with open(output_path, "w", encoding="utf-8") as f:
+        for prof, group in tqdm(df_occtext.groupby("prof"), desc="Running batched zero-shot classification by profession"):
+            texts = group["text"].tolist()
+            ids = group["id"].tolist()
+            hypothesis_template = f"The {prof} in the sample text is {{}}."
+            
+            results = pipe(
+                texts,
+                candidate_gender,
+                hypothesis_template=hypothesis_template,
+                multi_label=False,
+                batch_size=batch_size
+            )
+            
+            for id_, text, result in zip(ids, texts, results):
+                record = {
+                    "id": id_,
+                    "occupation": prof,
+                    "classification": result["labels"][0],
+                    "score": result["scores"][0]
+                }
+                f.write(json.dumps(record) + "\n")
     print(f"Classification complete. Results saved to {output_path}")
