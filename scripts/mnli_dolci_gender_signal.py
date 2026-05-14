@@ -133,7 +133,7 @@ if __name__ == "__main__":
     # collect args and load samples
     parser = argparse.ArgumentParser(description="Run gender classification on MNLI test samples")
     parser.add_argument("--testing", default=0, help="Whether to run in testing mode with a smaller sample of the data")
-    parser.add_argument("--batch-size", type=int, defauclt=16, help="Batch size per profession for zero-shot inference")
+    parser.add_argument("--batch-size", type=int, default=16, help="Batch size per profession for zero-shot inference")
     args = parser.parse_args()
     # convert testing arg to bool
     args.testing = args_to_bool(args.testing)
@@ -180,7 +180,7 @@ if __name__ == "__main__":
             candidate_gender,
             hypothesis_template=hypothesis_template,
             multi_label=False,
-            batch_size=32
+            batch_size=batch_size
         )
         
         for id_, text, result in zip(ids, texts, results):
