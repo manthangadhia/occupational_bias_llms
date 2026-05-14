@@ -31,6 +31,7 @@ MAX_WORD_TOKENS = 480
 import json
 import argparse
 from tqdm import tqdm
+import gc
 
 # ------------ HELPER FUNCTIONS ------------
 @lru_cache(maxsize=1)
@@ -125,6 +126,7 @@ if __name__ == "__main__":
     model_name = "MoritzLaurer/deberta-v3-large-zeroshot-v2.0"
     model = AutoModelForSequenceClassification.from_pretrained(model_name,
                                                             cache_dir=models_dir,
+                                                            trust_remote_code=True,
                                                             token=HF_TOKEN).to(device)
     tokenizer = AutoTokenizer.from_pretrained(model_name, 
                                               cache_dir=models_dir,
@@ -174,6 +176,8 @@ if __name__ == "__main__":
                 "text": content
             })
     df_occtext = pd.DataFrame(rows)
+    del rows
+    gc.collect()
     # parallelapply the text processing function to the dataframe
     df_occtext["text"] = df_occtext.parallel_apply(lambda x: process_text_length(x["text"], x["prof"]), axis=1)
     # filter out rows where text is empty after processing
