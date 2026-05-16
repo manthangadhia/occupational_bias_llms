@@ -3,7 +3,7 @@ Utility functions for model loading, generation, and memory management.
 This module provides a functional approach to model handling without singletons.
 """
 import torch
-from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
+from transformers import AutoTokenizer, AutoModelForCausalLM #, BitsAndBytesConfig
 from pathlib import Path
 from typing import Optional, Tuple, Dict, Any
 import numpy as np
@@ -85,7 +85,6 @@ def load_model(model_name: str, cache_dir: Optional[Path] = None) -> Tuple[AutoT
         Tuple of (tokenizer, model)
     """
     device = get_device()
-    bnb_config = BitsAndBytesConfig(load_in_8bit=True) if device == "cuda" else None
     
     print(f"Loading model: {model_name}\nTokenizer loading...")
     tokenizer = AutoTokenizer.from_pretrained(
@@ -96,10 +95,9 @@ def load_model(model_name: str, cache_dir: Optional[Path] = None) -> Tuple[AutoT
     print(f"Tokenizer loaded successfully. Model loading...")
     model = AutoModelForCausalLM.from_pretrained(
         model_name,
-        dtype=torch.float16 if device == "cuda" else torch.float32,
-        device_map="auto",
+        dtype=torch.bfloat16 if device == "cuda" else torch.float32,
+        device_map="cuda:0" if device == "cuda" else None,
         cache_dir=cache_dir,
-        quantization_config=bnb_config,
         token=HF_TOKEN if HF_TOKEN else None
     )
     
