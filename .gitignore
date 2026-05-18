@@ -69,6 +69,8 @@ archive/
 notes/
 notebooks/scratchpad.ipynb
 test*/
+*.out
+*.err
 
 # --- Data files that I want to ignore ---
 *.xlsx
