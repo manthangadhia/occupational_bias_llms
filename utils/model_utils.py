@@ -8,19 +8,30 @@ from pathlib import Path
 from typing import Optional, Tuple, Dict, Any
 import numpy as np
 import gc
+import time
 
 import os
 from dotenv import load_dotenv
 load_dotenv()  # Load environment variables from .env file if present
 HF_TOKEN = os.getenv("HF_TOKEN")  # HuggingFace token
 
-def get_device() -> str:
-    """Get the current device (cuda or cpu)."""
-    if torch.cuda.is_available():
+_DEVICE: Optional[str] = None
+_DEVICE_INFO_PRINTED = False
+
+def get_device(verbose: bool = False) -> str:
+    global _DEVICE, _DEVICE_INFO_PRINTED
+
+    if _DEVICE is None:
+        if not torch.cuda.is_available():
+            raise RuntimeError("CUDA is required for this job. No GPU detected.")
+        _DEVICE = "cuda"
+
+    if verbose and not _DEVICE_INFO_PRINTED:
         print(f"CUDA available: {torch.cuda.is_available()}")
         print(f"GPU: {torch.cuda.get_device_name(0)}")
-        return "cuda"
-    return "cpu"
+        _DEVICE_INFO_PRINTED = True
+
+    return _DEVICE
 
 def hard_cleanup_memory(*objects_to_delete, verbose: bool = True) -> Dict[str, Any]:
     """
@@ -73,7 +84,12 @@ def hard_cleanup_memory(*objects_to_delete, verbose: bool = True) -> Dict[str, A
     
     return stats
 
-def load_model(model_name: str, cache_dir: Optional[Path] = None) -> Tuple[AutoTokenizer, AutoModelForCausalLM]:
+def load_model(
+    model_name: str,
+    cache_dir: Optional[Path] = None,
+    low_cpu_mem_usage: bool = True,
+    local_files_only: Optional[bool] = None
+) -> Tuple[AutoTokenizer, AutoModelForCausalLM]:
     """
     Load and return model + tokenizer.
     
@@ -84,22 +100,40 @@ def load_model(model_name: str, cache_dir: Optional[Path] = None) -> Tuple[AutoT
     Returns:
         Tuple of (tokenizer, model)
     """
-    device = get_device()
+    device = get_device(verbose=True)
     
+    if local_files_only is None:
+        offline_env = (
+            os.getenv("HF_HUB_OFFLINE")
+            or os.getenv("TRANSFORMERS_OFFLINE")
+            or os.getenv("HF_OFFLINE")
+        )
+        local_files_only = str(offline_env).lower() in {"1", "true", "yes"}
+        print(f"Local files only mode: {local_files_only}")
+
+    if local_files_only:
+        print("Local files only mode enabled (offline cache).")
+
     print(f"Loading model: {model_name}\nTokenizer loading...")
     tokenizer = AutoTokenizer.from_pretrained(
         model_name,
         cache_dir=cache_dir,
-        token=HF_TOKEN if HF_TOKEN else None
+        token=HF_TOKEN if HF_TOKEN else None,
+        local_files_only=local_files_only
     )
     print(f"Tokenizer loaded successfully. Model loading...")
+    model_load_start = time.time()
     model = AutoModelForCausalLM.from_pretrained(
         model_name,
-        dtype=torch.bfloat16 if device == "cuda" else torch.float32,
-        device_map="cuda:0" if device == "cuda" else None,
+        dtype=torch.bfloat16,
+        device_map="cuda:0",
         cache_dir=cache_dir,
-        token=HF_TOKEN if HF_TOKEN else None
+        token=HF_TOKEN if HF_TOKEN else None,
+        low_cpu_mem_usage=low_cpu_mem_usage,
+        local_files_only=local_files_only
     )
+    model_load_end = time.time()
+    print(f"Model weights loaded in {model_load_end - model_load_start:.2f} seconds")
     
     print(f"Model {model_name} loaded successfully on {device}")
     if device == "cuda" and torch.cuda.is_available():

@@ -1,7 +1,7 @@
 # utils/prompt_loader.py
 import json
 from pathlib import Path
-from typing import List, Dict
+from typing import Dict, Optional
 import pandas as pd
 
 # -------------------------
@@ -37,11 +37,11 @@ def get_prompt_files(prompts_dir: Path = prompts_dir) -> Dict:
 
     return all_prompt_files
 
-def load_prompts_for_model(model_type: str, 
+def load_prompts_for_model(model_type: str,
                            prompt_case: str,
-                           all_prompt_files: dict = get_prompt_files(), 
+                           all_prompt_files: Optional[dict] = None,
                            limit: int = 0
-                           ) -> List[Dict]:
+                           ) -> pd.DataFrame:
     """
     Load the correct prompt file based on filename and model_type.
     
@@ -52,10 +52,21 @@ def load_prompts_for_model(model_type: str,
         limit: Optional limit on number of prompts to load (for testing)
     
     Returns:
-        Pandas DF containing prompt text along with all other detailed info stored in the json
+        Pandas DataFrame containing prompt text and associated metadata
     """
+    if all_prompt_files is None:
+        all_prompt_files = get_prompt_files()
+
+    normalized_model_type = (model_type or "").strip().lower()
+    normalized_prompt_case = (prompt_case or "").strip().lower()
+    if normalized_prompt_case not in {"given", "assumed"}:
+        raise ValueError("prompt_case must be 'given' or 'assumed'.")
+
+    if normalized_model_type != "base":
+        normalized_model_type = "instruct"
+
     # I want a prompt key which is either given/given_base/assumed/assumed_base
-    prompt_key = f"{prompt_case}_base" if model_type == 'base' else prompt_case
+    prompt_key = f"{normalized_prompt_case}_base" if normalized_model_type == "base" else normalized_prompt_case
     
     filepath = all_prompt_files.get(prompt_key)
     if not filepath or not filepath.exists():
@@ -63,7 +74,7 @@ def load_prompts_for_model(model_type: str,
     
     prompts_df = pd.read_json(filepath)
     
-    if limit > 0:
+    if limit and limit > 0:
         prompts_df = prompts_df[:limit]
     
     return prompts_df

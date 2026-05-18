@@ -48,17 +48,24 @@ DEFAULT_GENERATION_KWARGS = {
     "temperature": 0.7,
 }
 
-TEMPERATURES = [0.2, 0.5, 0.7, 1.0, 1.2]
+TEMPERATURES = [0.2, 0.5, 0.7, 1.0]
+PROMPT_CASES = ["given", "assumed"]
 
-def main(track_entropy: bool = True, 
-         multigen: bool = True, 
-         num_prompts: int = 50,
-         temperature: float = None
-        ):
+def main(track_entropy: bool = True,
+     multigen: bool = True,
+     num_prompts: int = 50,
+     temperature: float = None,
+     prompt_case: str = None
+    ):
     """Run analysis for selected models with optional entropy tracking."""
 
     if temperature is None:
         temperature = TEMPERATURES
+
+    if prompt_case:
+        selected_prompt_cases = [prompt_case]
+    else:
+        selected_prompt_cases = PROMPT_CASES
 
     with open(output_dir / "olmo7b_temp_results.jsonl", "w", encoding="utf-8") as out_file:
         for model_key in MODELS.keys(): 
@@ -71,88 +78,98 @@ def main(track_entropy: bool = True,
             print(f"Model loaded in {model_load_end - model_load_start:.2f} seconds")
             model.eval()
 
-            # Load and configure prompts once per model
-            model_type = 'base' if model_key == 'base' else 'instruct'
-            prompts_to_process = load_prompts_for_model(model_type, limit=num_prompts)
-
-            print(f"Loaded {len(prompts_to_process)} prompts for model '{model_key}'")
-            
             # Start timing for this model
             model_start_time = time.time()
-            
-            # Middle loop to go through all temperatures
-            for temp in temperature:
-                print(f"\n[{model_key}] Generating at temperature: {temp}")
-                temp_start_time = time.time()
 
-                # Inner loop to go through all prompts
-                for prompt_data in prompts_to_process:
-                    profile_id = prompt_data.get("profile_id", "unknown")
-                    prompt_text = prompt_data["prompt_text"]
-                    print(f"[{model_key}] Processing prompt for profile {profile_id}")
-                    # Start tracking output for this prompt at this stage
-                    model_output = {
-                        "model_key": model_key,
-                        "model_name": model_name,
-                        "profile_id": profile_id,
-                        "temperature": temp
-                    }
+            # Load and configure prompts once per model and prompt case
+            model_type = 'base' if model_key == 'base' else 'instruct'
+            for prompt_case in selected_prompt_cases:
+                prompts_df = load_prompts_for_model(model_type, prompt_case, limit=num_prompts)
+                print(f"Loaded {len(prompts_df)} prompts for model '{model_key}' and case '{prompt_case}'")
 
-                    num_gens = NUM_GENERATIONS if multigen else 1
-                    
-                    for n in range(1, num_gens + 1):
+                prompt_columns = set(prompts_df.columns)
+                id_column = "id" if "id" in prompt_columns else ("profile_id" if "profile_id" in prompt_columns else None)
+                prompt_column = "prompt" if "prompt" in prompt_columns else ("prompt_text" if "prompt_text" in prompt_columns else None)
+                if prompt_column is None:
+                    raise KeyError(f"Prompt text column not found in {sorted(prompt_columns)}")
+                
+                # Middle loop to go through all temperatures
+                for temp in temperature:
+                    print(f"\n[{model_key}] Generating at temperature: {temp}")
+                    temp_start_time = time.time()
 
-                        if track_entropy: # generate response with entropy tracking
-                            result_entropy = generate_with_entropy(
-                                model=model,
-                                tokenizer=tokenizer,
-                                prompt=prompt_text,
-                                clip_input=True,
-                                temperature=temp
-                            )
+                    # Inner loop to go through all prompts
+                    for prompt_data in prompts_df.itertuples(index=False):
+                        profile_id = getattr(prompt_data, id_column) if id_column else "unknown"
+                        prompt_text = getattr(prompt_data, prompt_column)
+                        print(f"[{model_key}] Processing prompt for profile {profile_id}")
+                        # Start tracking output for this prompt at this stage
+                        model_output = {
+                            "model_key": model_key,
+                            "model_name": model_name,
+                            "prompt_case": prompt_case,
+                            "profile_id": profile_id,
+                            "temperature": temp
+                        }
 
-                            response = result_entropy['text']
-                            mean_entropy = result_entropy['mean_entropy']
-                            max_entropy = result_entropy['max_entropy']
-                            min_entropy = result_entropy['min_entropy']
-                            std_entropy = result_entropy['std_entropy']
-                            tokens = result_entropy['tokens']
+                        for optional_field in ("gender", "occupation", "attended_university"):
+                            if optional_field in prompt_columns:
+                                model_output[optional_field] = getattr(prompt_data, optional_field)
 
-                            model_output.update({
-                                "response_number": n,
-                                "response": response,
-                                "entropy_analysis": {
-                                    "mean_entropy": mean_entropy,
-                                    "max_entropy": max_entropy,
-                                    "min_entropy": min_entropy,
-                                    "std_entropy": std_entropy,
-                                    },
-                                })
+                        num_gens = NUM_GENERATIONS if multigen else 1
                         
-                        else: # generate response without entropy tracking
-                            response = generate(
-                                model=model,
-                                tokenizer=tokenizer,
-                                prompt=prompt_text,
-                                clip_input=True,
-                                temperature=temp
-                            )
-                            model_output.update({
-                                "response_number": n,
-                                "response": response,
-                            })
-                                
-                        # Write output for this prompt and generation
-                        out_file.write(json.dumps(model_output) + "\n")
+                        for n in range(1, num_gens + 1):
 
-                    print(f"[{model_key}] Generated {num_gens} responses ✓")
-                    # Flush the file buffer to ensure data is written to disk AFTER EACH PROMPT
-                    out_file.flush()
-                    os.fsync(out_file.fileno())
+                            if track_entropy: # generate response with entropy tracking
+                                result_entropy = generate_with_entropy(
+                                    model=model,
+                                    tokenizer=tokenizer,
+                                    prompt=prompt_text,
+                                    clip_input=True,
+                                    temperature=temp
+                                )
 
-                temp_end_time = time.time()
-                temp_elapsed = temp_end_time - temp_start_time
-                print(f"[{model_key}] Completed temperature {temp} in {temp_elapsed:.2f} seconds ({temp_elapsed/60:.2f} minutes)")
+                                response = result_entropy['text']
+                                mean_entropy = result_entropy['mean_entropy']
+                                max_entropy = result_entropy['max_entropy']
+                                min_entropy = result_entropy['min_entropy']
+                                std_entropy = result_entropy['std_entropy']
+
+                                model_output.update({
+                                    "response_number": n,
+                                    "response": response,
+                                    "entropy_analysis": {
+                                        "mean_entropy": mean_entropy,
+                                        "max_entropy": max_entropy,
+                                        "min_entropy": min_entropy,
+                                        "std_entropy": std_entropy,
+                                        },
+                                    })
+                            
+                            else: # generate response without entropy tracking
+                                response = generate(
+                                    model=model,
+                                    tokenizer=tokenizer,
+                                    prompt=prompt_text,
+                                    clip_input=True,
+                                    temperature=temp
+                                )
+                                model_output.update({
+                                    "response_number": n,
+                                    "response": response,
+                                })
+                                    
+                            # Write output for this prompt and generation
+                            out_file.write(json.dumps(model_output) + "\n")
+
+                        print(f"[{model_key}] Generated {num_gens} responses ✓")
+                        # Flush the file buffer to ensure data is written to disk AFTER EACH PROMPT
+                        out_file.flush()
+                        os.fsync(out_file.fileno())
+
+                    temp_end_time = time.time()
+                    temp_elapsed = temp_end_time - temp_start_time
+                    print(f"[{model_key}] Completed temperature {temp} in {temp_elapsed:.2f} seconds ({temp_elapsed/60:.2f} minutes)")
 
             # End timing for this model
             model_end_time = time.time()
@@ -167,11 +184,16 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run Olmo-7B model analysis.")
     parser.add_argument("--num_prompts", 
                         type=int, 
-                        default=10, 
+                        default=None, 
                         help="Number of prompts to process per model.")
     parser.add_argument("--temperature",
                         type=float, 
                         default=None, 
                         help="Temperature for text generation.")
+    parser.add_argument("--prompt_case",
+                        type=str,
+                        choices=PROMPT_CASES,
+                        default=None,
+                        help="Run only one prompt case (given or assumed).")
     args = parser.parse_args()
-    main(num_prompts=args.num_prompts)
+    main(num_prompts=args.num_prompts, prompt_case=args.prompt_case)
