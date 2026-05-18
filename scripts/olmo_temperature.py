@@ -64,10 +64,12 @@ def main(track_entropy: bool = True,
 
     if prompt_case:
         selected_prompt_cases = [prompt_case]
+        output_name = f"olmo7b_temp_results_{prompt_case}.jsonl"
     else:
         selected_prompt_cases = PROMPT_CASES
+        output_name = "olmo7b_temp_results.jsonl"
 
-    with open(output_dir / "olmo7b_temp_results.jsonl", "w", encoding="utf-8") as out_file:
+    with open(output_dir / output_name, "w", encoding="utf-8") as out_file:
         for model_key in MODELS.keys(): 
             # Load each model only once, then generate for all prompts and temperatures
             model_name = MODELS[model_key]
@@ -116,7 +118,12 @@ def main(track_entropy: bool = True,
                             if optional_field in prompt_columns:
                                 model_output[optional_field] = getattr(prompt_data, optional_field)
 
-                        num_gens = NUM_GENERATIONS if multigen else 1
+                        if not multigen:
+                            num_gens = 1
+                        elif prompt_case == "assumed":
+                            num_gens = 10
+                        else:
+                            num_gens = NUM_GENERATIONS
                         
                         for n in range(1, num_gens + 1):
 
