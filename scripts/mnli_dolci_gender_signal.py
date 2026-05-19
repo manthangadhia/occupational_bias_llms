@@ -117,95 +117,141 @@ def load_labelled_dolci(testing: bool = False):
     return dataset
 
 if __name__ == "__main__":
-    # Setup pipeline for zero-shot classification
-    candidate_gender = ["male", "female", "none"]
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    print(f"Using device: {device}")
-
-    # Define model and tokenizer from cache
-    model_name = "MoritzLaurer/deberta-v3-large-zeroshot-v2.0"
-    model = AutoModelForSequenceClassification.from_pretrained(model_name,
-                                                            cache_dir=models_dir,
-                                                            trust_remote_code=True,
-                                                            token=HF_TOKEN).to(device)
-    tokenizer = AutoTokenizer.from_pretrained(model_name, 
-                                              cache_dir=models_dir,
-                                              token=HF_TOKEN)
-
-    pipe = pipeline("zero-shot-classification", 
-                    model=model,
-                    tokenizer=tokenizer,
-                    device=device)  
-    
     # collect args and load samples
     parser = argparse.ArgumentParser(description="Run gender classification on MNLI test samples")
     parser.add_argument("--testing", default=0, help="Whether to run in testing mode with a smaller sample of the data")
     parser.add_argument("--batch-size", type=int, default=16, help="Batch size per profession for zero-shot inference")
+    parser.add_argument("--do-filtering", default=1, help="Whether to run the text windowing/filtering step")
+    parser.add_argument("--do-classify", default=1, help="Whether to run zero-shot classification")
     args = parser.parse_args()
     # convert testing arg to bool
     args.testing = args_to_bool(args.testing)
+    args.do_filtering = args_to_bool(args.do_filtering)
+    args.do_classify = args_to_bool(args.do_classify)
     batch_size = max(int(args.batch_size), 1)
 
-    labelled_data = load_labelled_dolci(testing=args.testing)
-    print(f"Loaded {len(labelled_data)} labelled samples from Dolci SFT dataset with occupation labels.")
+    if not (args.do_filtering or args.do_classify):
+        raise ValueError("At least one of --do-filtering or --do-classify must be true.")
+
     output_path = dolci_classified_file
     i = 1
     truncated = 0
     progress_interval = 5000 if not args.testing else 10
 
-    rows = []
     df_occtext = pd.DataFrame()
-    for row in tqdm(labelled_data, total=len(labelled_data), desc="Processing occupations and content"):
-        original_id = int(row["original_index"])
-        content = ""
-        # get all turns in the row, and all instruct content from each turn
-        turns = json.loads(row["messages"])
-        content = " ".join(
-            t["content"] for t in turns
-            if t.get("role") == "user" and t.get("content")
-        )
-        professions = pipe_separate_professions(row["professions"])
-        for prof in professions:
-            prof = prof.lower().strip()
-            # processed_text = process_text_length(content, prof, tokenizer, occ_input_id)
-            # if processed_text == "":
-            #     continue
-            rows.append({
-                "id": original_id,
-                "prof": prof,
-                "text": content
-            })
-    df_occtext = pd.DataFrame(rows)
-    # parallelapply the text processing function to the dataframe
-    df_occtext["text"] = df_occtext.parallel_apply(lambda x: process_text_length(x["text"], x["prof"]), axis=1)
-    # filter out rows where text is empty after processing
-    df_occtext = df_occtext[df_occtext["text"] != ""]
-    print(f"After processing text length, {len(df_occtext)} rows remain for classification. {len(rows) - len(df_occtext)} rows were removed due to empty text after processing.")
-    del rows
-    gc.collect()
+    if args.do_filtering:
+        labelled_data = load_labelled_dolci(testing=args.testing)
+        print(f"Loaded {len(labelled_data)} labelled samples from Dolci SFT dataset with occupation labels.")
 
-    # Now the new df has a row for each profession and a corresponding word-token window.
-    # Pass batches to the pipeline.
-    with open(output_path, "w", encoding="utf-8") as f:
-        for prof, group in tqdm(df_occtext.groupby("prof"), desc="Running batched zero-shot classification by profession"):
-            texts = group["text"].tolist()
-            ids = group["id"].tolist()
-            hypothesis_template = f"The {prof} in the sample text is {{}}."
-            
-            results = pipe(
-                texts,
-                candidate_gender,
-                hypothesis_template=hypothesis_template,
-                multi_label=False,
-                batch_size=batch_size
+        rows = []
+        for row in tqdm(labelled_data, total=len(labelled_data), desc="Processing occupations and content"):
+            original_id = int(row["original_index"])
+            content = ""
+            # get all turns in the row, and all instruct content from each turn
+            turns = json.loads(row["messages"])
+            content = " ".join(
+                t["content"] for t in turns
+                if t.get("role") == "user" and t.get("content")
             )
-            
-            for id_, text, result in zip(ids, texts, results):
-                record = {
-                    "id": id_,
-                    "occupation": prof,
-                    "classification": result["labels"][0],
-                    "score": result["scores"][0]
-                }
-                f.write(json.dumps(record) + "\n")
-    print(f"Classification complete. Results saved to {output_path}")
+            professions = pipe_separate_professions(row["professions"])
+            for prof in professions:
+                prof = prof.lower().strip()
+                # processed_text = process_text_length(content, prof, tokenizer, occ_input_id)
+                # if processed_text == "":
+                #     continue
+                rows.append({
+                    "id": original_id,
+                    "prof": prof,
+                    "text": content
+                })
+        df_occtext = pd.DataFrame(rows)
+        # parallelapply the text processing function to the dataframe
+        df_occtext["text"] = df_occtext.parallel_apply(lambda x: process_text_length(x["text"], x["prof"]), axis=1)
+        # filter out rows where text is empty after processing
+        df_occtext = df_occtext[df_occtext["text"] != ""]
+        print(f"After processing text length, {len(df_occtext)} rows remain for classification. {len(rows) - len(df_occtext)} rows were removed due to empty text after processing.")
+        del rows
+        gc.collect()
+
+        # save filteredd and processed dataframe to disk for inspection
+        df_occtext.to_parquet(dolci_professions_file, engine="pyarrow")
+        print(f"Saved processed dataframe with professions and text to {dolci_professions_file}")
+    else:
+        if not dolci_professions_file.exists():
+            raise FileNotFoundError(
+                f"Processed file not found: {dolci_professions_file}. Run with --do-filtering=1 first."
+            )
+        df_occtext = pd.read_parquet(dolci_professions_file)
+        required_columns = {"id", "prof", "text"}
+        missing_columns = required_columns - set(df_occtext.columns)
+        if missing_columns:
+            raise ValueError(f"Processed file missing required columns: {sorted(missing_columns)}")
+        print(f"Loaded {len(df_occtext)} processed rows from {dolci_professions_file}")
+
+    if args.do_classify:
+        if df_occtext.empty:
+            raise ValueError("No rows available for classification. Run with --do-filtering=1 first.")
+
+        if os.getenv("TOKENIZERS_PARALLELISM") is None:
+            os.environ["TOKENIZERS_PARALLELISM"] = "true"
+        if os.getenv("RAYON_NUM_THREADS") is None:
+            slurm_cpus = os.getenv("SLURM_CPUS_PER_TASK")
+            if slurm_cpus:
+                os.environ["RAYON_NUM_THREADS"] = slurm_cpus
+
+        # Setup pipeline for zero-shot classification
+        candidate_gender = ["male", "female", "none"]
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        print(f"Using device: {device}")
+        print(
+            "Tokenizer parallelism: "
+            f"TOKENIZERS_PARALLELISM={os.getenv('TOKENIZERS_PARALLELISM')}, "
+            f"RAYON_NUM_THREADS={os.getenv('RAYON_NUM_THREADS')}"
+        )
+
+        # Define model and tokenizer from cache
+        model_name = "MoritzLaurer/deberta-v3-large-zeroshot-v2.0"
+        model = AutoModelForSequenceClassification.from_pretrained(
+            model_name,
+            cache_dir=models_dir,
+            trust_remote_code=True,
+            token=HF_TOKEN
+        ).to(device)
+        tokenizer = AutoTokenizer.from_pretrained(
+            model_name,
+            cache_dir=models_dir,
+            token=HF_TOKEN
+        )
+
+        pipe = pipeline(
+            "zero-shot-classification",
+            model=model,
+            tokenizer=tokenizer,
+            device=device
+        )
+
+        # Now the new df has a row for each profession and a corresponding word-token window.
+        # Pass batches to the pipeline.
+        with open(output_path, "w", encoding="utf-8") as f:
+            for prof, group in tqdm(df_occtext.groupby("prof"), desc="Running batched zero-shot classification by profession"):
+                texts = group["text"].tolist()
+                ids = group["id"].tolist()
+                hypothesis_template = f"The {prof} in the sample text is {{}}."
+                
+                results = pipe(
+                    texts,
+                    candidate_gender,
+                    hypothesis_template=hypothesis_template,
+                    multi_label=False,
+                    batch_size=batch_size
+                )
+                
+                for id_, text, result in zip(ids, texts, results):
+                    record = {
+                        "id": id_,
+                        "occupation": prof,
+                        "classification": result["labels"][0],
+                        "score": result["scores"][0]
+                    }
+                    f.write(json.dumps(record) + "\n")
+        print(f"Classification complete. Results saved to {output_path}")
