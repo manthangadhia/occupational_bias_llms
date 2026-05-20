@@ -19,7 +19,7 @@ from dotenv import load_dotenv
 load_dotenv()
 HF_TOKEN = os.getenv("HF_TOKEN")
 
-from transformers import pipeline, AutoTokenizer, AutoModelForSequenceClassification
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 import datasets as ds
 import pandas as pd
@@ -98,6 +98,39 @@ def process_text_length(text: str, occupation: str, max_words: int = MAX_WORD_TO
     window_tokens = text_tokens[window_start:window_end]
 
     return detokenizer.detokenize(window_tokens)
+
+
+def get_entailment_index(model: AutoModelForSequenceClassification) -> int:
+    """Resolve the entailment logit index from the model config if available."""
+    label2id = getattr(model.config, "label2id", {}) or {}
+    id2label = getattr(model.config, "id2label", {}) or {}
+
+    # Prefer label2id if it includes an entailment key
+    for key, value in label2id.items():
+        if "entail" in str(key).lower():
+            return int(value)
+
+    # Fall back to id2label if needed
+    for key, value in id2label.items():
+        if "entail" in str(value).lower():
+            return int(key)
+
+    # Final fallback by num_labels
+    num_labels = getattr(model.config, "num_labels", None)
+    if num_labels == 3:
+        return 2
+    if num_labels == 2:
+        return 1
+
+    raise ValueError(f"Unable to resolve entailment index for num_labels={num_labels}")
+
+
+def get_entailment_scores(logits: torch.Tensor, entailment_idx: int) -> torch.Tensor:
+    """
+    Given raw NLI logits of shape (batch_size, num_labels),
+    return only the entailment column, shape (batch_size,).
+    """
+    return logits[:, entailment_idx]
 
 
 def pipe_separate_professions(professions_str):
@@ -192,22 +225,9 @@ if __name__ == "__main__":
         if df_occtext.empty:
             raise ValueError("No rows available for classification. Run with --do-filtering=1 first.")
 
-        if os.getenv("TOKENIZERS_PARALLELISM") is None:
-            os.environ["TOKENIZERS_PARALLELISM"] = "true"
-        if os.getenv("RAYON_NUM_THREADS") is None:
-            slurm_cpus = os.getenv("SLURM_CPUS_PER_TASK")
-            if slurm_cpus:
-                os.environ["RAYON_NUM_THREADS"] = slurm_cpus
-
         # Setup pipeline for zero-shot classification
-        candidate_gender = ["male", "female", "none"]
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         print(f"Using device: {device}")
-        print(
-            "Tokenizer parallelism: "
-            f"TOKENIZERS_PARALLELISM={os.getenv('TOKENIZERS_PARALLELISM')}, "
-            f"RAYON_NUM_THREADS={os.getenv('RAYON_NUM_THREADS')}"
-        )
 
         # Define model and tokenizer from cache
         model_name = "MoritzLaurer/deberta-v3-large-zeroshot-v2.0"
@@ -215,43 +235,84 @@ if __name__ == "__main__":
             model_name,
             cache_dir=models_dir,
             trust_remote_code=True,
-            token=HF_TOKEN
+            token=HF_TOKEN,
+            torch_dtype=torch.bfloat16
         ).to(device)
         tokenizer = AutoTokenizer.from_pretrained(
             model_name,
             cache_dir=models_dir,
             token=HF_TOKEN
         )
+        model.eval()
+        entailment_idx = get_entailment_index(model)
 
-        pipe = pipeline(
-            "zero-shot-classification",
-            model=model,
-            tokenizer=tokenizer,
-            device=device
-        )
+        candidate_gender = ["male", "female", "none"]
+        num_labels = len(candidate_gender)
 
-        # Now the new df has a row for each profession and a corresponding word-token window.
-        # Pass batches to the pipeline.
+        # Sort by profession so same-profession rows stay together (good for memory locality)
+        df_occtext = df_occtext.sort_values("prof").reset_index(drop=True)
+
+        # Build flat lists
+        all_texts = df_occtext["text"].tolist()
+        all_profs = df_occtext["prof"].tolist()
+        all_ids = df_occtext["id"].tolist()
+
+        total_rows = len(all_texts)
+
         with open(output_path, "w", encoding="utf-8") as f:
-            for prof, group in tqdm(df_occtext.groupby("prof"), desc="Running batched zero-shot classification by profession"):
-                texts = group["text"].tolist()
-                ids = group["id"].tolist()
-                hypothesis_template = f"The {prof} in the sample text is {{}}."
-                
-                results = pipe(
-                    texts,
-                    candidate_gender,
-                    hypothesis_template=hypothesis_template,
-                    multi_label=False,
-                    batch_size=batch_size
-                )
-                
-                for id_, text, result in zip(ids, texts, results):
+            for batch_start in tqdm(
+                range(0, total_rows, batch_size),
+                desc="Running manual batched classification"
+            ):
+                batch_end = min(batch_start + batch_size, total_rows)
+
+                batch_texts = all_texts[batch_start:batch_end]
+                batch_profs = all_profs[batch_start:batch_end]
+                batch_ids = all_ids[batch_start:batch_end]
+
+                # For each (text, profession) pair, create one premise-hypothesis pair
+                # per candidate label — so N rows * 3 candidates = 3N NLI pairs total.
+                premises = []
+                hypotheses = []
+
+                for text, prof in zip(batch_texts, batch_profs):
+                    for label in candidate_gender:
+                        premises.append(text)
+                        hypotheses.append(f"The {prof} in the sample text is {label}.")
+
+                # Tokenise all pairs together
+                encoded = tokenizer(
+                    premises,
+                    hypotheses,
+                    padding=True,
+                    truncation="only_first",
+                    max_length=512,
+                    return_tensors="pt"
+                ).to(device)
+
+                with torch.no_grad():
+                    logits = model(**encoded).logits
+
+                # Extract entailment scores and reshape to (N, num_labels)
+                entailment_scores = get_entailment_scores(logits, entailment_idx)
+                entailment_scores = entailment_scores.view(-1, num_labels)
+
+                # Softmax across the candidate labels for each row
+                probs = torch.softmax(entailment_scores, dim=-1)
+                best_label_indices = probs.argmax(dim=-1).tolist()
+                best_scores = probs.max(dim=-1).values.tolist()
+
+                for id_, prof, label_idx, score in zip(
+                    batch_ids,
+                    batch_profs,
+                    best_label_indices,
+                    best_scores
+                ):
                     record = {
                         "id": id_,
                         "occupation": prof,
-                        "classification": result["labels"][0],
-                        "score": result["scores"][0]
+                        "classification": candidate_gender[label_idx],
+                        "score": round(float(score), 6)
                     }
                     f.write(json.dumps(record) + "\n")
         print(f"Classification complete. Results saved to {output_path}")
