@@ -652,6 +652,8 @@ def compute_occupation_delta_metrics(
         return pd.DataFrame()
 
     delta_series = {}
+    base_female_rate = None
+    sft_female_rate = None
     for metric in available_metrics:
         pivot_df = occupation_model_metrics_df.pivot_table(
             index="occupation",
@@ -662,6 +664,13 @@ def compute_occupation_delta_metrics(
         if base_label not in pivot_df.columns or sft_label not in pivot_df.columns:
             continue
         delta_series[f"delta_{metric}_sft_minus_base"] = pivot_df[sft_label] - pivot_df[base_label]
+        if metric == "female_rate":
+            base_female_rate = pivot_df[base_label]
+            sft_female_rate = pivot_df[sft_label]
+
+    if base_female_rate is not None and sft_female_rate is not None:
+        delta_series["female_rate_base"] = base_female_rate
+        delta_series["female_rate_sft"] = sft_female_rate
 
     if not delta_series:
         return pd.DataFrame()
@@ -698,7 +707,8 @@ def plot_occupation_delta_metrics_heatmap(delta_df: pd.DataFrame, output_dir: Pa
         return
 
     heatmap_df = delta_df.set_index("occupation")[metric_cols]
-    heatmap_df = heatmap_df.sort_values(by=metric_cols[0])
+    sort_col = "delta_female_rate_sft_minus_base" if "delta_female_rate_sft_minus_base" in heatmap_df.columns else metric_cols[0]
+    heatmap_df = heatmap_df.sort_values(by=sort_col, ascending=False)
 
     fig_height = max(8, 0.28 * len(heatmap_df))
     fig_width = max(10, 1.2 * len(metric_cols))
@@ -711,7 +721,7 @@ def plot_occupation_delta_metrics_heatmap(delta_df: pd.DataFrame, output_dir: Pa
             linewidths=0.2,
             linecolor="white",
             ax=ax,
-            cbar_kws={"label": "SFT - Base delta"},
+            cbar_kws={"label": "Delta (SFT - Base) / female rate"},
         )
     else:
         im = ax.imshow(heatmap_df.values, aspect="auto", cmap="coolwarm")
@@ -719,7 +729,7 @@ def plot_occupation_delta_metrics_heatmap(delta_df: pd.DataFrame, output_dir: Pa
         ax.set_xticklabels(metric_cols, rotation=45, ha="right")
         ax.set_yticks(range(len(heatmap_df.index)))
         ax.set_yticklabels(heatmap_df.index)
-        fig.colorbar(im, ax=ax, label="SFT - Base delta")
+        fig.colorbar(im, ax=ax, label="Delta (SFT - Base) / female rate")
 
     ax.set_title("Occupation-level metric deltas (SFT - Base)")
     ax.set_xlabel("Metric")
