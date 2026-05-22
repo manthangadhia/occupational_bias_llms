@@ -41,7 +41,7 @@ MODELS = {
 
 # default generation parameters
 MAX_NEW_TOKENS = 200
-NUM_GENERATIONS = 5  # Number of generations per prompt for consistency analysis
+NUM_GENERATIONS = 10  # Number of generations per prompt for consistency analysis
 DEFAULT_GENERATION_KWARGS = {
     "do_sample": True,
     "top_p": 0.9,
@@ -121,7 +121,7 @@ def main(track_entropy: bool = True,
                         if not multigen:
                             num_gens = 1
                         elif prompt_case == "assumed":
-                            num_gens = 10
+                            num_gens = 20  # More generations for assumed case to analyze consistency
                         else:
                             num_gens = NUM_GENERATIONS
                         
