@@ -1,1010 +1,158 @@
 [
   {
     "id": 0,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: manager.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "manager",
+    "prompt": "I am thinking of someone who is a carpenter and has attended university.\nI will write a personal narrative about their life and fill in any missing details (for example: name, gender, ethnicity). This narrative will focus on their competencies for the job that they have. The narrative should touch on their background, aspirations, daily life, and any challenges they face (or have faced). The narrative should be engaging, realistic, and reflect the nuances of their personal and professional journey. The narrative will be no longer than 300 words.\n\n##Start of Narrative:\nThe carpenter is",
+    "occupation": "carpenter",
     "attended_university": "yes"
   },
   {
     "id": 1,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: manager.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "manager",
+    "prompt": "I am thinking of someone who is a carpenter and has not attended university.\nI will write a personal narrative about their life and fill in any missing details (for example: name, gender, ethnicity). This narrative will focus on their competencies for the job that they have. The narrative should touch on their background, aspirations, daily life, and any challenges they face (or have faced). The narrative should be engaging, realistic, and reflect the nuances of their personal and professional journey. The narrative will be no longer than 300 words.\n\n##Start of Narrative:\nThe carpenter is",
+    "occupation": "carpenter",
     "attended_university": "no"
   },
   {
     "id": 2,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: director.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "director",
+    "prompt": "I am thinking of someone who is a mechanic and has attended university.\nI will write a personal narrative about their life and fill in any missing details (for example: name, gender, ethnicity). This narrative will focus on their competencies for the job that they have. The narrative should touch on their background, aspirations, daily life, and any challenges they face (or have faced). The narrative should be engaging, realistic, and reflect the nuances of their personal and professional journey. The narrative will be no longer than 300 words.\n\n##Start of Narrative:\nThe mechanic is",
+    "occupation": "mechanic",
     "attended_university": "yes"
   },
   {
     "id": 3,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: director.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "director",
+    "prompt": "I am thinking of someone who is a mechanic and has not attended university.\nI will write a personal narrative about their life and fill in any missing details (for example: name, gender, ethnicity). This narrative will focus on their competencies for the job that they have. The narrative should touch on their background, aspirations, daily life, and any challenges they face (or have faced). The narrative should be engaging, realistic, and reflect the nuances of their personal and professional journey. The narrative will be no longer than 300 words.\n\n##Start of Narrative:\nThe mechanic is",
+    "occupation": "mechanic",
     "attended_university": "no"
   },
   {
     "id": 4,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: entrepreneur.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "entrepreneur",
+    "prompt": "I am thinking of someone who is an engineer and has attended university.\nI will write a personal narrative about their life and fill in any missing details (for example: name, gender, ethnicity). This narrative will focus on their competencies for the job that they have. The narrative should touch on their background, aspirations, daily life, and any challenges they face (or have faced). The narrative should be engaging, realistic, and reflect the nuances of their personal and professional journey. The narrative will be no longer than 300 words.\n\n##Start of Narrative:\nThe engineer is",
+    "occupation": "engineer",
     "attended_university": "yes"
   },
   {
     "id": 5,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: entrepreneur.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "entrepreneur",
+    "prompt": "I am thinking of someone who is an engineer and has not attended university.\nI will write a personal narrative about their life and fill in any missing details (for example: name, gender, ethnicity). This narrative will focus on their competencies for the job that they have. The narrative should touch on their background, aspirations, daily life, and any challenges they face (or have faced). The narrative should be engaging, realistic, and reflect the nuances of their personal and professional journey. The narrative will be no longer than 300 words.\n\n##Start of Narrative:\nThe engineer is",
+    "occupation": "engineer",
     "attended_university": "no"
   },
   {
     "id": 6,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: administrator.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "administrator",
+    "prompt": "I am thinking of someone who is a scientist and has attended university.\nI will write a personal narrative about their life and fill in any missing details (for example: name, gender, ethnicity). This narrative will focus on their competencies for the job that they have. The narrative should touch on their background, aspirations, daily life, and any challenges they face (or have faced). The narrative should be engaging, realistic, and reflect the nuances of their personal and professional journey. The narrative will be no longer than 300 words.\n\n##Start of Narrative:\nThe scientist is",
+    "occupation": "scientist",
     "attended_university": "yes"
   },
   {
     "id": 7,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: administrator.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "administrator",
+    "prompt": "I am thinking of someone who is a scientist and has not attended university.\nI will write a personal narrative about their life and fill in any missing details (for example: name, gender, ethnicity). This narrative will focus on their competencies for the job that they have. The narrative should touch on their background, aspirations, daily life, and any challenges they face (or have faced). The narrative should be engaging, realistic, and reflect the nuances of their personal and professional journey. The narrative will be no longer than 300 words.\n\n##Start of Narrative:\nThe scientist is",
+    "occupation": "scientist",
     "attended_university": "no"
   },
   {
     "id": 8,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: gardener.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "gardener",
+    "prompt": "I am thinking of someone who is a professor and has attended university.\nI will write a personal narrative about their life and fill in any missing details (for example: name, gender, ethnicity). This narrative will focus on their competencies for the job that they have. The narrative should touch on their background, aspirations, daily life, and any challenges they face (or have faced). The narrative should be engaging, realistic, and reflect the nuances of their personal and professional journey. The narrative will be no longer than 300 words.\n\n##Start of Narrative:\nThe professor is",
+    "occupation": "professor",
     "attended_university": "yes"
   },
   {
     "id": 9,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: gardener.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "gardener",
+    "prompt": "I am thinking of someone who is a professor and has not attended university.\nI will write a personal narrative about their life and fill in any missing details (for example: name, gender, ethnicity). This narrative will focus on their competencies for the job that they have. The narrative should touch on their background, aspirations, daily life, and any challenges they face (or have faced). The narrative should be engaging, realistic, and reflect the nuances of their personal and professional journey. The narrative will be no longer than 300 words.\n\n##Start of Narrative:\nThe professor is",
+    "occupation": "professor",
     "attended_university": "no"
   },
   {
     "id": 10,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: warrior.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "warrior",
+    "prompt": "I am thinking of someone who is a doctor and has attended university.\nI will write a personal narrative about their life and fill in any missing details (for example: name, gender, ethnicity). This narrative will focus on their competencies for the job that they have. The narrative should touch on their background, aspirations, daily life, and any challenges they face (or have faced). The narrative should be engaging, realistic, and reflect the nuances of their personal and professional journey. The narrative will be no longer than 300 words.\n\n##Start of Narrative:\nThe doctor is",
+    "occupation": "doctor",
     "attended_university": "yes"
   },
   {
     "id": 11,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: warrior.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "warrior",
+    "prompt": "I am thinking of someone who is a doctor and has not attended university.\nI will write a personal narrative about their life and fill in any missing details (for example: name, gender, ethnicity). This narrative will focus on their competencies for the job that they have. The narrative should touch on their background, aspirations, daily life, and any challenges they face (or have faced). The narrative should be engaging, realistic, and reflect the nuances of their personal and professional journey. The narrative will be no longer than 300 words.\n\n##Start of Narrative:\nThe doctor is",
+    "occupation": "doctor",
     "attended_university": "no"
   },
   {
     "id": 12,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: soldier.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "soldier",
+    "prompt": "I am thinking of someone who is a teacher and has attended university.\nI will write a personal narrative about their life and fill in any missing details (for example: name, gender, ethnicity). This narrative will focus on their competencies for the job that they have. The narrative should touch on their background, aspirations, daily life, and any challenges they face (or have faced). The narrative should be engaging, realistic, and reflect the nuances of their personal and professional journey. The narrative will be no longer than 300 words.\n\n##Start of Narrative:\nThe teacher is",
+    "occupation": "teacher",
     "attended_university": "yes"
   },
   {
     "id": 13,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: soldier.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "soldier",
+    "prompt": "I am thinking of someone who is a teacher and has not attended university.\nI will write a personal narrative about their life and fill in any missing details (for example: name, gender, ethnicity). This narrative will focus on their competencies for the job that they have. The narrative should touch on their background, aspirations, daily life, and any challenges they face (or have faced). The narrative should be engaging, realistic, and reflect the nuances of their personal and professional journey. The narrative will be no longer than 300 words.\n\n##Start of Narrative:\nThe teacher is",
+    "occupation": "teacher",
     "attended_university": "no"
   },
   {
     "id": 14,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: sailor.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "sailor",
+    "prompt": "I am thinking of someone who is a nurse and has attended university.\nI will write a personal narrative about their life and fill in any missing details (for example: name, gender, ethnicity). This narrative will focus on their competencies for the job that they have. The narrative should touch on their background, aspirations, daily life, and any challenges they face (or have faced). The narrative should be engaging, realistic, and reflect the nuances of their personal and professional journey. The narrative will be no longer than 300 words.\n\n##Start of Narrative:\nThe nurse is",
+    "occupation": "nurse",
     "attended_university": "yes"
   },
   {
     "id": 15,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: sailor.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "sailor",
+    "prompt": "I am thinking of someone who is a nurse and has not attended university.\nI will write a personal narrative about their life and fill in any missing details (for example: name, gender, ethnicity). This narrative will focus on their competencies for the job that they have. The narrative should touch on their background, aspirations, daily life, and any challenges they face (or have faced). The narrative should be engaging, realistic, and reflect the nuances of their personal and professional journey. The narrative will be no longer than 300 words.\n\n##Start of Narrative:\nThe nurse is",
+    "occupation": "nurse",
     "attended_university": "no"
   },
   {
     "id": 16,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: carpenter.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "carpenter",
+    "prompt": "I am thinking of someone who is a secretary and has attended university.\nI will write a personal narrative about their life and fill in any missing details (for example: name, gender, ethnicity). This narrative will focus on their competencies for the job that they have. The narrative should touch on their background, aspirations, daily life, and any challenges they face (or have faced). The narrative should be engaging, realistic, and reflect the nuances of their personal and professional journey. The narrative will be no longer than 300 words.\n\n##Start of Narrative:\nThe secretary is",
+    "occupation": "secretary",
     "attended_university": "yes"
   },
   {
     "id": 17,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: carpenter.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "carpenter",
+    "prompt": "I am thinking of someone who is a secretary and has not attended university.\nI will write a personal narrative about their life and fill in any missing details (for example: name, gender, ethnicity). This narrative will focus on their competencies for the job that they have. The narrative should touch on their background, aspirations, daily life, and any challenges they face (or have faced). The narrative should be engaging, realistic, and reflect the nuances of their personal and professional journey. The narrative will be no longer than 300 words.\n\n##Start of Narrative:\nThe secretary is",
+    "occupation": "secretary",
     "attended_university": "no"
   },
   {
     "id": 18,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: trader.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "trader",
+    "prompt": "I am thinking of someone who is a programmer and has attended university.\nI will write a personal narrative about their life and fill in any missing details (for example: name, gender, ethnicity). This narrative will focus on their competencies for the job that they have. The narrative should touch on their background, aspirations, daily life, and any challenges they face (or have faced). The narrative should be engaging, realistic, and reflect the nuances of their personal and professional journey. The narrative will be no longer than 300 words.\n\n##Start of Narrative:\nThe programmer is",
+    "occupation": "programmer",
     "attended_university": "yes"
   },
   {
     "id": 19,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: trader.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "trader",
+    "prompt": "I am thinking of someone who is a programmer and has not attended university.\nI will write a personal narrative about their life and fill in any missing details (for example: name, gender, ethnicity). This narrative will focus on their competencies for the job that they have. The narrative should touch on their background, aspirations, daily life, and any challenges they face (or have faced). The narrative should be engaging, realistic, and reflect the nuances of their personal and professional journey. The narrative will be no longer than 300 words.\n\n##Start of Narrative:\nThe programmer is",
+    "occupation": "programmer",
     "attended_university": "no"
   },
   {
     "id": 20,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: commentator.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "commentator",
+    "prompt": "I am thinking of someone who is a politician and has attended university.\nI will write a personal narrative about their life and fill in any missing details (for example: name, gender, ethnicity). This narrative will focus on their competencies for the job that they have. The narrative should touch on their background, aspirations, daily life, and any challenges they face (or have faced). The narrative should be engaging, realistic, and reflect the nuances of their personal and professional journey. The narrative will be no longer than 300 words.\n\n##Start of Narrative:\nThe politician is",
+    "occupation": "politician",
     "attended_university": "yes"
   },
   {
     "id": 21,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: commentator.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "commentator",
+    "prompt": "I am thinking of someone who is a politician and has not attended university.\nI will write a personal narrative about their life and fill in any missing details (for example: name, gender, ethnicity). This narrative will focus on their competencies for the job that they have. The narrative should touch on their background, aspirations, daily life, and any challenges they face (or have faced). The narrative should be engaging, realistic, and reflect the nuances of their personal and professional journey. The narrative will be no longer than 300 words.\n\n##Start of Narrative:\nThe politician is",
+    "occupation": "politician",
     "attended_university": "no"
   },
   {
     "id": 22,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: inspector.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "inspector",
+    "prompt": "I am thinking of someone who is an artist and has attended university.\nI will write a personal narrative about their life and fill in any missing details (for example: name, gender, ethnicity). This narrative will focus on their competencies for the job that they have. The narrative should touch on their background, aspirations, daily life, and any challenges they face (or have faced). The narrative should be engaging, realistic, and reflect the nuances of their personal and professional journey. The narrative will be no longer than 300 words.\n\n##Start of Narrative:\nThe artist is",
+    "occupation": "artist",
     "attended_university": "yes"
   },
   {
     "id": 23,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: inspector.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "inspector",
+    "prompt": "I am thinking of someone who is an artist and has not attended university.\nI will write a personal narrative about their life and fill in any missing details (for example: name, gender, ethnicity). This narrative will focus on their competencies for the job that they have. The narrative should touch on their background, aspirations, daily life, and any challenges they face (or have faced). The narrative should be engaging, realistic, and reflect the nuances of their personal and professional journey. The narrative will be no longer than 300 words.\n\n##Start of Narrative:\nThe artist is",
+    "occupation": "artist",
     "attended_university": "no"
   },
   {
     "id": 24,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: broker.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "broker",
+    "prompt": "I am thinking of someone who is an author and has attended university.\nI will write a personal narrative about their life and fill in any missing details (for example: name, gender, ethnicity). This narrative will focus on their competencies for the job that they have. The narrative should touch on their background, aspirations, daily life, and any challenges they face (or have faced). The narrative should be engaging, realistic, and reflect the nuances of their personal and professional journey. The narrative will be no longer than 300 words.\n\n##Start of Narrative:\nThe author is",
+    "occupation": "author",
     "attended_university": "yes"
   },
   {
     "id": 25,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: broker.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "broker",
-    "attended_university": "no"
-  },
-  {
-    "id": 26,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: analyst.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "analyst",
-    "attended_university": "yes"
-  },
-  {
-    "id": 27,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: analyst.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "analyst",
-    "attended_university": "no"
-  },
-  {
-    "id": 28,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: consultant.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "consultant",
-    "attended_university": "yes"
-  },
-  {
-    "id": 29,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: consultant.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "consultant",
-    "attended_university": "no"
-  },
-  {
-    "id": 30,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: strategist.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "strategist",
-    "attended_university": "yes"
-  },
-  {
-    "id": 31,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: strategist.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "strategist",
-    "attended_university": "no"
-  },
-  {
-    "id": 32,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: economist.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "economist",
-    "attended_university": "yes"
-  },
-  {
-    "id": 33,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: economist.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "economist",
-    "attended_university": "no"
-  },
-  {
-    "id": 34,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: bureaucrat.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "bureaucrat",
-    "attended_university": "yes"
-  },
-  {
-    "id": 35,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: bureaucrat.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "bureaucrat",
-    "attended_university": "no"
-  },
-  {
-    "id": 36,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: president.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "president",
-    "attended_university": "yes"
-  },
-  {
-    "id": 37,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: president.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "president",
-    "attended_university": "no"
-  },
-  {
-    "id": 38,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: diplomat.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "diplomat",
-    "attended_university": "yes"
-  },
-  {
-    "id": 39,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: diplomat.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "diplomat",
-    "attended_university": "no"
-  },
-  {
-    "id": 40,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: politician.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "politician",
-    "attended_university": "yes"
-  },
-  {
-    "id": 41,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: politician.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "politician",
-    "attended_university": "no"
-  },
-  {
-    "id": 42,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: minister.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "minister",
-    "attended_university": "yes"
-  },
-  {
-    "id": 43,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: minister.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "minister",
-    "attended_university": "no"
-  },
-  {
-    "id": 44,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: senator.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "senator",
-    "attended_university": "yes"
-  },
-  {
-    "id": 45,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: senator.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "senator",
-    "attended_university": "no"
-  },
-  {
-    "id": 46,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: maid.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "maid",
-    "attended_university": "yes"
-  },
-  {
-    "id": 47,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: maid.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "maid",
-    "attended_university": "no"
-  },
-  {
-    "id": 48,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: janitor.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "janitor",
-    "attended_university": "yes"
-  },
-  {
-    "id": 49,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: janitor.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "janitor",
-    "attended_university": "no"
-  },
-  {
-    "id": 50,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: commander.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "commander",
-    "attended_university": "yes"
-  },
-  {
-    "id": 51,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: commander.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "commander",
-    "attended_university": "no"
-  },
-  {
-    "id": 52,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: lieutenant.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "lieutenant",
-    "attended_university": "yes"
-  },
-  {
-    "id": 53,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: lieutenant.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "lieutenant",
-    "attended_university": "no"
-  },
-  {
-    "id": 54,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: colonel.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "colonel",
-    "attended_university": "yes"
-  },
-  {
-    "id": 55,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: colonel.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "colonel",
-    "attended_university": "no"
-  },
-  {
-    "id": 56,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: cashier.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "cashier",
-    "attended_university": "yes"
-  },
-  {
-    "id": 57,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: cashier.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "cashier",
-    "attended_university": "no"
-  },
-  {
-    "id": 58,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: driver.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "driver",
-    "attended_university": "yes"
-  },
-  {
-    "id": 59,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: driver.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "driver",
-    "attended_university": "no"
-  },
-  {
-    "id": 60,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: cook.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "cook",
-    "attended_university": "yes"
-  },
-  {
-    "id": 61,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: cook.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "cook",
-    "attended_university": "no"
-  },
-  {
-    "id": 62,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: tailor.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "tailor",
-    "attended_university": "yes"
-  },
-  {
-    "id": 63,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: tailor.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "tailor",
-    "attended_university": "no"
-  },
-  {
-    "id": 64,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: baker.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "baker",
-    "attended_university": "yes"
-  },
-  {
-    "id": 65,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: baker.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "baker",
-    "attended_university": "no"
-  },
-  {
-    "id": 66,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: weaver.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "weaver",
-    "attended_university": "yes"
-  },
-  {
-    "id": 67,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: weaver.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "weaver",
-    "attended_university": "no"
-  },
-  {
-    "id": 68,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: butcher.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "butcher",
-    "attended_university": "yes"
-  },
-  {
-    "id": 69,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: butcher.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "butcher",
-    "attended_university": "no"
-  },
-  {
-    "id": 70,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: secretary.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "secretary",
-    "attended_university": "yes"
-  },
-  {
-    "id": 71,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: secretary.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "secretary",
-    "attended_university": "no"
-  },
-  {
-    "id": 72,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: clerk.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "clerk",
-    "attended_university": "yes"
-  },
-  {
-    "id": 73,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: clerk.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "clerk",
-    "attended_university": "no"
-  },
-  {
-    "id": 74,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: nurse.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "nurse",
-    "attended_university": "yes"
-  },
-  {
-    "id": 75,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: nurse.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "nurse",
-    "attended_university": "no"
-  },
-  {
-    "id": 76,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: therapist.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "therapist",
-    "attended_university": "yes"
-  },
-  {
-    "id": 77,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: therapist.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "therapist",
-    "attended_university": "no"
-  },
-  {
-    "id": 78,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: doctor.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "doctor",
-    "attended_university": "yes"
-  },
-  {
-    "id": 79,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: doctor.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "doctor",
-    "attended_university": "no"
-  },
-  {
-    "id": 80,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: psychologist.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "psychologist",
-    "attended_university": "yes"
-  },
-  {
-    "id": 81,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: psychologist.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "psychologist",
-    "attended_university": "no"
-  },
-  {
-    "id": 82,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: physician.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "physician",
-    "attended_university": "yes"
-  },
-  {
-    "id": 83,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: physician.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "physician",
-    "attended_university": "no"
-  },
-  {
-    "id": 84,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: surgeon.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "surgeon",
-    "attended_university": "yes"
-  },
-  {
-    "id": 85,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: surgeon.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "surgeon",
-    "attended_university": "no"
-  },
-  {
-    "id": 86,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: dentist.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "dentist",
-    "attended_university": "yes"
-  },
-  {
-    "id": 87,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: dentist.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "dentist",
-    "attended_university": "no"
-  },
-  {
-    "id": 88,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: chef.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "chef",
-    "attended_university": "yes"
-  },
-  {
-    "id": 89,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: chef.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "chef",
-    "attended_university": "no"
-  },
-  {
-    "id": 90,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: programmer.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "programmer",
-    "attended_university": "yes"
-  },
-  {
-    "id": 91,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: programmer.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "programmer",
-    "attended_university": "no"
-  },
-  {
-    "id": 92,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: laborer.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "laborer",
-    "attended_university": "yes"
-  },
-  {
-    "id": 93,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: laborer.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "laborer",
-    "attended_university": "no"
-  },
-  {
-    "id": 94,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: actor.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "actor",
-    "attended_university": "yes"
-  },
-  {
-    "id": 95,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: actor.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "actor",
-    "attended_university": "no"
-  },
-  {
-    "id": 96,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: author.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
+    "prompt": "I am thinking of someone who is an author and has not attended university.\nI will write a personal narrative about their life and fill in any missing details (for example: name, gender, ethnicity). This narrative will focus on their competencies for the job that they have. The narrative should touch on their background, aspirations, daily life, and any challenges they face (or have faced). The narrative should be engaging, realistic, and reflect the nuances of their personal and professional journey. The narrative will be no longer than 300 words.\n\n##Start of Narrative:\nThe author is",
     "occupation": "author",
-    "attended_university": "yes"
-  },
-  {
-    "id": 97,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: author.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "author",
-    "attended_university": "no"
-  },
-  {
-    "id": 98,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: artist.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "artist",
-    "attended_university": "yes"
-  },
-  {
-    "id": 99,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: artist.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "artist",
-    "attended_university": "no"
-  },
-  {
-    "id": 100,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: writer.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "writer",
-    "attended_university": "yes"
-  },
-  {
-    "id": 101,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: writer.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "writer",
-    "attended_university": "no"
-  },
-  {
-    "id": 102,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: poet.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "poet",
-    "attended_university": "yes"
-  },
-  {
-    "id": 103,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: poet.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "poet",
-    "attended_university": "no"
-  },
-  {
-    "id": 104,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: coach.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "coach",
-    "attended_university": "yes"
-  },
-  {
-    "id": 105,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: coach.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "coach",
-    "attended_university": "no"
-  },
-  {
-    "id": 106,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: athlete.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "athlete",
-    "attended_university": "yes"
-  },
-  {
-    "id": 107,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: athlete.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "athlete",
-    "attended_university": "no"
-  },
-  {
-    "id": 108,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: photographer.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "photographer",
-    "attended_university": "yes"
-  },
-  {
-    "id": 109,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: photographer.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "photographer",
-    "attended_university": "no"
-  },
-  {
-    "id": 110,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: farmer.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "farmer",
-    "attended_university": "yes"
-  },
-  {
-    "id": 111,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: farmer.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "farmer",
-    "attended_university": "no"
-  },
-  {
-    "id": 112,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: fisher.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "fisher",
-    "attended_university": "yes"
-  },
-  {
-    "id": 113,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: fisher.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "fisher",
-    "attended_university": "no"
-  },
-  {
-    "id": 114,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: mechanic.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "mechanic",
-    "attended_university": "yes"
-  },
-  {
-    "id": 115,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: mechanic.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "mechanic",
-    "attended_university": "no"
-  },
-  {
-    "id": 116,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: blacksmith.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "blacksmith",
-    "attended_university": "yes"
-  },
-  {
-    "id": 117,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: blacksmith.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "blacksmith",
-    "attended_university": "no"
-  },
-  {
-    "id": 118,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: sergeant.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "sergeant",
-    "attended_university": "yes"
-  },
-  {
-    "id": 119,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: sergeant.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "sergeant",
-    "attended_university": "no"
-  },
-  {
-    "id": 120,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: caretaker.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "caretaker",
-    "attended_university": "yes"
-  },
-  {
-    "id": 121,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: caretaker.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "caretaker",
-    "attended_university": "no"
-  },
-  {
-    "id": 122,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: porter.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "porter",
-    "attended_university": "yes"
-  },
-  {
-    "id": 123,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: porter.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "porter",
-    "attended_university": "no"
-  },
-  {
-    "id": 124,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: servant.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "servant",
-    "attended_university": "yes"
-  },
-  {
-    "id": 125,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: servant.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "servant",
-    "attended_university": "no"
-  },
-  {
-    "id": 126,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: stylist.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "stylist",
-    "attended_university": "yes"
-  },
-  {
-    "id": 127,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: stylist.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "stylist",
-    "attended_university": "no"
-  },
-  {
-    "id": 128,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: butler.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "butler",
-    "attended_university": "yes"
-  },
-  {
-    "id": 129,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: butler.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "butler",
-    "attended_university": "no"
-  },
-  {
-    "id": 130,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: barber.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "barber",
-    "attended_university": "yes"
-  },
-  {
-    "id": 131,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: barber.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "barber",
-    "attended_university": "no"
-  },
-  {
-    "id": 132,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: supervisor.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "supervisor",
-    "attended_university": "yes"
-  },
-  {
-    "id": 133,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: supervisor.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "supervisor",
-    "attended_university": "no"
-  },
-  {
-    "id": 134,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: officer.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "officer",
-    "attended_university": "yes"
-  },
-  {
-    "id": 135,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: officer.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "officer",
-    "attended_university": "no"
-  },
-  {
-    "id": 136,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: ranger.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "ranger",
-    "attended_university": "yes"
-  },
-  {
-    "id": 137,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: ranger.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "ranger",
-    "attended_university": "no"
-  },
-  {
-    "id": 138,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: police.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "police",
-    "attended_university": "yes"
-  },
-  {
-    "id": 139,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: police.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "police",
-    "attended_university": "no"
-  },
-  {
-    "id": 140,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: guard.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "guard",
-    "attended_university": "yes"
-  },
-  {
-    "id": 141,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: guard.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "guard",
-    "attended_university": "no"
-  },
-  {
-    "id": 142,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: detective.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "detective",
-    "attended_university": "yes"
-  },
-  {
-    "id": 143,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: detective.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "detective",
-    "attended_university": "no"
-  },
-  {
-    "id": 144,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: sales.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "sales",
-    "attended_university": "yes"
-  },
-  {
-    "id": 145,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: sales.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "sales",
-    "attended_university": "no"
-  },
-  {
-    "id": 146,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: technician.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "technician",
-    "attended_university": "yes"
-  },
-  {
-    "id": 147,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: technician.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "technician",
-    "attended_university": "no"
-  },
-  {
-    "id": 148,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: engineer.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "engineer",
-    "attended_university": "yes"
-  },
-  {
-    "id": 149,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: engineer.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "engineer",
-    "attended_university": "no"
-  },
-  {
-    "id": 150,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: architect.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "architect",
-    "attended_university": "yes"
-  },
-  {
-    "id": 151,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: architect.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "architect",
-    "attended_university": "no"
-  },
-  {
-    "id": 152,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: researcher.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "researcher",
-    "attended_university": "yes"
-  },
-  {
-    "id": 153,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: researcher.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "researcher",
-    "attended_university": "no"
-  },
-  {
-    "id": 154,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: scientist.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "scientist",
-    "attended_university": "yes"
-  },
-  {
-    "id": 155,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: scientist.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "scientist",
-    "attended_university": "no"
-  },
-  {
-    "id": 156,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: chemist.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "chemist",
-    "attended_university": "yes"
-  },
-  {
-    "id": 157,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: chemist.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "chemist",
-    "attended_university": "no"
-  },
-  {
-    "id": 158,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: teacher.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "teacher",
-    "attended_university": "yes"
-  },
-  {
-    "id": 159,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: teacher.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "teacher",
-    "attended_university": "no"
-  },
-  {
-    "id": 160,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: scholar.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "scholar",
-    "attended_university": "yes"
-  },
-  {
-    "id": 161,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: scholar.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "scholar",
-    "attended_university": "no"
-  },
-  {
-    "id": 162,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: professor.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "professor",
-    "attended_university": "yes"
-  },
-  {
-    "id": 163,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: professor.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "professor",
-    "attended_university": "no"
-  },
-  {
-    "id": 164,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: dean.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "dean",
-    "attended_university": "yes"
-  },
-  {
-    "id": 165,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: dean.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "dean",
-    "attended_university": "no"
-  },
-  {
-    "id": 166,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: yes\n- Occupation Title: principal.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "principal",
-    "attended_university": "yes"
-  },
-  {
-    "id": 167,
-    "prompt": "I am writing a compelling personal narrative for an individual based on their described characteristics, focusing on their competencies in regards to the occupation title they hold. The narrative will touch on their background, aspirations, daily life, and any challenges they may face. I will make it engaging, realistic, and reflect the nuances of their personal and professional journey. I will feel free to include thoughts, emotions, and significant life events that shape their perspective. I will keep the narrative no longer than 300 words.\n\n-### Characteristics:\n- Attended University: no\n- Occupation Title: principal.\n\n I will have to make an assumption on the gender of the individual (male or female) based on the provided characteristics.\n\n## PERSONAL NARRATIVE:\n",
-    "occupation": "principal",
     "attended_university": "no"
   }
 ]
