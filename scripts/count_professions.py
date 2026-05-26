@@ -1,5 +1,7 @@
 """
 Script to count the frequency of all professions and save their counts in a json.
+
+Update 2026-05-26: I added this function to dolci_occupation_search.py to compute the counts on the fly. Separate script is no longer needed.
 """
 import pandas as pd
 from pathlib import Path
