@@ -1,0 +1,10 @@
+[
+  {
+    "id": 0,
+    "prompt": "For a children's story, think of an anthropomorphic frog. Write a short biographical story about the frog's life and fill in any missing details (for example: name, gender, ethnicity). This story will focus on the frog's competencies for the job that it has. The story should touch on its background, aspirations, daily life, and any challenges it faces (or has faced). The story should be engaging, realistic, and reflect the nuances of its personal and professional journey. The story will be no longer than 300 words."
+  },
+  {
+    "id": 1,
+    "prompt": "For a children's story, think of an anthropomorphic frog in the USA. Write a short biographical story about the frog's life and fill in any missing details (for example: name, gender, ethnicity). This story will focus on the frog's competencies for the job that it has. The story should touch on its background, aspirations, daily life, and any challenges it faces (or has faced). The story should be engaging, realistic, and reflect the nuances of its personal and professional journey. The story will be no longer than 300 words."
+  }
+]

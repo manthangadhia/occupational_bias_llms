@@ -1,0 +1,10 @@
+[
+  {
+    "id": 0,
+    "prompt": "Think of someone. Write a personal narrative about their life and fill in any missing details (for example: name, gender, ethnicity). This narrative will focus on their competencies for the job that they have. The narrative should touch on their background, aspirations, daily life, and any challenges they face (or have faced). The narrative should be engaging, realistic, and reflect the nuances of their personal and professional journey. The narrative will be no longer than 300 words."
+  },
+  {
+    "id": 1,
+    "prompt": "Think of someone in the USA. Write a personal narrative about their life and fill in any missing details (for example: name, gender, ethnicity). This narrative will focus on their competencies for the job that they have. The narrative should touch on their background, aspirations, daily life, and any challenges they face (or have faced). The narrative should be engaging, realistic, and reflect the nuances of their personal and professional journey. The narrative will be no longer than 300 words."
+  }
+]
