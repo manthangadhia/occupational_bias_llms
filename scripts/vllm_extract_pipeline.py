@@ -50,8 +50,6 @@ def main():
     gc.collect()
     print(f"Loaded {len(df)} narratives for extraction.")
 
-    prompts = [create_prompt(text, system_prompt, tokenizer) for text in df["response"]]
-
     # 4. Initialize vLLM with Guided Decoding
     MODEL = "mistralai/Ministral-8B-Instruct-2410"  # Upgraded for better JSON adherence
     llm = LLM(
@@ -59,9 +57,10 @@ def main():
         swap_space=0, 
         max_model_len=4096,
     )
-
     tokenizer = AutoTokenizer.from_pretrained(MODEL)
-
+    print(f"Initialized vLLM  with model {MODEL} and tokenizer.")
+    
+    prompts = [create_prompt(text, system_prompt, tokenizer) for text in df["response"]]
     # Enforce JSON output matching the Pydantic schema
     sampling_params = SamplingParams(
         temperature=0.0,
