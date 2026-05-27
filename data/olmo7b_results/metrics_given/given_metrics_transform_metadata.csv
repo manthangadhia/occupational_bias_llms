@@ -1,0 +1,4 @@
+transform,skew,skew_threshold,lambda,shift,metric
+none,0.20523133628949114,0.25,,0.0,self_bleu
+boxcox,-0.39111087055794563,0.25,1.3163783746838074,0.0,semantic_div
+boxcox,0.6718421434192952,0.25,0.19897597128471242,0.0,mean_entropy

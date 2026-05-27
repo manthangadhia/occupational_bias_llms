@@ -1,0 +1,23 @@
+[
+    {
+        "metric":"self_bleu",
+        "nobs":832,
+        "r2":0.9025417681,
+        "r2_adj":0.901594422,
+        "f_pvalue":0.0
+    },
+    {
+        "metric":"semantic_div",
+        "nobs":832,
+        "r2":0.4706472133,
+        "r2_adj":0.4655016212,
+        "f_pvalue":2.594584445e-108
+    },
+    {
+        "metric":"mean_entropy",
+        "nobs":832,
+        "r2":0.9840070386,
+        "r2_adj":0.9838515785,
+        "f_pvalue":0.0
+    }
+]

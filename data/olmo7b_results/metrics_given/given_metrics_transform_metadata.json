@@ -1,0 +1,26 @@
+[
+    {
+        "transform":"none",
+        "skew":0.2052313363,
+        "skew_threshold":0.25,
+        "lambda":null,
+        "shift":0.0,
+        "metric":"self_bleu"
+    },
+    {
+        "transform":"boxcox",
+        "skew":-0.3911108706,
+        "skew_threshold":0.25,
+        "lambda":1.3163783747,
+        "shift":0.0,
+        "metric":"semantic_div"
+    },
+    {
+        "transform":"boxcox",
+        "skew":0.6718421434,
+        "skew_threshold":0.25,
+        "lambda":0.1989759713,
+        "shift":0.0,
+        "metric":"mean_entropy"
+    }
+]
