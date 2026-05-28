@@ -300,6 +300,8 @@ if __name__ == "__main__":
     regression_df = summary_df.copy()
     regression_df["gender_norm"] = normalize_gender_series(regression_df.get("gender"))
     regression_df["is_female"] = (regression_df["gender_norm"] == "female").astype(int)
+    if "occupation" in regression_df.columns:
+        regression_df["occupation"] = regression_df["occupation"].astype("category")
 
     model_indicators = build_model_indicators(regression_df.get("model_key"))
     regression_df = pd.concat([regression_df, model_indicators], axis=1)
@@ -311,7 +313,7 @@ if __name__ == "__main__":
 
     formula_template = (
         "{metric}_z ~ is_female + is_sft + is_dpo + is_rlvr "
-        "+ is_female:is_sft + is_female:is_dpo + is_female:is_rlvr + temperature_z"
+        "+ is_female:is_sft + is_female:is_dpo + is_female:is_rlvr + temperature_z + C(occupation)"
     )
 
     for metric in metric_cols:
