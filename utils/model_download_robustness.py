@@ -6,10 +6,14 @@ load_dotenv()
 HF_TOKEN = os.getenv("HF_TOKEN")
 
 models = [
-    "meta-llama/Llama-3.1-8B"
+    "swiss-ai/Apertus-8B-2509",
+    "mistralai/Mistral-7B-v0.3",
+    "Qwen/Qwen2.5-7B",
+    "meta-llama/Llama-3.1-8B",
+    "google/gemma-2-9b",
 ]
 
-cache_dir = "/cluster/scratch/mgadhia/models/llama"
+cache_dir = "/cluster/scratch/mgadhia/models/robustness"
 
 for model_name in models:
     print(f"Downloading {model_name}...")

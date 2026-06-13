@@ -87,21 +87,24 @@ def hard_cleanup_memory(*objects_to_delete, verbose: bool = True) -> Dict[str, A
 def load_model(
     model_name: str,
     cache_dir: Optional[Path] = None,
+    revision: Optional[str] = None,
     low_cpu_mem_usage: bool = True,
     local_files_only: Optional[bool] = None
 ) -> Tuple[AutoTokenizer, AutoModelForCausalLM]:
     """
     Load and return model + tokenizer.
-    
+
     Args:
         model_name: HuggingFace model identifier
         cache_dir: Optional cache directory for model downloads
-        
+        revision: Optional git revision (branch, tag, or commit hash) to load,
+            e.g. an intermediate training checkpoint
+
     Returns:
         Tuple of (tokenizer, model)
     """
     device = get_device(verbose=True)
-    
+
     if local_files_only is None:
         offline_env = (
             os.getenv("HF_HUB_OFFLINE")
@@ -114,12 +117,15 @@ def load_model(
     if local_files_only:
         print("Local files only mode enabled (offline cache).")
 
-    print(f"Loading model: {model_name}\nTokenizer loading...")
+    revision_kwargs = {"revision": revision} if revision else {}
+
+    print(f"Loading model: {model_name}{f' @ {revision}' if revision else ''}\nTokenizer loading...")
     tokenizer = AutoTokenizer.from_pretrained(
         model_name,
         cache_dir=cache_dir,
         token=HF_TOKEN if HF_TOKEN else None,
-        local_files_only=local_files_only
+        local_files_only=local_files_only,
+        **revision_kwargs
     )
     print(f"Tokenizer loaded successfully. Model loading...")
     model_load_start = time.time()
@@ -130,7 +136,8 @@ def load_model(
         cache_dir=cache_dir,
         token=HF_TOKEN if HF_TOKEN else None,
         low_cpu_mem_usage=low_cpu_mem_usage,
-        local_files_only=local_files_only
+        local_files_only=local_files_only,
+        **revision_kwargs
     )
     model_load_end = time.time()
     print(f"Model weights loaded in {model_load_end - model_load_start:.2f} seconds")
