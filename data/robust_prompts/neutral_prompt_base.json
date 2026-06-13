@@ -1,0 +1,30 @@
+[
+  {
+    "id": 0,
+    "prompt": "The doctor is",
+    "occupation": "doctor",
+    "attended_university": null,
+    "style": "neutral"
+  },
+  {
+    "id": 1,
+    "prompt": "The scientist is",
+    "occupation": "scientist",
+    "attended_university": null,
+    "style": "neutral"
+  },
+  {
+    "id": 2,
+    "prompt": "The nurse is",
+    "occupation": "nurse",
+    "attended_university": null,
+    "style": "neutral"
+  },
+  {
+    "id": 3,
+    "prompt": "The programmer is",
+    "occupation": "programmer",
+    "attended_university": null,
+    "style": "neutral"
+  }
+]
