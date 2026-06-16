@@ -125,7 +125,8 @@ def aggregate_regard(row_indices: list[int], regard_results: list[list[dict]], n
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input", type=Path, default=default_input, help="Path to a results .jsonl/.json file")
-    parser.add_argument("--output", type=Path, default=None, help="Output .jsonl path (default: <input_stem>_with_sentiment_regard.jsonl in data/olmo7b_results)")
+    parser.add_argument("--output", type=Path, default=None, help="Output .jsonl path (default: <input_stem>_with_sentiment_regard.jsonl next to input file)")
+    parser.add_argument("--metadata-dir", type=Path, default=None, help="Directory for metadata JSON (default: metrics_<input_stem>/ next to output file)")
     parser.add_argument("--batch-size", type=int, default=16)
     parser.add_argument("--limit", type=int, default=None, help="Only process the first N records (for smoke testing)")
     parser.add_argument("--device", type=str, default=None, choices=["cuda", "cpu"])
@@ -135,7 +136,7 @@ def main() -> None:
     device_idx = 0 if device == "cuda" else -1
     print(f"Using device: {device}")
 
-    output_path = args.output or results_dir / f"{args.input.stem}_with_sentiment_regard.jsonl"
+    output_path = args.output or args.input.parent / f"{args.input.stem}_with_sentiment_regard.jsonl"
 
     print(f"Loading {args.input}")
     df = read_results_file(args.input)
@@ -188,7 +189,7 @@ def main() -> None:
     df.to_json(output_path, orient="records", lines=True)
     print(f"Wrote {n_rows} records to {output_path}")
 
-    metadata_dir = results_dir / "metrics_given"
+    metadata_dir = args.metadata_dir or output_path.parent / f"metrics_{args.input.stem}"
     metadata_dir.mkdir(parents=True, exist_ok=True)
     metadata = {
         "input_path": str(args.input),
