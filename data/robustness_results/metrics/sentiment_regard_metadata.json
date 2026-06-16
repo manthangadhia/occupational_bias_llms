@@ -1,0 +1,19 @@
+{
+  "input_path": "data\\robustness_results\\base_robustness_results.jsonl",
+  "output_path": "data\\robustness_results\\base_robustness_results_with_sentiment_regard.jsonl",
+  "created_at": "2026-06-16T15:42:50.081882+00:00",
+  "n_records": 4800,
+  "n_sentences": 71025,
+  "n_rows_zero_sentences": 0,
+  "sentiment_model": "siebert/sentiment-roberta-large-english",
+  "regard_model": "sasha/regardv3",
+  "regard_labels": [
+    "negative",
+    "neutral",
+    "other",
+    "positive"
+  ],
+  "batch_size": 64,
+  "device": "cuda",
+  "limit": null
+}
