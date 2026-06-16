@@ -1,0 +1,19 @@
+{
+  "input_path": "C:\\Users\\manth\\GitHub\\occupational_bias_llms\\data\\olmo7b_results\\olmo7b_temp_results_given.jsonl",
+  "output_path": "C:\\Users\\manth\\GitHub\\occupational_bias_llms\\data\\olmo7b_results\\olmo7b_temp_results_given_with_sentiment_regard.jsonl",
+  "created_at": "2026-06-15T19:26:11.775631+00:00",
+  "n_records": 8320,
+  "n_sentences": 112004,
+  "n_rows_zero_sentences": 3,
+  "sentiment_model": "siebert/sentiment-roberta-large-english",
+  "regard_model": "sasha/regardv3",
+  "regard_labels": [
+    "negative",
+    "neutral",
+    "other",
+    "positive"
+  ],
+  "batch_size": 16,
+  "device": "cuda",
+  "limit": null
+}
