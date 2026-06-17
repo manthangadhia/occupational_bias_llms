@@ -6,7 +6,7 @@ from functools import partial
 import torch
 
 # Add utils to path
-root_dir = Path(__file__).parent.parent
+root_dir = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(root_dir))
 from utils import save_dataframes
 # -------------------------

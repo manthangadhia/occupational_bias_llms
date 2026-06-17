@@ -1,35 +1,61 @@
-from pathlib import Path
-import pandas as pd
+"""
+fighting_words.py
+
+Monroe et al. (2008) Fightin' Words analysis comparing male vs female responses.
+
+Within each group (e.g., per model_key × occupation), computes z-scored log-odds ratios
+that identify words statistically over-represented in female vs male responses.
+
+Output convention:
+  - Positive z-score  = word more associated with FEMALE responses
+  - Negative z-score  = word more associated with MALE responses
+
+Output JSON schema (one record per group):
+  {
+    "group": {"model_key": "base", "occupation": "nurse"},
+    "n_female": 120,
+    "n_male": 15,
+    "top_female_words": [["she", 5.2], ["her", 4.8]],   # z > 0, sorted descending
+    "top_male_words":   [["he", 4.5], ["his", 3.9]],    # stored as positive strengths
+    "all_words": [                                        # top 200 words by |z|
+      {"word": "she", "z_score": 5.2, "count_female": 340, "count_male": 12},
+      ...
+    ],
+    "vocab_size": 5000
+  }
+
+Usage:
+  # Given/assumed (group by model × occupation):
+  python fighting_words.py --input data/olmo7b_results/foo_with_sentiment_regard.jsonl
+
+  # Robustness (group by model × prompt_style, pooling occupations):
+  python fighting_words.py --input data/robustness_results/bar.jsonl --group-by model_key,prompt_style
+"""
+import argparse
+import json
 import re
 import sys
-
-# Add utils to path
-root_dir = Path(__file__).parent.parent
-sys.path.insert(0, str(root_dir))
-from utils import save_dataframes
-# -------------------------
-# Configuration
-# -------------------------
-data_dir = root_dir / "data"
-results_dir = data_dir / "olmo7b_results"
-assumed_results = results_dir / "olmo7b_temp_results_assumed.jsonl"
-
-"""
-Example output format for assumed_results:
-{"model_key": "sft", "model_name": "allenai/Olmo-3-7B-Instruct-SFT", "prompt_case": "assumed", "profile_id": 28, "temperature": 0.7, "occupation": "consultant", "attended_university": "yes", "response_number": 3, "response": " You are allowed to make assumptions about the person's personality, based on the provided characteristics. The occupation title should be mentioned in the response.\n\nassistant\nGrowing up in a bustling coastal town, I was always fascinated by the constant ebb and flow of ideas...", "entropy_analysis": {"mean_entropy": 0.9206281426341836, "max_entropy": 3.046875, "min_entropy": 1.3096723705530167e-10, "std_entropy": 0.7879512841699567}}
-"""
+from dataclasses import dataclass
+from pathlib import Path
 
 import numpy as np
+import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
-from dataclasses import dataclass
+from tqdm.auto import tqdm
+
+
+# ---------------------------------------------------------------------------
+# Core algorithm (Monroe et al. 2008) — unchanged from original
+# ---------------------------------------------------------------------------
 
 @dataclass
 class FightinWordsResult:
     vocab: list[str]
-    log_odds: np.ndarray       # z-scored log-odds ratio for each word; positive = more associated with group_a
-    z_scores: np.ndarray
-    counts_a: np.ndarray
-    counts_b: np.ndarray
+    log_odds: np.ndarray   # signed log-odds; positive = more in group_a
+    z_scores: np.ndarray   # z-scored log-odds
+    counts_a: np.ndarray   # word counts in corpus A
+    counts_b: np.ndarray   # word counts in corpus B
+
 
 def fightin_words(
     texts_a: list[str],
@@ -41,13 +67,13 @@ def fightin_words(
 ) -> FightinWordsResult:
     """
     Monroe et al. (2008) Fightin' Words with informative Dirichlet prior.
-    
+
     Computes z-scored log-odds ratios for words distinguishing two corpora.
     Positive z-scores indicate association with texts_a; negative with texts_b.
 
     Args:
-        texts_a:      Corpus A (e.g. male-labelled responses)
-        texts_b:      Corpus B (e.g. female-labelled responses)
+        texts_a:      Corpus A
+        texts_b:      Corpus B
         prior_texts:  Background corpus for the Dirichlet prior.
                       If None, uses texts_a + texts_b (uninformative).
         alpha:        Prior scaling factor (smaller = less smoothing)
@@ -60,37 +86,29 @@ def fightin_words(
     """
     prior_corpus = prior_texts if prior_texts is not None else texts_a + texts_b
 
-    # Fit vocabulary on the full prior corpus
     vectorizer = CountVectorizer(max_features=max_features)
     vectorizer.fit(prior_corpus)
     vocab = vectorizer.get_feature_names_out().tolist()
 
-    # Count word frequencies in each corpus
-    counts_a = np.asarray(vectorizer.transform(texts_a).sum(axis=0)).flatten()
-    counts_b = np.asarray(vectorizer.transform(texts_b).sum(axis=0)).flatten()
-    prior_counts = np.asarray(vectorizer.transform(prior_corpus).sum(axis=0)).flatten()
+    counts_a      = np.asarray(vectorizer.transform(texts_a).sum(axis=0)).flatten()
+    counts_b      = np.asarray(vectorizer.transform(texts_b).sum(axis=0)).flatten()
+    prior_counts  = np.asarray(vectorizer.transform(prior_corpus).sum(axis=0)).flatten()
 
-    # Informative Dirichlet prior: alpha * (prior word freq / total prior freq)
     total_prior = prior_counts.sum()
-    alpha_w = alpha * (prior_counts / total_prior)  # shape: (vocab_size,)
+    alpha_w = alpha * (prior_counts / total_prior)
 
-    # Smoothed totals
-    n_a = counts_a.sum()
-    n_b = counts_b.sum()
+    n_a     = counts_a.sum()
+    n_b     = counts_b.sum()
     alpha_0 = alpha_w.sum()
 
-    # Log-odds ratio with prior smoothing (Monroe et al. eq. 17)
     log_odds = (
         np.log(counts_a + alpha_w) - np.log(n_a + alpha_0 - counts_a - alpha_w)
       - np.log(counts_b + alpha_w) + np.log(n_b + alpha_0 - counts_b - alpha_w)
     )
-
-    # Variance estimate (Monroe et al. eq. 22)
     variance = (
         1.0 / (counts_a + alpha_w)
       + 1.0 / (counts_b + alpha_w)
     )
-
     z_scores = log_odds / np.sqrt(variance)
 
     return FightinWordsResult(
@@ -101,6 +119,7 @@ def fightin_words(
         counts_b=counts_b,
     )
 
+
 def get_significant_words(
     result: FightinWordsResult,
     z_threshold: float = 1.96,
@@ -109,8 +128,8 @@ def get_significant_words(
     """
     Extract significant words from a FightinWordsResult.
 
-    Returns a dict with keys 'group_a' and 'group_b', each containing
-    a list of (word, z_score) tuples sorted by descending |z_score|.
+    Returns a dict with keys 'group_a' (z > threshold) and 'group_b' (z < -threshold),
+    each a list of (word, z_score) tuples sorted by descending |z_score|.
     """
     sig_mask = np.abs(result.z_scores) > z_threshold
     sig_indices = np.where(sig_mask)[0]
@@ -119,7 +138,7 @@ def get_significant_words(
     group_b = [(result.vocab[i], result.z_scores[i]) for i in sig_indices if result.z_scores[i] < 0]
 
     group_a.sort(key=lambda x: -x[1])
-    group_b.sort(key=lambda x: x[1])
+    group_b.sort(key=lambda x:  x[1])
 
     if top_n:
         group_a = group_a[:top_n]
@@ -128,15 +147,9 @@ def get_significant_words(
     return {"group_a": group_a, "group_b": group_b}
 
 
-def read_results_file(file_path: Path) -> pd.DataFrame:
-    if not file_path.exists():
-        raise FileNotFoundError(f"Input file not found: {file_path}")
-    if file_path.suffix == ".jsonl":
-        return pd.read_json(file_path, lines=True)
-    if file_path.suffix == ".json":
-        return pd.read_json(file_path)
-    raise ValueError(f"Unsupported file type: {file_path}")
-
+# ---------------------------------------------------------------------------
+# Text helpers
+# ---------------------------------------------------------------------------
 
 def clean_response_text(text: str) -> str:
     if not isinstance(text, str):
@@ -149,48 +162,127 @@ def clean_response_text(text: str) -> str:
 
 
 def extract_texts(series: pd.Series) -> list[str]:
-    return [text for text in series if isinstance(text, str) and text.strip()]
+    return [t for t in series if isinstance(t, str) and t.strip()]
+
 
 # ---------------------------------------------------------------------------
-# Usage sketch — replace with your actual data loading
+# Main CLI
 # ---------------------------------------------------------------------------
-if __name__ == "__main__":
-    df = read_results_file(assumed_results)
 
-    required_cols = {"response", "gender"}
-    missing_cols = required_cols - set(df.columns)
-    if missing_cols:
-        raise ValueError(f"Missing required columns: {sorted(missing_cols)}")
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Run Monroe et al. Fightin' Words, comparing male vs female responses per group. "
+            "Positive z-score = female-associated; negative z-score = male-associated."
+        )
+    )
+    parser.add_argument(
+        "--input", type=Path, required=True,
+        help="Input JSONL with 'response' and 'gender' columns.",
+    )
+    parser.add_argument(
+        "--group-by", type=str, default="model_key,occupation",
+        help=(
+            "Comma-separated columns for grouping (default: model_key,occupation). "
+            "For robustness files use: model_key,prompt_style"
+        ),
+    )
+    parser.add_argument(
+        "--top-n", type=int, default=20,
+        help="Top N words per gender to save (default 20).",
+    )
+    parser.add_argument(
+        "--min-group-size", type=int, default=10,
+        help="Skip groups where either gender has fewer than this many responses (default 10).",
+    )
+    parser.add_argument(
+        "--output", type=Path, default=None,
+        help="Output JSON path. Defaults to {input_dir}/{stem}_fighting_words.json",
+    )
+    args = parser.parse_args()
+
+    if not args.input.exists():
+        raise FileNotFoundError(f"Input not found: {args.input}")
+
+    output_path = args.output or (args.input.parent / f"{args.input.stem}_fighting_words.json")
+    group_cols  = [c.strip() for c in args.group_by.split(",")]
+
+    print(f"Loading {args.input} ...")
+    df = pd.read_json(args.input, lines=True)
+    print(f"Loaded {len(df)} rows.")
+
+    missing_gc = [c for c in group_cols if c not in df.columns]
+    if missing_gc:
+        raise ValueError(f"Group columns not in file: {missing_gc}")
+    for col in ("response", "gender"):
+        if col not in df.columns:
+            raise ValueError(f"Required column missing: '{col}'")
 
     df["response_clean"] = df["response"].apply(clean_response_text)
 
-    gender_series = df["gender"].fillna("").astype(str).str.strip().str.lower()
-    texts_male = extract_texts(df.loc[gender_series == "male", "response_clean"])
-    texts_female = extract_texts(df.loc[gender_series == "female", "response_clean"])
-    all_texts = extract_texts(df["response_clean"])
+    records = []
+    skipped = 0
 
-    if not texts_male or not texts_female:
-        raise ValueError(
-            "Need at least one male and one female response to run fightin_words."
+    for group_key, grp in tqdm(df.groupby(group_cols), desc="Groups"):
+        if not isinstance(group_key, tuple):
+            group_key = (group_key,)
+        group_dict = dict(zip(group_cols, group_key))
+
+        g_col = grp["gender"].fillna("").astype(str).str.strip().str.lower()
+        # texts_a = female, texts_b = male → positive z = female-associated
+        texts_female = extract_texts(grp.loc[g_col == "female", "response_clean"])
+        texts_male   = extract_texts(grp.loc[g_col == "male",   "response_clean"])
+
+        if len(texts_female) < args.min_group_size or len(texts_male) < args.min_group_size:
+            print(
+                f"  Skipping {group_dict}: "
+                f"n_female={len(texts_female)}, n_male={len(texts_male)} "
+                f"(min={args.min_group_size})"
+            )
+            skipped += 1
+            continue
+
+        all_texts = texts_female + texts_male
+        result = fightin_words(
+            texts_a=texts_female,
+            texts_b=texts_male,
+            prior_texts=all_texts,
         )
+        significant = get_significant_words(result, z_threshold=1.96, top_n=args.top_n)
 
-    # --- CORE COMPUTATION ---
-    result = fightin_words(
-        texts_a=texts_male,
-        texts_b=texts_female,
-        prior_texts=all_texts,   # or None to use only male+female as prior
+        # group_a = female (z > 0); group_b = male (z < 0, store as positive strength)
+        top_female_words = [[w, round(float(z),  4)] for w, z in significant["group_a"]]
+        top_male_words   = [[w, round(float(-z), 4)] for w, z in significant["group_b"]]
+
+        # top 200 words by |z| with raw signed z-score
+        top200_idx = np.argsort(np.abs(result.z_scores))[::-1][:200]
+        all_words = [
+            {
+                "word":         result.vocab[i],
+                "z_score":      round(float(result.z_scores[i]), 4),  # +female, -male
+                "count_female": int(result.counts_a[i]),
+                "count_male":   int(result.counts_b[i]),
+            }
+            for i in top200_idx
+        ]
+
+        records.append({
+            "group":            group_dict,
+            "n_female":         len(texts_female),
+            "n_male":           len(texts_male),
+            "top_female_words": top_female_words,
+            "top_male_words":   top_male_words,
+            "all_words":        all_words,
+            "vocab_size":       len(result.vocab),
+        })
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(json.dumps(records, indent=2, ensure_ascii=False))
+    print(
+        f"Written {len(records)} group records to {output_path} "
+        f"({skipped} groups skipped due to min-group-size)."
     )
-    significant = get_significant_words(result, z_threshold=1.96, top_n=30)
 
-    print("Words more associated with MALE-labelled responses:")
-    for word, z in significant["group_a"]:
-        print(f"  {word:20s}  z={z:.2f}")
 
-    print("\nWords more associated with FEMALE-labelled responses:")
-    for word, z in significant["group_b"]:
-        print(f"  {word:20s}  z={z:.2f}")
-
-    output_dir = results_dir / "fighting_words_outputs"
-    output_key = f"{assumed_results.stem}_with_clean"
-    save_dataframes({output_key: df}, output_dir)
-    print(f"Saved updated dataframe to {output_dir / (output_key + '.json')}")
+if __name__ == "__main__":
+    main()
