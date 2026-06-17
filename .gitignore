@@ -77,4 +77,6 @@ scratchpad.*
 # --- Data files that I want to ignore ---
 *.xlsx
 *keyword_hits*.jsonl
-olmo*results*.jsonl
+*results*.jsonl
+*results*.json
+*metadata*
