@@ -73,6 +73,7 @@ test*/
 *.out
 *.err
 scratchpad.*
+voice/
 
 # --- Data files that I want to ignore ---
 *.xlsx
